@@ -34,4 +34,9 @@ body {
     height: auto;
   }
 
+  footer {
+   font-size: 11px;
+   font-family: "Courier New", Monospace;
+  }
+
  
