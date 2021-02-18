@@ -1,0 +1,59 @@
+/* Declaration of the design */
+body {
+    background-color: #544E68;
+    color: #FFAA5E;
+  }
+  
+  h3 {
+    color: rgb(241, 8, 8);
+    margin-left: 20px;
+  }
+
+
+  .responsive {
+    padding: 0 6px;
+    float: right;
+    width: 25%;
+  }
+
+
+   @media only screen and (max-width: 100px) {
+    .responsive {
+      width: 75%;
+  } 
+}
+
+  @media only screen and (max-width: 700px) {
+    .responsive {
+      width: 25%;
+      margin: 6px 0;
+    }
+  }
+
+  div.responsive_picture img {
+    width: 75%;
+    height: auto;
+  }
+
+  footer {
+   font-size: 11px;
+   font-family: "Courier New", Monospace;
+  }
+
+  figcaption {
+    font-size: 11px;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+    width: 75%;
+    height: auto; 
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  } 
+ 
