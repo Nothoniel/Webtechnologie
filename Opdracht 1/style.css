@@ -56,3 +56,22 @@ body {
     margin-right: auto;
     width: 50%;
   } 
+
+  .ContentOfIE_sections h4{
+    text-indent: 10pt;
+    margin: 0px;
+  }
+
+  .ContentOfIE_sections h4{
+    margin-bottom: 5px;
+    color: rgb(237, 246, 248); 
+  }
+
+  .ContentOfIE_sections h1{
+    font-size: 30px;
+    color: rgb(13, 202, 130); 
+  }
+
+  .ContentOfIE_sections p{ 
+    margin-top: 0;
+  }
