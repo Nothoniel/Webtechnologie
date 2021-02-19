@@ -1,33 +1,35 @@
 /* Declaration of the design */
-body {
-    background-color: #544E68;
-    color: #FFAA5E;
+  body {
+      background-color: #544E68;
+      color: #FFAA5E;
   }
 
-  .responsive {
+  /* Not really needed */
+   .responsive {
     padding: 0 6px;
-    float: right;
-    width: 25%;
-  }
+    width: 50%;
+  }    
 
-
-   @media only screen and (max-width: 100px) {
+  @media only screen and (max-width: 900px) {
     .responsive {
       width: 100%;
-  } 
-}
-
-  @media only screen and (max-width: 700px) {
-    .responsive {
-      width: 25%;
       margin: 6px 0;
     }
   }
 
+  @media only screen and (min-width: 900px) {
+    .responsive {
+      width: 79.999%;
+      float: right;
+  } 
+}
+
   div.responsive_picture img {
     width: 100%;
     height: auto;
+    max-width: 300px;
   }
+
 
   footer {
    font-size: 11px;
@@ -58,25 +60,25 @@ body {
     font-size: 30px;
   }
 
-  .ContentOfIE_section h2{
+  .ContentOfIE_section h2 {
     font-size: 30px;
     color: rgb(13, 202, 130); 
   }
 
-  section.ContentOfIE_section_subsection h3{
+  section.ContentOfIE_section_subsection h3 {
     text-indent: 10pt;
     margin: 0px;
   }
 
-  section.ContentOfIE_section_subsection h3{
+  section.ContentOfIE_section_subsection h3 {
     margin-bottom: 5px;
     color: rgb(237, 246, 248); 
   }
 
-  section.ContentOfIE_section_subsection p{ 
+  section.ContentOfIE_section_subsection p { 
     margin-top: 0;
   }
 
-  section.ContentOfIE_section p{ 
+  section.ContentOfIE_section p { 
     margin-top: 0;
   }
