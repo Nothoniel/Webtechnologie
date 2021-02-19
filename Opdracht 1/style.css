@@ -3,12 +3,6 @@ body {
     background-color: #544E68;
     color: #FFAA5E;
   }
-  
-  h3 {
-    color: rgb(241, 8, 8);
-    margin-left: 20px;
-  }
-
 
   .responsive {
     padding: 0 6px;
@@ -19,7 +13,7 @@ body {
 
    @media only screen and (max-width: 100px) {
     .responsive {
-      width: 75%;
+      width: 100%;
   } 
 }
 
@@ -31,7 +25,7 @@ body {
   }
 
   div.responsive_picture img {
-    width: 75%;
+    width: 100%;
     height: auto;
   }
 
@@ -46,7 +40,7 @@ body {
 
   table, th, td {
     border: 1px solid black;
-    width: 75%;
+    width: 100%;
     height: auto; 
   }
 
@@ -57,21 +51,32 @@ body {
     width: 50%;
   } 
 
-  .ContentOfIE_sections h4{
-    text-indent: 10pt;
-    margin: 0px;
+  .ContentOfIE header {
+    padding: 60px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
   }
 
-  .ContentOfIE_sections h4{
-    margin-bottom: 5px;
-    color: rgb(237, 246, 248); 
-  }
-
-  .ContentOfIE_sections h1{
+  .ContentOfIE_section h2{
     font-size: 30px;
     color: rgb(13, 202, 130); 
   }
 
-  .ContentOfIE_sections p{ 
+  section.ContentOfIE_section_subsection h3{
+    text-indent: 10pt;
+    margin: 0px;
+  }
+
+  section.ContentOfIE_section_subsection h3{
+    margin-bottom: 5px;
+    color: rgb(237, 246, 248); 
+  }
+
+  section.ContentOfIE_section_subsection p{ 
+    margin-top: 0;
+  }
+
+  section.ContentOfIE_section p{ 
     margin-top: 0;
   }
