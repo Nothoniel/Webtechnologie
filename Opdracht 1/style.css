@@ -1,7 +1,15 @@
 /* Declaration of the design */
+  html {
+    background: white;
+    height: 100%;
+  }
+
   body {
       background-color: #203C56;
-      color: #FFD4A3;
+      color: #FFD4A3; /* now changes the text of the whole body */
+      margin: 0 auto;
+      width: 900px;
+      min-height: 100%;
   }
 
   /* Not really needed */
