@@ -5,57 +5,39 @@
       font-size: 20px;
   }
 
-  /* Not really needed */
+  img {
+    max-width: 460px;
+  }
+
    .responsive {
     padding: 0 6px;
-    width: 50%;
+    width: 100%;
   }    
 
-
-
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 812px) {
     .responsive {
       width: 100%;
-      margin: 6px 0;   
     }
 
     .center {
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 50%;
+      width: 80%;
     }  
   }
 
-  @media only screen and (min-width: 900px) {
+  @media only screen and (min-width: 812px) {
     .responsive {
-      width: 79.999%;
-      float: right;  
-  } 
-}
-
-/* @media only screen and (min-width: 900px) {
-  div.responsive_picture img {
-    margin-left: 40%; 
+      width: auto; 
+      float: right; 
+    }   
   }
-} */
-
-/* 
-  @media only screen and (max-width: 900px) {
-    body {
-      width: 100%;
-      margin-left: 0px; 
-      margin-right: auto;
-    } 
-  } */
-
 
   div.responsive_picture img {
     width: 100%;
     height: auto;
-    max-width: 400px;
   }
-
 
   footer {
    font-size: 11px;
