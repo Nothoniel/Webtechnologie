@@ -77,19 +77,9 @@ th, td{
   top: 39px;
   left: 5%;
 }  
-
-.clearfix {
-  clear: both;
-}
-
-.center_table {
-  margin-left: auto;
-  margin-right: auto;
-} 
   
 
 @media only screen and (max-width: 812px) {
-
   section.ContentOfIE_section_subsection {
     clear: both;
     width: 100%; 
@@ -116,21 +106,22 @@ th, td{
     width: 80%;
   }  
 
-  .center_table {
-    margin-left: auto;
-    margin-right: auto;
-  } 
+    
+table.centering {
+  margin-left: auto;
+  margin-right: auto;
+}
 }
 
 @media only screen and (min-width: 812px) {
   .responsive {
     width: 80%;
   } 
-
-  .center_table {
-    margin-left: auto;
-    margin-right: auto;
-  } 
+  
+table.centering {
+  margin-left: 12.5%;
+  margin-right: auto;
+}
 }
 
 div.responsive_picture img {
