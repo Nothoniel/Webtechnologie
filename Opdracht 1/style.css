@@ -2,7 +2,9 @@
   body {
     background-color: #203C56;
     color: #FFD4A3;
-    font-size: 20px;
+    font-size: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   a {
@@ -68,7 +70,7 @@
 
   .offset {
     position: relative; 
-    top: 55px;
+    top: 39px;
     left: 5%;
   }  
   
@@ -136,12 +138,14 @@ table, th, td {
 }
 
 .ContentOfIE_section h2 {
+  margin-bottom: 3px;
   font-size: 30px;
   color: #FFAA5E; 
 }
 
 section.ContentOfIE_section_subsection h3 {
-  font-size: 25px;
+  margin-top: 2px;
+  font-size: 22px;
   text-indent: 10pt;
   margin-bottom: 5px;
   color: rgb(255, 236, 218); 
