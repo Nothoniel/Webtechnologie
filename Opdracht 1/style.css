@@ -5,6 +5,19 @@
     font-size: 20px;
   }
 
+  a {
+    text-decoration: none;
+    color: #FFAA5E;
+  }
+
+  .ContentOfIE a:hover {
+    text-decoration: underline;
+  }
+
+  .ContentOfIE a:visited {
+    color: #D08159;
+  } 
+
   nav ul {
     list-style-type: none;
     margin: 0;
