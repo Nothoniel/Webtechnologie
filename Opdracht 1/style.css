@@ -24,10 +24,6 @@
     clear: both;
   }
 
-  img {
-    max-width: 440px;
-  }
-
   .responsive {
     padding: 0 6px;
     width: 100%;
@@ -36,6 +32,7 @@
   .offset {
     position: relative; 
     top: 55px;
+    left: 5%;
   }  
   
 
@@ -48,6 +45,7 @@
 
   .offset {
     top: 0px;
+    left: 0px;
   }  
 
   aside {
@@ -69,8 +67,8 @@
 
 @media only screen and (min-width: 812px) {
   .responsive {
-    width: 100%; 
-  }   
+    width: 80%;
+  } 
 }
 
 div.responsive_picture img {
