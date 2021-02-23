@@ -65,7 +65,21 @@ footer {
   
 th, td{
   border: 1px solid black;
-} 
+}
+
+.ContentOfIE_section h2 {
+  margin-bottom: 3px;
+  font-size: 30px;
+  color: #FFAA5E; 
+}
+
+section.ContentOfIE_section_subsection h3 {
+  margin-top: 2px;
+  font-size: 22px;
+  text-indent: 10pt;
+  margin-bottom: 5px;
+  color: rgb(255, 236, 218); 
+}
 
 .responsive {
   padding: 0 6px;
@@ -96,32 +110,32 @@ th, td{
   }
 
   .responsive {
-    width: 100%;
+    width: 70%;
   }
 
   .center {
     display: block;
-    margin-left: auto;
+    margin-left: 24.3%;
     margin-right: auto;
-    width: 80%;
+    width: 70%;
   }  
 
     
-table.centering {
-  margin-left: auto;
-  margin-right: auto;
-}
+  table.centering {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media only screen and (min-width: 812px) {
   .responsive {
     width: 80%;
-  } 
+  }
   
-table.centering {
-  margin-left: 12.5%;
-  margin-right: auto;
-}
+  table.centering {
+    margin-left: 12.5%;
+    margin-right: auto;
+  }
 }
 
 div.responsive_picture img {
@@ -150,24 +164,9 @@ figcaption {
   font-size: 30px;
 }
 
-.ContentOfIE_section h2 {
-  margin-bottom: 3px;
-  font-size: 30px;
-  color: #FFAA5E; 
-}
-
-section.ContentOfIE_section_subsection h3 {
-  margin-top: 2px;
-  font-size: 22px;
-  text-indent: 10pt;
-  margin-bottom: 5px;
-  color: rgb(255, 236, 218); 
-}
-
 section.ContentOfIE_section_subsection p { 
   margin-top: 0;
 }
-
 
 section.ContentOfIE_section p { 
   margin-top: 0;
