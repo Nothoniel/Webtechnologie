@@ -1,78 +1,91 @@
 /* Declaration of the design */
-  body {
-    background-color: #203C56;
-    color: #FFD4A3;
-    font-size: 18px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+body {
+  background-color: #203C56;
+  color: #FFD4A3;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
-  a {
-    text-decoration: none;
-    color: #FFAA5E;
-  }
+a {
+  text-decoration: none;
+  color: #FFAA5E;
+}
 
-  .ContentOfIE a:hover {
-    text-decoration: underline;
-  }
+.ContentOfIE a:hover {
+  text-decoration: underline;
+}
 
-  .ContentOfIE a:visited {
-    color: #D08159;
-  } 
+.ContentOfIE a:visited {
+  color: #D08159;
+} 
 
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; 
-    background-color: #0D2B45 ;
-  }
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
+  background-color: #0D2B45 ;
+}
 
-  nav li {
-    float: left;
-  }  
+nav li {
+  float: left;
+}  
 
-  nav li a {
-    display: block;
-    color: #FFECD6;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
+nav li a {
+  display: block;
+  color: #FFECD6;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
 
-  nav li a:hover {
-    background-color: #544E68;
-  }
+nav li a:hover {
+  background-color: #544E68;
+}
 
-  .ContentOfIE_section h2 {
-    float: left;
-    width: 70%;
-  }
+.ContentOfIE_section h2 {
+  float: left;
+  width: 70%;
+}
 
-  section.ContentOfIE_section_subsection {
-    float: left;
-    width: 70%;
-  }
+section.ContentOfIE_section_subsection {
+  float: left;
+  width: 70%;
+}
 
-  aside {
-    float: right;
-    width: 30%;
-  }
+aside {
+  float: right;
+  width: 30%;
+}
+
+footer {
+  clear: both;
+}
   
-  footer {
-    clear: both;
-  }
+th, td{
+  border: 1px solid black;
+} 
 
-  .responsive {
-    padding: 0 6px;
-    width: 100%;
-  }    
+.responsive {
+  padding: 0 6px;
+  width: 100%;
+}    
 
-  .offset {
-    position: relative; 
-    top: 39px;
-    left: 5%;
-  }  
+.offset {
+  position: relative; 
+  top: 39px;
+  left: 5%;
+}  
+
+.clearfix {
+  clear: both;
+}
+
+.center_table {
+  margin-left: auto;
+  margin-right: auto;
+} 
   
 
 @media only screen and (max-width: 812px) {
@@ -102,15 +115,30 @@
     margin-right: auto;
     width: 80%;
   }  
+
+  .center_table {
+    margin-left: auto;
+    margin-right: auto;
+  } 
 }
 
 @media only screen and (min-width: 812px) {
   .responsive {
     width: 80%;
   } 
+
+  .center_table {
+    margin-left: auto;
+    margin-right: auto;
+  } 
 }
 
 div.responsive_picture img {
+  width: 100%;
+  height: auto;
+}
+
+div.responsive_table table{
   width: 100%;
   height: auto;
 }
@@ -122,12 +150,6 @@ footer {
 
 figcaption {
   font-size: 11px;
-}
-
-table, th, td {
-  border: 1px solid black;
-  width: 100%;
-  height: auto; 
 }
 
 .ContentOfIE header {
