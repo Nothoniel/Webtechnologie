@@ -1,8 +1,32 @@
 /* Declaration of the design */
   body {
-      background-color: #203C56;
-      color: #FFD4A3;
-      font-size: 20px;
+    background-color: #203C56;
+    color: #FFD4A3;
+    font-size: 20px;
+  }
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    background-color: #0D2B45 ;
+  }
+
+  nav li {
+    float: left;
+  }  
+
+  nav li a {
+    display: block;
+    color: #FFECD6;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  nav li a:hover {
+    background-color: #544E68;
   }
 
   .ContentOfIE_section h2 {
