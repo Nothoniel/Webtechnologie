@@ -5,80 +5,118 @@
       font-size: 20px;
   }
 
-  img {
-    max-width: 460px;
+  .ContentOfIE_section h2 {
+    float: left;
+    width: 70%;
   }
 
-   .responsive {
+  section.ContentOfIE_section_subsection {
+    float: left;
+    width: 70%;
+  }
+
+  aside {
+    float: right;
+    width: 30%;
+  }
+  
+  footer {
+    clear: both;
+  }
+
+  img {
+    max-width: 440px;
+  }
+
+  .responsive {
     padding: 0 6px;
     width: 100%;
   }    
 
-  @media only screen and (max-width: 812px) {
-    .responsive {
-      width: 100%;
-    }
+  .offset {
+    position: relative; 
+    top: 55px;
+  }  
+  
 
-    .center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 80%;
-    }  
+@media only screen and (max-width: 812px) {
+
+  section.ContentOfIE_section_subsection {
+    clear: both;
+    width: 100%; 
   }
 
-  @media only screen and (min-width: 812px) {
-    .responsive {
-      width: auto; 
-      float: right; 
-    }   
-  }
+  .offset {
+    top: 0px;
+  }  
 
-  div.responsive_picture img {
+  aside {
+    clear: both;
     width: 100%;
-    height: auto;
   }
 
-  footer {
-   font-size: 11px;
-   font-family: "Courier New", Monospace;
-  }
-
-  figcaption {
-    font-size: 11px;
-  }
-
-  table, th, td {
-    border: 1px solid black;
+  .responsive {
     width: 100%;
-    height: auto; 
   }
 
-  .ContentOfIE header {
-    padding: 60px;
-    text-align: center;
-    color: #FFECD6;
-    font-size: 30px;
-  }
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }  
+}
 
-  .ContentOfIE_section h2 {
-    font-size: 30px;
-    color: #FFAA5E; 
-  }
+@media only screen and (min-width: 812px) {
+  .responsive {
+    width: 100%; 
+  }   
+}
 
-  section.ContentOfIE_section_subsection h3 {
-    font-size: 25px;
-    text-indent: 10pt;
-    margin-bottom: 5px;
-    color: rgb(255, 236, 218); 
-  }
+div.responsive_picture img {
+  width: 100%;
+  height: auto;
+}
 
-  section.ContentOfIE_section_subsection p { 
-    display: block;  
-    margin-top: 0;
-  }
+footer {
+  font-size: 11px;
+  font-family: "Courier New", Monospace;
+}
+
+figcaption {
+  font-size: 11px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  width: 100%;
+  height: auto; 
+}
+
+.ContentOfIE header {
+  padding: 60px;
+  text-align: center;
+  color: #FFECD6;
+  font-size: 30px;
+}
+
+.ContentOfIE_section h2 {
+  font-size: 30px;
+  color: #FFAA5E; 
+}
+
+section.ContentOfIE_section_subsection h3 {
+  font-size: 25px;
+  text-indent: 10pt;
+  margin-bottom: 5px;
+  color: rgb(255, 236, 218); 
+}
+
+section.ContentOfIE_section_subsection p { 
+  margin-top: 0;
+}
 
 
-  section.ContentOfIE_section p { 
-    margin-top: 0;
-  }
+section.ContentOfIE_section p { 
+  margin-top: 0;
+}
