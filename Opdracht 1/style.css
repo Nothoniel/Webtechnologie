@@ -63,7 +63,7 @@ footer {
   clear: both;
 }
   
-th, td{
+table, th, td{
   border: 1px solid black;
 }
 
@@ -91,6 +91,25 @@ section.ContentOfIE_section_subsection h3 {
   top: 39px;
   left: 5%;
 }  
+
+td {
+  text-align : center;
+}
+
+
+table {
+  background-color:#544E68; 
+  color:#FFD4A3;
+}
+
+table tr#ROW1 {
+  background-color:#0D2B45; 
+  color:#FFD4A3;
+}
+
+
+
+
   
 
 @media only screen and (max-width: 812px) {
@@ -107,6 +126,10 @@ section.ContentOfIE_section_subsection h3 {
   aside {
     clear: both;
     width: 100%;
+  }
+
+  .table_responsive {
+    width: 70%;
   }
 
   .responsive {
@@ -129,9 +152,13 @@ section.ContentOfIE_section_subsection h3 {
   .responsive {
     width: 80%;
   }
+
+  .table_responsive {
+    width: 50%;
+  }
   
   table.centering {
-    margin-left: 12.5%;
+    margin-left: 49%;
     margin-right: auto;
   }
 }
@@ -141,7 +168,7 @@ div.responsive_picture img {
   height: auto;
 }
 
-div.responsive_table table{
+div.table_responsive_elements table{
   width: 100%;
   height: auto;
 }
