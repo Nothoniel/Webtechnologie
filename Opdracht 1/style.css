@@ -119,11 +119,10 @@ section.ContentOfIE_section_subsection h3 {
     margin-right: auto;
     width: 70%;
   }  
-
-    
+  
   table.centering {
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; 
   }
 }
 
@@ -154,6 +153,10 @@ footer {
 }
 
 figcaption {
+  font-size: 11px;
+}
+
+caption {
   font-size: 11px;
 }
 
