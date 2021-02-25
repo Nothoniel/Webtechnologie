@@ -73,6 +73,13 @@ td {
   text-align : center;
 }
 
+.webpage-content header {
+  padding: 60px;
+  text-align: center;
+  color: #FFECD6;
+  font-size: 30px;
+}
+
 .webpage-content a:hover {
   text-decoration: underline;
 }
@@ -111,6 +118,20 @@ section.webpage-content__section__subsection h3 {
   left: 5%;
 }  
 
+ figure {
+  border: 1px #00FFFFFF;
+  padding: 4px;
+  margin: auto;
+}
+
+caption {
+  font-size: 11px;
+}
+
+figcaption {
+  font-size: 11px;
+}
+
   
 @media only screen and (max-width: 812px) {
   section.webpage-content__section__subsection {
@@ -134,12 +155,8 @@ section.webpage-content__section__subsection h3 {
 
   .responsive-picture {
     width: 70%;
-  }
-
-  .center{
-    display: block;
-    margin-left: auto ;
-    margin-right: auto;
+    margin-left: auto;
+    margin-right: auto; 
   }
 
   .table-scrollbar {
@@ -175,22 +192,6 @@ div.responsive-picture__size img {
 div.responsive-table__size table{
   width: 99%;
   height: auto;
-}
-
-
-caption {
-  font-size: 11px;
-}
-
-figcaption {
-  font-size: 11px;
-}
-
-.webpage-content header {
-  padding: 60px;
-  text-align: center;
-  color: #FFECD6;
-  font-size: 30px;
 }
 
 section.webpage-content__section__subsection p { 
