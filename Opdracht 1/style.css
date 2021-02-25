@@ -160,7 +160,7 @@ figcaption {
   }
 
   .table-scrollbar {
-    overflow-x:auto;
+    overflow-x: auto;
   }
   
   table.responsive-table__size--center {
