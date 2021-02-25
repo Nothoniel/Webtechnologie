@@ -26,75 +26,119 @@
             <!-- sections are like subparts of an article/div -->
         <article class = "ContentOfIE">
             <header>
-                <h1>The browser, Internet Explorer</h1>
+                <h1>The history of webbrowsers</h1>
                 <p>Written by: Nathan van de Kolk, Joran van de Kolk, Do Toan Nguyen </p>
             </header>
                         
             
             <section class = "ContentOfIE_section">
                 <h2>History</h2>
+                <section class = "ContentOfIE_section_subsection">
+                    <h3>General history about the creation of webbrowsers</h3>
+                    <p> 
+                        The first web browser, called WorldWideWeb, was created in 1990 by Sir Tim Berners-Lee.
+                        He then recruited Nicola Pellow to write the Line Mode Browser, which displayed web pages on dumb terminals; it was released in 1991 <a href = "#footnote-1"><sup>[1]</sup></a>.  
+                        This was back then the only browser, unlike today. The development of webbrowsers went pretty fast after the founding of the WorldWideWeb.
+                        In 1993 Mosaic was created, this one allowed images in text. And became the first "mainsteam" browser.  The debut of the well-known Internet Explorer was in  1995.
+                        Then in a span of a decade the most used  webbrowsers of these days were created : Google chrome, Microsoft Edge, Mozilla Firefox and Safari. 
+                        On this website especially about those 4 popular webbrowsers information can be found<a href = "#footnote-2"><sup>[2]</sup></a>.
+                        A quick overview of the first version of the previous named webbrowers are shown in table 1 with Opera included, since it also a pretty popular webbrowser.</p>
+                </section>   
+          
+                <div class = "table_responsive">
+                    <div class = "table_responsive_elements"> 
+                            <table class = "centering">
+                                <caption>Table 1: Mainstream browsers  <a href="#footnote-3">[4]</a></caption>
+                                <tr id="ROW1">
+                                    <th>Browsername</th>
+                                    <th>First release </th> 
+                                </tr>
+                                <tr>
+                                    <td>Chrome</td>
+                                    <td>December 11, 2008</td>               
+                                </tr>
+                                <tr>
+                                    <td>Firefox</td>
+                                    <td>November 9, 2004</td>
+                                </tr>
+                                <tr>
+                                    <td>Internet explorer</td>
+                                    <td>August 16, 1995</td>
+                                </tr>
+                                <tr>
+                                    <td>Safari</td>
+                                    <td>June 23, 2003</td>
+                                </tr>
+                                <tr>
+                                    <td>Opera</td>
+                                    <td>July(?), 1996</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div> 
+                </div> 
+            </section>    
+                           
+            <section class = "ContentOfIE_section">
+                <h2>Function</h2>
+                <section class = "ContentOfIE_section_subsection">
+                    <h3>General features of a standard browser</h3>
+                    <p>Generally every webbrowser has an UI, what  basically is a browser wrapper. It would include an address bar, back and forward buttons, minimize/maximize/exit buttons, tabs, 
+                    and the reload page button (seen in fig 1). Although they aren’t technically required, all these elements are usually found on every browser page to ensure usability.
+                    The idea behind the working of a webbrowser is that it acts as client/medium that contacts the webbrowser. So when you search something on Google and click on a link 
+                    or enter a URL in the address bar, the web server locates and sends the information you just requested to the web browser
+                    <a href = "#footnote-2"><sup>[2]</sup></a>.</p>
+
+                    <p>The information is getting located by using DNS. DNS makes it possible to have a conversion between a numerical IP addres  and a string.
+                    Meaning an user can type in the adress bar of a webbrowser something like "Google.com".  An HTTP request is then send to the web server, 
+                    which sends a response with HTML, CSS, and other content files to the browser. 
+                    In short the browser communicates with the network to ask for documents that make up a page<a href = "#footnote-2"><sup>[2]</sup></a>.</p>   
+                </section> 
+
+                <aside class= "offset">
+                    <div class = "center"> 
+                        <div class = "responsive">
+                            <div class = "responsive_picture"> 
+                                <fig>                 
+                                    <img src = "Webbrowser.png"  alt = "Features of a webbrowser" width = "1080" length = "812">  
+                                    <figcaption> fig. 1: General lay-out of a webbrowser <a href = "#footnote-3">[3]</a></figcaption>
+                                </fig>  
+                            </div>
+                        </div>    
+                    </div>  
+                </aside>
 
                 <section class = "ContentOfIE_section_subsection">
-                    <h3>table</h3>
-                    <p> 
-                        The first web browser, called WorldWideWeb, was created in 1990 by Sir Tim Berners-Lee. <a href="#footnote-1">[1]</a>
-                        He then recruited Nicola Pellow to write the Line Mode Browser, which displayed web pages on dumb terminals; it was released in 1991. 
-                    </p>
-                </section>   
-              
-          
-            <div class = "table_responsive">
-                <div class = "table_responsive_elements"> 
-                        <table class = "centering">
-                            <caption>Table 1: Mainstream browsers  <a href="#footnote-3">[3]</a></caption>
-                            <tr id="ROW1">
-                                <th>Browsername</th>
-                                <th>First release </th> 
-                            </tr>
-                            <tr>
-                                <td>Chrome</td>
-                                <td>December 11, 2008</td>               
-                            </tr>
-                            <tr>
-                                <td>Firefox</td>
-                                <td>November 9, 2004</td>
-                            </tr>
-                            <tr>
-                                <td>Internet explorer</td>
-                                <td>August 16, 1995</td>
-                            </tr>
-                            <tr>
-                                <td>Safari</td>
-                                <td>June 23, 2003</td>
-                            </tr>
-                            <tr>
-                                <td>Opera</td>
-                                <td>July(?), 1996</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div> 
-            </div> 
-                
-                
+                    <h3>W3C Standards</h3>
+                    <p>The World Wide Web Consortium is the standards organization for the web, which has a set of guidelines for browsers to adhere certain to HTML and DOM specifications.
+                    Because it’s not a strict set of rules, 
+                    they can be interpreted differently by different rendering engines. 
+                    This is largely why discrepancies in browser experiences exist. 
+                    Browsers can conform the specification while still abiding by their own rules, which can cause compatibility issues<a href = "#footnote-2"><sup>[2]</sup></a>.</p>            
+                </section>
+
                 <section class = "ContentOfIE_section_subsection">
-                    <h2>Function</h2>
-                    <section class = "ContentOfIE_section_subsection">
-                        <p>content of Paragraph 2 </p>
-                    </section>
-                </section>                 
+                    <h3>Browser Wars</h3>
+                    <p> Browsers are still to this day trying to make their browser the best. This competitsion between each browser causes frequent development.
+                        Each browser has to adapt to the mobile phone usage and newer versions of html and css are needed to achieve their goal.
+                        The competition between the browsers can be noticed by the user through the frequent browser updates 
+                        and new version releases that has better speed, security, features, and design.<a href = "#footnote-2"><sup>[2]</sup></a>.</p>            
+                </section>
             </section> 
 
             <section class = "ContentOfIE_section">
                 <h2>References</h2>
                 <section class = "ContentOfIE_section_subsection">
-                <ol>
-                    <li id="footnote-1"> <a href="https://archive.org/details/howwebwasbornsto00gill/page/6/mode/2up"> How the Web was Born: The Story of the World Wide Web </a></li>
-                    <li id="footnote-2"> <a href="https://websitelatenmakenzwolle.nl/kennisbank/websites/wat-is-een-browser/">Wat is een browser?</a></li>
-                    <li id="footnote-3"> <a href="https://www.impressivewebs.com/release-history-major-browsers/"> Webbrowsers releases </a></li>
-                </ol> 
-            </section>
-            
+                    <h3>Reference list</h3>
+                    <ol>
+                        <li id="footnote-1"> Jasmes Gillies (2000). <a href="https://archive.org/details/howwebwasbornsto00gill/page/6/mode/2up"> How the Web was Born: The Story of the World Wide Web </a></li>
+                        <li id="footnote-2"> Alex Mcpeak (24 January, 2018). <a href="https://smartbear.com/blog/2018/history-of-web-browsers/?lang=de-de"> A Brief History of Web Browsers and How They Work.</a> 
+                            Retrieved February 24, 2021.</li>
+                        <li id="footnote-3"> <a href="https://vivaldi.com/nl/"> Features of a webbrowser.</a> Retrieved February 24, 2021. </li>
+                        <li id="footnote-4"> Louis Lazaris (12 March, 2012). <a href="https://www.impressivewebs.com/release-history-major-browsers/"> Webbrowsers releases </a> Retrieved February 18, 2021.</li>
+                    </ol> 
+                </section>
+            </section>    
         </article>    
 
         <footer>  
