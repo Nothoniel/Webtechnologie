@@ -42,6 +42,11 @@ section.webpage-content__section__subsection {
   width: 70%;
 }
 
+.webpage-content__section h2 {
+  float: left;
+  width: 70%;
+}
+
 aside {
   float: right;
   width: 30%;
@@ -88,11 +93,6 @@ td {
 .webpage-content a:visited {
   color: #D08159;
 } 
-
-.webpage-content__section h2 {
-  float: left;
-  width: 70%;
-}
 
 .webpage-content__section h2 {
   margin-bottom: 3px;
@@ -169,6 +169,34 @@ figcaption {
     margin-right: auto; 
   }
 }
+
+@media only screen and (min-width: 812px) and (max-width: 900px) {
+  section.webpage-content__section__subsection {
+    width: 55%;
+  }
+
+  .webpage-content__section h2 {
+    width: 55%;
+  }
+
+  aside {
+    width: 45%;
+  }
+} 
+
+@media only screen and (min-width: 900px) and (max-width: 1080px) {
+  section.webpage-content__section__subsection {
+    width: 65%;
+  }
+
+  .webpage-content__section h2 {
+    width: 65%;
+  }
+
+  aside {
+    width: 35%;
+  }
+} 
 
 @media only screen and (min-width: 812px) {
   .responsive-picture {
