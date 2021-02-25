@@ -1,0 +1,202 @@
+/* Declaration of the design */
+body {
+  background-color: #203C56;
+  color: #FFD4A3;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #FFAA5E;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
+  background-color: #0D2B45 ;
+}
+
+nav li {
+  float: left;
+}  
+
+nav li a {
+  display: block;
+  color: #FFECD6;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #544E68;
+}
+
+section.webpage-content__section__subsection {
+  float: left;
+  width: 70%;
+}
+
+aside {
+  float: right;
+  width: 30%;
+}
+
+footer {
+  clear: both;
+}
+
+footer {
+  font-size: 11px;
+  font-family: "Courier New", Monospace;
+}
+
+table, th, td{
+  border: 1px solid black;
+}
+
+table {
+  background-color:#544E68; 
+  color:#FFD4A3;
+}
+
+table tr#ROW1 {
+  background-color:#0D2B45; 
+  color:#FFD4A3;
+}
+
+td {
+  text-align : center;
+}
+
+.webpage-content a:hover {
+  text-decoration: underline;
+}
+
+.webpage-content a:visited {
+  color: #D08159;
+} 
+
+.webpage-content__section h2 {
+  float: left;
+  width: 70%;
+}
+
+.webpage-content__section h2 {
+  margin-bottom: 3px;
+  font-size: 30px;
+  color: #FFAA5E; 
+}
+
+section.webpage-content__section__subsection h3 {
+  margin-top: 2px;
+  font-size: 22px;
+  text-indent: 10pt;
+  margin-bottom: 5px;
+  color: rgb(255, 236, 218); 
+}
+
+.responsive-picture {
+  padding: 0 6px;
+  width: 99%;
+}
+
+.offset {
+  position: relative; 
+  top: 39px;
+  left: 5%;
+}  
+
+  
+@media only screen and (max-width: 812px) {
+  section.webpage-content__section__subsection {
+    clear: both;
+    width: 99%; 
+  }
+
+  .offset {
+    top: 0px;
+    left: 0px;
+  }  
+
+  aside {
+    clear: both;
+    width: 99%;
+  }
+
+  .responsive-table {
+    width: 70%;
+  }
+
+  .responsive-picture {
+    width: 70%;
+  }
+
+  .center{
+    display: block;
+    margin-left: auto ;
+    margin-right: auto;
+  }
+
+  .table-scrollbar {
+    overflow-x:auto;
+  }
+  
+  table.responsive-table__size--center {
+    margin-left: 17.5%;
+    margin-right: auto; 
+  }
+}
+
+@media only screen and (min-width: 812px) {
+  .responsive-picture {
+    width: 80%;
+  }
+
+  .responsive-table {
+    width: 50%;
+  }
+  
+  table.responsive-table__size--center {
+    margin-left: 49%;
+    margin-right: auto;
+  }
+}
+
+div.responsive-picture__size img {
+  width: 99%;
+  height: auto;
+}
+
+div.responsive-table__size table{
+  width: 99%;
+  height: auto;
+}
+
+
+caption {
+  font-size: 11px;
+}
+
+figcaption {
+  font-size: 11px;
+}
+
+.webpage-content header {
+  padding: 60px;
+  text-align: center;
+  color: #FFECD6;
+  font-size: 30px;
+}
+
+section.webpage-content__section__subsection p { 
+  margin-top: 0;
+}
+
+section.webpage-content__section p { 
+  margin-top: 0;
+}
