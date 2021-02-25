@@ -110,7 +110,7 @@ section.webpage-content__section__subsection h3 {
 
 .responsive-picture {
   padding: 0 6px;
-  width: 99%;
+  width: 100%;
 }
 
 .offset {
@@ -137,7 +137,7 @@ figcaption {
 @media only screen and (max-width: 812px) {
   section.webpage-content__section__subsection {
     clear: both;
-    width: 99%; 
+    width: 100%; 
   }
 
   .offset {
@@ -147,7 +147,7 @@ figcaption {
 
   aside {
     clear: both;
-    width: 99%;
+    width: 100%;
   }
 
   .responsive-table {
@@ -155,7 +155,7 @@ figcaption {
   }
 
   .responsive-picture {
-    width: 70%;
+    width: 55%;
     margin-left: auto;
     margin-right: auto; 
   }
@@ -186,12 +186,12 @@ figcaption {
 }
 
 div.responsive-picture__size img {
-  width: 99%;
+  width: 100%;
   height: auto;
 }
 
 div.responsive-table__size table{
-  width: 99%;
+  width: 100%;
   height: auto;
 }
 
