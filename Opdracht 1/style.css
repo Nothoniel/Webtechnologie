@@ -131,13 +131,13 @@ table tr#ROW1 {
     width: 70%;
   }
 
-  .center {
+  .responsive-picture__size--center {
     display: block;
-    margin-left: 24.3%;
+    margin-left: 35.8%;
     margin-right: auto;
   }  
 
-  .responsive-table__size--scrollbar {
+  .table-scrollbar {
     overflow-x:auto;
   }
   
