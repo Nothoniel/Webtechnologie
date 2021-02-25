@@ -106,12 +106,7 @@ table tr#ROW1 {
   background-color:#0D2B45; 
   color:#FFD4A3;
 }
-
-
-
-
   
-
 @media only screen and (max-width: 812px) {
   section.ContentOfIE_section_subsection {
     clear: both;
@@ -141,6 +136,10 @@ table tr#ROW1 {
     margin-left: 24.3%;
     margin-right: auto;
   }  
+
+  .overflow {
+    overflow-x:auto;
+  }
   
   table.centering {
     margin-left: 17.5%;
