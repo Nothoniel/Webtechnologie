@@ -12,11 +12,11 @@ a {
   color: #FFAA5E;
 }
 
-.ContentOfIE a:hover {
+.webpage-content a:hover {
   text-decoration: underline;
 }
 
-.ContentOfIE a:visited {
+.webpage-content a:visited {
   color: #D08159;
 } 
 
@@ -44,12 +44,12 @@ nav li a:hover {
   background-color: #544E68;
 }
 
-.ContentOfIE_section h2 {
+.webpage-content__section h2 {
   float: left;
   width: 70%;
 }
 
-section.ContentOfIE_section_subsection {
+section.webpage-content__section__subsection {
   float: left;
   width: 70%;
 }
@@ -67,13 +67,13 @@ table, th, td{
   border: 1px solid black;
 }
 
-.ContentOfIE_section h2 {
+.webpage-content__section h2 {
   margin-bottom: 3px;
   font-size: 30px;
   color: #FFAA5E; 
 }
 
-section.ContentOfIE_section_subsection h3 {
+section.webpage-content__section__subsection h3 {
   margin-top: 2px;
   font-size: 22px;
   text-indent: 10pt;
@@ -81,7 +81,7 @@ section.ContentOfIE_section_subsection h3 {
   color: rgb(255, 236, 218); 
 }
 
-.responsive {
+.responsive-picture {
   padding: 0 6px;
   width: 100%;
 }    
@@ -108,7 +108,7 @@ table tr#ROW1 {
 }
   
 @media only screen and (max-width: 812px) {
-  section.ContentOfIE_section_subsection {
+  section.webpage-content__section__subsection {
     clear: both;
     width: 100%; 
   }
@@ -123,11 +123,11 @@ table tr#ROW1 {
     width: 100%;
   }
 
-  .table_responsive {
+  .responsive-table {
     width: 70%;
   }
 
-  .responsive {
+  .responsive-picture {
     width: 70%;
   }
 
@@ -137,37 +137,37 @@ table tr#ROW1 {
     margin-right: auto;
   }  
 
-  .overflow {
+  .responsive-table__size--scrollbar {
     overflow-x:auto;
   }
   
-  table.centering {
+  table.responsive-table__size--center {
     margin-left: 17.5%;
     margin-right: auto; 
   }
 }
 
 @media only screen and (min-width: 812px) {
-  .responsive {
+  .responsive-picture {
     width: 80%;
   }
 
-  .table_responsive {
+  .responsive-table {
     width: 50%;
   }
   
-  table.centering {
+  table.responsive-table__size--center {
     margin-left: 49%;
     margin-right: auto;
   }
 }
 
-div.responsive_picture img {
+div.responsive-picture__size img {
   width: 100%;
   height: auto;
 }
 
-div.table_responsive_elements table{
+div.responsive-table__size table{
   width: 100%;
   height: auto;
 }
@@ -185,17 +185,17 @@ caption {
   font-size: 11px;
 }
 
-.ContentOfIE header {
+.webpage-content header {
   padding: 60px;
   text-align: center;
   color: #FFECD6;
   font-size: 30px;
 }
 
-section.ContentOfIE_section_subsection p { 
+section.webpage-content__section__subsection p { 
   margin-top: 0;
 }
 
-section.ContentOfIE_section p { 
+section.webpage-content__section p { 
   margin-top: 0;
 }
