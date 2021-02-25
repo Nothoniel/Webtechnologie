@@ -12,14 +12,6 @@ a {
   color: #FFAA5E;
 }
 
-.ContentOfIE a:hover {
-  text-decoration: underline;
-}
-
-.ContentOfIE a:visited {
-  color: #D08159;
-} 
-
 nav ul {
   list-style-type: none;
   margin: 0;
@@ -44,12 +36,7 @@ nav li a:hover {
   background-color: #544E68;
 }
 
-.webpage-content__section h2 {
-  float: left;
-  width: 70%;
-}
-
-section.webpage-content__section__subsection  {
+section.webpage-content__section__subsection {
   float: left;
   width: 70%;
 }
@@ -62,9 +49,41 @@ aside {
 footer {
   clear: both;
 }
-  
+
+footer {
+  font-size: 11px;
+  font-family: "Courier New", Monospace;
+}
+
 table, th, td{
   border: 1px solid black;
+}
+
+table {
+  background-color:#544E68; 
+  color:#FFD4A3;
+}
+
+table tr#ROW1 {
+  background-color:#0D2B45; 
+  color:#FFD4A3;
+}
+
+td {
+  text-align : center;
+}
+
+.webpage-content a:hover {
+  text-decoration: underline;
+}
+
+.webpage-content a:visited {
+  color: #D08159;
+} 
+
+.webpage-content__section h2 {
+  float: left;
+  width: 70%;
 }
 
 .webpage-content__section h2 {
@@ -83,8 +102,8 @@ section.webpage-content__section__subsection h3 {
 
 .responsive-picture {
   padding: 0 6px;
-  width: 100%;
-}    
+  width: 99%;
+}
 
 .offset {
   position: relative; 
@@ -92,25 +111,11 @@ section.webpage-content__section__subsection h3 {
   left: 5%;
 }  
 
-td {
-  text-align : center;
-}
-
-
-table {
-  background-color:#544E68; 
-  color:#FFD4A3;
-}
-
-table tr#ROW1 {
-  background-color:#0D2B45; 
-  color:#FFD4A3;
-}
   
 @media only screen and (max-width: 812px) {
-  section.webpage-content__section__subsection  {
+  section.webpage-content__section__subsection {
     clear: both;
-    width: 100%; 
+    width: 99%; 
   }
 
   .offset {
@@ -120,10 +125,10 @@ table tr#ROW1 {
 
   aside {
     clear: both;
-    width: 100%;
+    width: 99%;
   }
 
-  .responsive-table{
+  .responsive-table {
     width: 70%;
   }
 
@@ -131,11 +136,15 @@ table tr#ROW1 {
     width: 70%;
   }
 
-  .center {
+  .center{
     display: block;
-    margin-left: 24.3%;
+    margin-left: auto ;
     margin-right: auto;
-  }  
+  }
+
+  .table-scrollbar {
+    overflow-x:auto;
+  }
   
   table.responsive-table__size--center {
     margin-left: 17.5%;
@@ -159,25 +168,21 @@ table tr#ROW1 {
 }
 
 div.responsive-picture__size img {
-  width: 100%;
+  width: 99%;
   height: auto;
 }
 
 div.responsive-table__size table{
-  width: 100%;
+  width: 99%;
   height: auto;
 }
 
-footer {
+
+caption {
   font-size: 11px;
-  font-family: "Courier New", Monospace;
 }
 
 figcaption {
-  font-size: 11px;
-}
-
-caption {
   font-size: 11px;
 }
 
@@ -188,7 +193,7 @@ caption {
   font-size: 30px;
 }
 
-section.webpage-contentE__section_subsection p { 
+section.webpage-content__section__subsection p { 
   margin-top: 0;
 }
 
