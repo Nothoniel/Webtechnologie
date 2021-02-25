@@ -143,14 +143,10 @@ figure.figcaption {
   }
 
   .responsive-picture {
-    width: 70%;
-  }
-
-  .responsive-picture__size--center {
-    display: block;
     margin-left: 35.8%;
     margin-right: auto;
-  }  
+    width: 70%;
+  }
 
   .table-scrollbar {
     overflow-x:auto;
