@@ -25,6 +25,8 @@
             </ul>
         </nav>
 
+        <!-- article contains the content of the webpage -->
+        <!-- footnotes are used as hyperlinks that links the user to the refence list (section) -->
         <article class = "webpage-content">
             <!-- The header of each webpage -->
             <header>
@@ -36,7 +38,7 @@
                 <h2>History</h2>
                 <section class = "webpage-content__section__subsection">
                     <h3>Summary</h3>
-                    <p> The Mozilla project started in 1998 by releasing the Netscape browser suite source code. The open-source nature of the project is primarily commendable.
+                    <p> The Mozilla project (see fig 1) started in 1998 by releasing the Netscape browser suite source code. The open-source nature of the project is primarily commendable.
                     After multiple years of development, Mozilla 1.0, released in the year 2002. In the same year the first version of Phoenix, later renamed to Firefox, was released for many people unnoticed.
                     At the moment, more than 90% of the internet browser market was taken by Internet Explorer.<br>
                     Later on, in 2004, Firefox 1.0 was released and succesfully, downloads reached numbers over 100 million. Since then, new versions were frequent and FireFox is still one of the major internetbrowsers in the market.
@@ -44,21 +46,33 @@
                     <a href = "#footnote-1"><sup>[1]</sup></a>.</p>
                 </section> 
 
+                <!-- The <aside> is placed on the right-side of the webpage, but at lower than 812px it gets centered -->
+                <aside class= "offset">
+                    <div class = "responsive-picture"> 
+                        <div class = "responsive-picture__size">
+                            <figure>             
+                                <img src = "img/firefox-logo.png"  alt = "most recent logo of Firefox" width = "256" height = "256">  
+                                <figcaption> fig. 1: Logo of Firefox <a href = "#footnote-2">[2]</a></figcaption> 
+                            </figure>   
+                        </div>  
+                    </div>   
+                </aside>
+
                 <section class = "webpage-content__section__subsection">
                     <h3>Usage Share</h3>
                     <p> Firefox usage was at a peak at the fall of 2009 when its share of the browser market consisted of an impressive 32.21%, taking over the position of Internet Explorer 7.
                     Howerever, usage has declined ever since due to a new competitor: Google Chrome. Currently, Firefox has a usage share of around 4 percent, while Chrome's is more in the range of 60-65.
                     Making Firefox the third-most popular webbrowser after Chrome and Safari
-                    <a href = "#footnote-2"><sup>[2]</sup></a>.</p>
+                    <a href = "#footnote-3"><sup>[3]</sup></a>.</p>
                 </section>
                 
                 <section class = "webpage-content__section__subsection">
                     <h3>FireFox OS</h3>
                     <p> FireFox OS was an open-source operating system for mobile phones being developed by the Mozilla Project.
-                        It has since been cancelled. It was built using 3 layers: the applicationlayer, Open Web Platform Interface and the infrastucturelayer (<em>Gonk</em>).<br>
-                        The first layer consisted of a combination of HTML5, JavaScript and CSS. The second contained all of the technological stuff: application programming interfaces.
-                        These communicate with the layout-engine known as Gecko. The final layer is the actual operating system which was based on linux
-                        <a href = "#footnote-3"><sup>[3]</sup></a>.</p>
+                    It has since been cancelled. It was built using 3 layers: the applicationlayer, Open Web Platform Interface and the infrastucturelayer (<em>Gonk</em>).<br>
+                    The first layer consisted of a combination of HTML5, JavaScript and CSS. The second contained all of the technological stuff: application programming interfaces.
+                    These communicate with the layout-engine known as Gecko. The final layer is the actual operating system which was based on linux
+                    <a href = "#footnote-4"><sup>[4]</sup></a>.</p>
                 </section>
 
                 <section class = "webpage-content__section__subsection">
@@ -81,26 +95,23 @@
                 <section class="webpage-content__section__subsection">
                     <h3>Default blocking of trackers</h3>
                     <p> According to the official websites, Ads are distracting and make the browsingexperience more sluggish with slower loadtimes.
-                        Thus the blocking of trackers is of by default without the need of fiddling in the security settings.
-                    <a href = "#footnote-4"><sup>[4]</sup></a>.</p>
+                    Thus the blocking of trackers is of by default without the need of fiddling in the security settings.
+                    <a href = "#footnote-5"><sup>[5]</sup></a>.</p>
                 </section>
 
                 <section class="webpage-content__section__subsection">
                     <h3>Password Management</h3>
                     <p> Just as in prevelant on other browser the option of saving one's passwords is a feature.
                     Due to the connection of the browser across multiple devices these can also be shared, making the transition between devices just that little bit less intrusive.
-                    <a href = "#footnote-4"><sup>[4]</sup></a>.</p>
+                    <a href = "#footnote-5"><sup>[5]</sup></a>.</p>
                 </section>
 
                 <section class="webpage-content__section__subsection">
                     <h3>OS and language availability</h3>
                     <p> One of Firefox's more unique properties is its availabilty on several Operating systems.
                     It is also available in over 90 languages.
-                    <a href = "#footnote-4"><sup>[4]</sup></a>.</p>
+                    <a href = "#footnote-5"><sup>[5]</sup></a>.</p>
                 </section>
-
-
-
             </section>
 
 
@@ -110,10 +121,11 @@
                     <h3>Reference list</h3>
                     <!-- ordered list that represents all sources used on the current webpage -->
                     <ol>
-                        <li id = "footnote-1"> <a href=https://www.mozilla.org/en-US/about/history> History of the Mozilla Project.</a> Retrieved February 25, 2021.</li>
-                        <li id = "footnote-2"> <a href=https://gs.statcounter.com/#browser-ww-monthly-200807-201609> Browser Market Share Worldwide - January 2021.</a> Retrieved February 25, 2021.</li>
-                        <li id = "footnote-3"> <a href="https://nl.wikipedia.org/wiki/Firefox_OS"> Firefox OS</a> Retrieved February 25, 2021.</li>
-                        <li id = "footnote-4"> <a href="https://www.mozilla.org/en-US/firefox/new/"> Firefox for Desktop</a> Retrieved February 25, 2021.</li>
+                        <li id = "footnote-1"> <a href= "https://www.mozilla.org/en-US/about/history"> History of the Mozilla Project.</a> Retrieved February 25, 2021.</li>
+                        <li id = "footnote-2"> <a href= "https://www.mozilla.org/nl/firefox/new/"> Firefox browser.</a> Retrieved February 25, 2021.</li>
+                        <li id = "footnote-3"> <a href= "https://gs.statcounter.com/#browser-ww-monthly-200807-201609"> Browser Market Share Worldwide - January 2021.</a> Retrieved February 25, 2021.</li>
+                        <li id = "footnote-4"> <a href="https://nl.wikipedia.org/wiki/Firefox_OS"> Firefox OS</a> Retrieved February 25, 2021.</li>
+                        <li id = "footnote-5"> <a href="https://www.mozilla.org/en-US/firefox/new/"> Firefox for Desktop</a> Retrieved February 25, 2021.</li>
                     </ol> 
                 </section>
             </section> 
