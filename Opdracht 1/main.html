@@ -8,8 +8,12 @@
         <meta name = "founder" content = "Tim Berners-Lee">
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 
+        <!-- connection to external css sheet -->
         <link rel = "stylesheet" href = "style.css">
+
+        <!-- name  and icon of the browser tab -->
         <title>Webipedia</title>
+        <link rel="icon" href="img/browser-icon.ico">
     </head>
     
     <!-- declarations of content -->
@@ -35,17 +39,19 @@
             </header>          
             
             <section class = "webpage-content__section">
-                <h2>History</h2>
-                <section class = "webpage-content__section__subsection">
-                    <h3>General history about the creation of webbrowsers</h3>
-                    <p>The first web browser, called WorldWideWeb, was created in 1990 by Sir Tim Berners-Lee.
-                    He then recruited Nicola Pellow to write the Line Mode Browser, which displayed web pages on dumb terminals; it was released in 1991 <a href = "#footnote-1"><sup>[1]</sup></a>.  
-                    This was back then the only browser, unlike today. The development of webbrowsers went pretty fast after the founding of the WorldWideWeb.
-                    In 1993 Mosaic was created, this one allowed images in text. And became the first "mainsteam" browser.  The debut of the well-known Internet Explorer was in  1995.
-                    Then in a span of a decade the most used  webbrowsers of these days were created : Google chrome, Microsoft Edge, Mozilla Firefox and Safari. 
-                    On this website especially about those 4 popular webbrowsers information can be found<a href = "#footnote-2"><sup>[2]</sup></a>.
-                    A quick overview of the first version of the previous named webbrowers are shown in table 1 with Opera included, since it also a pretty popular webbrowser.</p>
-                </section>   
+                <div class = "container--resize">
+                    <h2>History</h2>
+                    <section class = "webpage-content__section__subsection">
+                        <h3>General history about the creation of webbrowsers</h3>
+                        <p>The first web browser, called WorldWideWeb, was created in 1990 by Sir Tim Berners-Lee.
+                        He then recruited Nicola Pellow to write the Line Mode Browser, which displayed web pages on dumb terminals; it was released in 1991 <a href = "#footnote-1"><sup>[1]</sup></a>.  
+                        This was back then the only browser, unlike today. The development of webbrowsers went pretty fast after the founding of the WorldWideWeb.
+                        In 1993 Mosaic was created, this one allowed images in text. And became the first "mainsteam" browser.  The debut of the well-known Internet Explorer was in  1995.
+                        Then in a span of a decade the most used  webbrowsers of these days were created : Google chrome, Microsoft Edge, Mozilla Firefox and Safari. 
+                        On this website especially about those 4 popular webbrowsers information can be found<a href = "#footnote-2"><sup>[2]</sup></a>.
+                        A quick overview of the first version of the previous named webbrowers are shown in table 1 with Opera included, since it also a pretty popular webbrowser.</p>
+                    </section>
+                </div>   
                 
                 <!-- vertical table that changes width depending on screen size -->
                 <div class = "responsive-table">
@@ -109,38 +115,42 @@
                     </div>   
                 </aside>
 
-                <section class = "webpage-content__section__subsection">
-                    <h3>W3C Standards</h3>
-                    <p>The World Wide Web Consortium is the standards organization for the web, which has a set of guidelines for browsers to adhere certain to HTML and DOM specifications.
-                    Because it’s not a strict set of rules, 
-                    they can be interpreted differently by different rendering engines. 
-                    This is largely why discrepancies in browser experiences exist. 
-                    Browsers can conform the specification while still abiding by their own rules, which can cause compatibility issues<a href = "#footnote-2"><sup>[2]</sup></a>.</p>            
-                </section>
+                <div class = "container--resize">
+                    <section class = "webpage-content__section__subsection">
+                        <h3>W3C Standards</h3>
+                        <p>The World Wide Web Consortium is the standards organization for the web, which has a set of guidelines for browsers to adhere certain to HTML and DOM specifications.
+                        Because it’s not a strict set of rules, 
+                        they can be interpreted differently by different rendering engines. 
+                        This is largely why discrepancies in browser experiences exist. 
+                        Browsers can conform the specification while still abiding by their own rules, which can cause compatibility issues<a href = "#footnote-2"><sup>[2]</sup></a>.</p>            
+                    </section>
 
-                <section class = "webpage-content__section__subsection">
-                    <h3>Browser Wars</h3>
-                    <p> Browsers are still to this day trying to make their browser the best. This competitsion between each browser causes frequent development.
-                    Each browser has to adapt to the mobile phone usage and newer versions of html and css are needed to achieve their goal.
-                    The competition between the browsers can be noticed by the user through the frequent browser updates 
-                    and new version releases that has better speed, security, features, and design.<a href = "#footnote-2"><sup>[2]</sup></a>.</p>            
-                </section>
+                    <section class = "webpage-content__section__subsection">
+                        <h3>Browser Wars</h3>
+                        <p> Browsers are still to this day trying to make their browser the best. This competitsion between each browser causes frequent development.
+                        Each browser has to adapt to the mobile phone usage and newer versions of html and css are needed to achieve their goal.
+                        The competition between the browsers can be noticed by the user through the frequent browser updates 
+                        and new version releases that has better speed, security, features, and design.<a href = "#footnote-2"><sup>[2]</sup></a>.</p>            
+                    </section>
+                </div>
             </section> 
 
             <section class = "webpage-content__section">
-                <h2>References</h2>
-                <section class = "webpage-content__section__subsection">
-                    <h3>Reference list</h3>
-                    <!-- ordered list that represents all sources used on the current webpage -->
-                    <ol>
-                        <li id="footnote-1"> Jasmes Gillies (2000). <a href="https://archive.org/details/howwebwasbornsto00gill/page/6/mode/2up"> How the Web was Born: The Story of the World Wide Web </a> 
-                        Retrieved February 20, 2021.</li>
-                        <li id="footnote-2"> Alex Mcpeak (24 January, 2018). <a href="https://smartbear.com/blog/2018/history-of-web-browsers/?lang=de-de"> A Brief History of Web Browsers and How They Work.</a> 
-                        Retrieved February 24, 2021.</li>
-                        <li id="footnote-3"> <a href="https://vivaldi.com/nl/"> Features of a webbrowser.</a> Retrieved February 24, 2021. </li>
-                        <li id="footnote-4"> Louis Lazaris (12 March, 2012). <a href="https://www.impressivewebs.com/release-history-major-browsers/"> Webbrowsers releases </a> Retrieved February 18, 2021.</li>
-                    </ol> 
-                </section>
+                <div class = "container--resize">
+                    <h2>References</h2>
+                    <section class = "webpage-content__section__subsection">
+                        <h3>Reference list</h3>
+                        <!-- ordered list that represents all sources used on the current webpage -->
+                        <ol>
+                            <li id="footnote-1"> Jasmes Gillies (2000). <a href="https://archive.org/details/howwebwasbornsto00gill/page/6/mode/2up"> How the Web was Born: The Story of the World Wide Web </a> 
+                            Retrieved February 20, 2021.</li>
+                            <li id="footnote-2"> Alex Mcpeak (24 January, 2018). <a href="https://smartbear.com/blog/2018/history-of-web-browsers/?lang=de-de"> A Brief History of Web Browsers and How They Work.</a> 
+                            Retrieved February 24, 2021.</li>
+                            <li id="footnote-3"> <a href="https://vivaldi.com/nl/"> Features of a webbrowser.</a> Retrieved February 24, 2021. </li>
+                            <li id="footnote-4"> Louis Lazaris (12 March, 2012). <a href="https://www.impressivewebs.com/release-history-major-browsers/"> Webbrowsers releases </a> Retrieved February 18, 2021.</li>
+                        </ol> 
+                    </section>
+                </div>
             </section>    
         </article>    
 

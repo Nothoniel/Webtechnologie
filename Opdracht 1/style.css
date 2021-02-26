@@ -242,6 +242,11 @@ As last a table can be  responsive on 2 ways, with a scrollbar and width depende
   aside {
     width: 45%;
   }
+  
+  .container--resize .webpage-content__section__subsection {
+    clear: both;
+    width: 100%; 
+  }
 } 
 
 @media only screen and (min-width: 900px) and (max-width: 1080px) {
@@ -256,6 +261,12 @@ As last a table can be  responsive on 2 ways, with a scrollbar and width depende
   aside {
     width: 35%;
   }
+  
+  .container--resize .webpage-content__section__subsection {
+    clear: both;
+    width: 100%; 
+  }
+  
 } 
 
 /*This media query is meant for when mobiles are not used, since most mobiles are not bigger than 812px.
