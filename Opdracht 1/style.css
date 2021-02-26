@@ -116,8 +116,8 @@ section.webpage-content__section__subsection h3 {
 .offset {
   position: relative; 
   top: 39px;
-  left: 5%;
-}  
+  left: 5vw;
+} 
 
  figure {
   border: 1px #00FFFFFF;
@@ -198,7 +198,7 @@ figcaption {
   }
 } 
 
-@media only screen and (min-width: 812px) {
+@media only screen and (min-width: 812px) { 
   .responsive-picture {
     width: 80%;
   }
@@ -213,13 +213,33 @@ figcaption {
   }
 }
 
+@media only screen and (min-width: 3682px) {
+  section.webpage-content__section__subsection {
+    width: 51%;
+  }
+
+  .webpage-content__section h2 {
+    width: 51%;
+  }
+
+  aside {
+    width: 49%;
+  }
+
+  .offset{
+    left: 0px;
+  }
+}
+
 div.responsive-picture__size img {
   width: 100%;
+  max-width: 400px;
   height: auto;
 }
 
 div.responsive-table__size table{
   width: 100%;
+  max-width: 960px;
   height: auto;
 }
 
