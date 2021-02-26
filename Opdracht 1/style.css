@@ -213,7 +213,7 @@ figcaption {
   }
 }
 
-@media only screen and (min-width: 3682px) {
+@media only screen and (min-width: 4682px) {
   section.webpage-content__section__subsection {
     width: 51%;
   }
@@ -226,8 +226,9 @@ figcaption {
     width: 49%;
   }
 
-  .offset{
-    left: 0px;
+  .responsive-picture {
+    position: absolute;
+    left: 0%;
   }
 }
 
