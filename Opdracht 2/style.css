@@ -1,0 +1,323 @@
+/*
+    ///// Comment-section: Body layout /////
+*/ 
+
+/* the body proportions*/
+body {
+  background-color: #203C56;
+  color: #FFD4A3;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow-x: hidden;
+}
+
+/* the next 4 CSS-rules are determing the float width of some blocks in the webpage */
+section.webpage-content__section__subsection {
+  float: left;
+  width: 70%;
+}
+
+.webpage-content__section h2 {
+  float: left;
+  width: 70%;
+}
+
+section.webpage-content__section__subsection p { 
+  margin-top: 0;
+}
+
+section.webpage-content__section p { 
+  margin-top: 0;
+}
+
+aside {
+  float: right;
+  width: 30%;
+}
+
+footer {
+  clear: both;
+}
+
+/*the last 4 CSS-rules of this comment-section are coloring and changing the font */
+footer {
+  font-size: 11px;
+  font-family: "Courier New", Monospace;
+}
+
+.webpage-content header {
+  padding: 60px;
+  text-align: center;
+  color: #FFECD6;
+  font-size: 30px;
+}
+
+
+.webpage-content__section h2 {
+  margin-bottom: 3px;
+  font-size: 30px;
+  color: #FFAA5E; 
+}
+
+section.webpage-content__section__subsection h3 {
+  margin-top: 2px;
+  font-size: 22px;
+  text-indent: 10pt;
+  margin-bottom: 5px;
+  color: rgb(255, 236, 218); 
+}
+
+/*
+    ///// Comment-section: Hyperlinks of webpage /////
+*/  
+a {
+  text-decoration: none;
+  color: #FFAA5E;
+}
+
+/* makes the hyperlink underline when hovering */
+.webpage-content a:hover {
+  text-decoration: underline;
+}
+
+/* makes the hyperlink dark colored when clicked */
+.webpage-content a:visited {
+  color: #D08159;
+} 
+
+/*
+    ///// Comment-section:Navigation bar /////
+    //the CSS-rules in this comment-section has declarations that determines the coloring and positioning of the navigation bar
+*/
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
+  background-color: #0D2B45;
+}
+
+nav li {
+  float: left;
+} 
+ 
+nav li a {
+  display: block;
+  color: #FFECD6;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #544E68;
+}
+
+/*
+    ///// Comment-section:Table /////
+    //in this comment sections all CSS-rules determine the borderstyle, coloring and positioning of the table. 
+*/
+table, th, td{
+  border: 1px solid black;
+}
+
+table {
+  background-color:#0D2B45;
+  color:#FFD4A3;
+}
+
+table tr {
+  color:#D08159; 
+}
+
+table tr#ROW1 {
+  background-color: #544E68; 
+  color:inherit;
+} 
+
+td {
+  text-align : center;
+}
+
+/*
+    ///// Comment-section:Image /////
+*/
+/* size of the image*/
+.responsive-picture {
+  padding: 0 6px;
+  width: 100%;
+}
+
+/*position of the image relative to  the original position*/
+.offset {
+  position: relative; 
+  top: 39px;
+  left: 5vw;
+} 
+
+/* border that is made transparant and really thin*/
+ figure {
+  border: 1px #00FFFFFF;
+  padding: 4px;
+  margin: auto;
+}
+
+/*
+    ///// Comment-section:Captions /////
+    //the CSS-rules of this comment-section determine the sizes of the captions
+*/
+caption {
+  font-size: 11px;
+}
+
+figcaption {
+  font-size: 11px;
+}
+
+/*
+    ///// Comment-section:Media-queries /////
+*/ 
+/*an iPhone-X has one of the bigger resolutions for mobile and that is choosen as a upperbound of "mobile mode" 
+the fonts are made bigger, the images+ text are centered and increased in size + are responsive.
+As last a table can be  responsive on 2 ways, with a scrollbar and width depended on screen*/
+@media only screen and (max-width: 812px) {
+  body {
+    font-size: 20px;
+  } 
+
+  caption {
+    font-size: 15px;
+  }
+  
+  figcaption {
+    font-size: 15px;
+  }
+
+  section.webpage-content__section__subsection {
+    clear: both;
+    width: 100%; 
+  }
+
+  .offset {
+    top: 0px;
+    left: 0px;
+  }  
+
+  aside {
+    clear: both;
+    width: 100%;
+  }
+
+  .responsive-table {
+    width: 70%;
+  }
+
+  .responsive-picture {
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto; 
+  }
+
+  .table-scrollbar {
+    overflow-x: auto;
+  }
+  
+  table.responsive-table__size--center {
+    margin-left: 17.5%;
+    margin-right: auto; 
+  }
+}
+
+/*the next 2 media-queries are resizing the sections sizes of the webpage to make it more readable */
+@media only screen and (min-width: 812px) and (max-width: 900px) {
+  section.webpage-content__section__subsection {
+    width: 55%;
+  }
+
+  .webpage-content__section h2 {
+    width: 55%;
+  }
+
+  aside {
+    width: 45%;
+  }
+  
+  .container--resize .webpage-content__section__subsection {
+    clear: both;
+    width: 100%; 
+  }
+} 
+
+@media only screen and (min-width: 900px) and (max-width: 1080px) {
+  section.webpage-content__section__subsection {
+    width: 65%;
+  }
+
+  .webpage-content__section h2 {
+    width: 65%;
+  }
+
+  aside {
+    width: 35%;
+  }
+  
+  .container--resize .webpage-content__section__subsection {
+    clear: both;
+    width: 100%; 
+  }
+  
+} 
+
+/*This media query is meant for when mobiles are not used, since most mobiles are not bigger than 812px.
+  This media query resizes the image, and the responsive table that does not use a scrollbar.*/
+@media only screen and (min-width: 812px) { 
+  .responsive-picture {
+    width: 80%;
+  }
+
+  .responsive-table {
+    width: 50%;
+  }
+  
+  table.responsive-table__size--center {
+    margin-left: 49%;
+    margin-right: auto;
+  }
+}
+
+/* The next media-query is resizing the sections so that when zooming out not the whole lay-out becomes bad. 
+This works up to 50% zooming out.*/
+@media only screen and (min-width: 4682px) {
+  section.webpage-content__section__subsection {
+    width: 51%;
+  }
+
+  .webpage-content__section h2 {
+    width: 51%;
+  }
+
+  aside {
+    width: 49%;
+  }
+
+  .responsive-picture {
+    position: absolute;
+    left: 0%;
+  }
+}
+
+/*
+    ///// Comment-section:Default sizes of image and table /////
+*/ 
+div.responsive-picture__size img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+div.responsive-table__size table{
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+}
