@@ -1,23 +1,206 @@
 <!DOCTYPE html>
-<html>
-    <!--Tabheader of Browser-->
+<html lang = "en">
+    <!-- optimisation for search engines-->
     <head>
-        <meta charset = "utf-8" >
-        <link rel="stylesheet" href="template.css">
-        <title> Webpagename</title>
+        <meta charset = "UTF-8" >
+        <meta name = "description" content = "Some questions about webbrowsers">
+        <meta name = "keywords" content = "Questions, Ranking webbrowser statistics, Questions, Multiple choice, Open question">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+
+        <!-- connection to external css sheet -->
+        <link rel = "stylesheet" href = "template.css">
+        
+        <!-- name  and icon of the browser tab -->
+        <title>Webipedia</title>
+        <link rel="icon" href="img/browser-icon.ico">
     </head>
+
     <!-- declarations of content -->
     <body>
-        <!-- link maintenance -->
-        <nav>..</nav>
-        <!-- sections are like subparts of an article/div -->
-        <section>
-            <!-- headers up to 6 fonts -->
-            <h3>header 1</h3>
-            <p>content of Paragraph 1</p>
-            <a href="..">hyperlink</a>
-            <img src= ".." width=".." height=".." alt="description of picture">
-        </section> 
+        <!-- horizontal navigation bar directs the user to the other webpages of the website -->
+        <nav>
+            <ul>
+                <li><a class = "active" href = "main.html">Home</a></li>
+                <li><a href = "page1-google-chrome.html">Google Chrome</a></li>
+                <li><a href = "page2-mozilla-firefox.html">Mozilla Firefox</a></li>
+                <li><a href = "page3-internet-explorer.html">Internet Explorer</a></li>
+                <li><a href = "page4-safari.html">Safari</a></li>
+                <li><a href = "assessment.html">WebiQuiz</a></li>
+            </ul>
+        </nav>
+
+        <!-- article contains the content of the webpage -->
+        <article class = "webpage-content">
+            <!-- The header of each webpage -->
+            <header>
+                <h1>WebiQuiz</h1>
+                <p>Made by: Nathan van de Kolk, Joran van de Kolk, Do Toan Nguyen</p>
+            </header>
+
+            <section id = "Questions"></section>
+
+        </article>
+
+        <script>
+            var questionSection = document.GetElementByID("Questions");
+            questionSection.class = "webpage-content__section";
+
+            questionSection.addEventLister("onload", renderQuiz())
+
+            class excercise
+            {
+                constructor(question, answers)
+                {
+                    this.question = question;
+                    this.answers = answers;
+                }
+
+                renderExcercise(i)
+                {
+                    var questionHeader = document.createElement("h2");
+                    var questionSubSection = document.createElement("section");
+                    questionSubSection.class = "webpage-content__section__subsection";
+                    var questionContainer = document.createElement("h6");
+
+                    questionHeader.appendChild(document.createTextnode("Question" + (i+1)));
+                    questionContainer.appendChild(document.createTextnode(question))
+
+                    questionSubSection.appendChild(questionContainer);
+                    
+                    questionSection.appendChild(questionHeader);
+                    questionSection.appendChild(questionSubSection);
+                }
+            }
+
+            class multipleChoice extends excercise
+            {
+                constructor(question, answers)
+                {
+                    super(question, answers);
+                }
+
+                renderExcercise()
+                {
+                    super(i);
+                    for(let k = 0; k < answers.lenght; k++)
+                    {
+                        var answersContainer = document.createElement("input");
+                        answersContainer.type = "radio";
+                        answersContainer.name = "Question" + (i +1);
+                        answersContainer.value = answers[k];
+                        var radioLabel = document.createElement("label");
+                        radioLabel.for = answersContainer.value;
+                        radioLabel.appendChild(document.createTextNode(answers[k]));
+
+                        questionSubSection.appendChild(answersContainer);
+                        questionSubSection.appendChild(radioLabel);
+                        if(k < answers.length - 1)
+                            questionSubSection.appendChild(document.createElement("br"));
+                    }
+                }
+            }
+
+            class multiChoice extends excercise
+            {
+                constructor(question, answers, amount)
+                {
+                    super(question, answers);
+                    this.amount = amount;
+                }
+
+                renderExcercise(i)
+                {
+                    super(i);
+                }
+            }
+
+            class open extends excercise
+            {
+                constructor(question, answers)
+                {
+                    super(question, answers);
+                }
+
+                renderExcercise(i)
+                {
+                    super(i);
+                }
+            }
+
+            class ordering extends excercise
+            {
+                constructor(question, answers)
+                {
+                    super(question, answers);
+                }
+
+                renderExcercise(i)
+                {
+                    super(i);
+                }
+            }
+
+            var questions = 
+            [
+                // new ordering(
+                //     "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
+                //     [
+                //         "Google Chrome",
+                //         "Safari",
+                //         "Mozilla Firefox",
+                //         "Microsoft Edge"
+                //     ]
+                // ),
+                // new open(
+                //     "What was the original name of Firefox?",
+                //     [
+                //         "Phoenix",
+                //         "Foenix",
+                //         "Poenix"
+                //     ]
+                // ),
+                new multipleChoice(
+                    "How many versions of Internet Explorer were released between 1995 and 2011?",
+                    [
+                        "10",
+                        "8",
+                        "11",
+                        "9",
+                        "7"
+                    ]
+                )//,
+                // new multiChoice(
+                //     "Which of the following are web browsers?",
+                //     [
+                //         "Firefox",
+                //         "Opera",
+                //         "Mosaic",
+                //         "DuckDuckGo",
+                //         "Facebook",
+                //         "Google",
+                //         "Yahoo",
+                //         "Hyves"
+                //     ],
+                //     3
+                // )
+            ]
+
+            function renderQuiz()
+            {
+                for(let i = 0; i < questions.length; i++)
+                {
+                    questions[i].renderExcercise(i);
+                }
+            }
+        </script>
+
+        <noscript>Sorry, your current browsersetup does not support JavaScript!</noscript>
+
+        <footer>
+            <hr>    
+            <p>Author: Nathan van de Kolk, Joran van de Kolk, Do Toan Nguyen<br>
+            <a href = "mailto:d.t.nguyen1@students.uu.nl">d.t.nguyen1@students.uu.nl</a></p> <!-- link that lets the user send a mail to authors of the website -->
+        </footer>
     </body>
 </html>
         
