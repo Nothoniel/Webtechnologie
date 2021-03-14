@@ -8,7 +8,7 @@
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 
         <!-- connection to external css sheet -->
-        <link rel = "stylesheet" href = "template.css">
+        <link rel = "stylesheet" href = "style.css">
         
         <!-- name  and icon of the browser tab -->
         <title>Webipedia</title>
@@ -42,10 +42,8 @@
         </article>
 
         <script>
-            var questionSection = document.GetElementByID("Questions");
+            var questionSection = document.getElementById("Questions");
             questionSection.class = "webpage-content__section";
-
-            questionSection.addEventLister("onload", renderQuiz())
 
             class excercise
             {
@@ -81,7 +79,7 @@
 
                 renderExcercise()
                 {
-                    super(i);
+                    super.renderExcercise(i);
                     for(let k = 0; k < answers.lenght; k++)
                     {
                         var answersContainer = document.createElement("input");
@@ -110,7 +108,7 @@
 
                 renderExcercise(i)
                 {
-                    super(i);
+                    super.renderExcercise(i);
                 }
             }
 
@@ -123,7 +121,7 @@
 
                 renderExcercise(i)
                 {
-                    super(i);
+                    super.renderExcercise(i);
                 }
             }
 
@@ -136,7 +134,7 @@
 
                 renderExcercise(i)
                 {
-                    super(i);
+                    super.renderExcercise(i);
                 }
             }
 
@@ -192,6 +190,8 @@
                     questions[i].renderExcercise(i);
                 }
             }
+
+            questionSection.addEventListener("onload", renderQuiz());
         </script>
 
         <noscript>Sorry, your current browsersetup does not support JavaScript!</noscript>
