@@ -56,17 +56,17 @@
                 renderExcercise(i)
                 {
                     var questionHeader = document.createElement("h2");
-                    var questionSubSection = document.createElement("section");
-                    questionSubSection.class = "webpage-content__section__subsection";
+                    this.questionSubSection = document.createElement("section");
+                    this.questionSubSection.class = "webpage-content__section__subsection";
                     var questionContainer = document.createElement("h6");
 
-                    questionHeader.appendChild(document.createTextnode("Question" + (i+1)));
-                    questionContainer.appendChild(document.createTextnode(question))
+                    questionHeader.appendChild(document.createTextNode("Question" + (i+1)));
+                    questionContainer.appendChild(document.createTextNode(this.question))
 
-                    questionSubSection.appendChild(questionContainer);
+                    this.questionSubSection.appendChild(questionContainer);
                     
                     questionSection.appendChild(questionHeader);
-                    questionSection.appendChild(questionSubSection);
+                    questionSection.appendChild(this.questionSubSection);
                 }
             }
 
@@ -77,23 +77,23 @@
                     super(question, answers);
                 }
 
-                renderExcercise()
+                renderExcercise(i)
                 {
                     super.renderExcercise(i);
-                    for(let k = 0; k < answers.lenght; k++)
+                    for(let k = 0; k < this.answers.length; k++)
                     {
                         var answersContainer = document.createElement("input");
                         answersContainer.type = "radio";
                         answersContainer.name = "Question" + (i +1);
-                        answersContainer.value = answers[k];
+                        answersContainer.value = this.answers[k];
                         var radioLabel = document.createElement("label");
                         radioLabel.for = answersContainer.value;
-                        radioLabel.appendChild(document.createTextNode(answers[k]));
+                        radioLabel.appendChild(document.createTextNode(this.answers[k]));
 
-                        questionSubSection.appendChild(answersContainer);
-                        questionSubSection.appendChild(radioLabel);
-                        if(k < answers.length - 1)
-                            questionSubSection.appendChild(document.createElement("br"));
+                        this.questionSubSection.appendChild(answersContainer);
+                        this.questionSubSection.appendChild(radioLabel);
+                        if(k < this.answers.length - 1)
+                            this.questionSubSection.appendChild(document.createElement("br"));
                     }
                 }
             }
