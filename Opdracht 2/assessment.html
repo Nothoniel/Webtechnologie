@@ -109,6 +109,21 @@
                 renderExcercise(i)
                 {
                     super.renderExcercise(i);
+                    for(let k = 0; k < this.answers.length; k++)
+                    {
+                        var answersContainer = document.createElement("input");
+                        answersContainer.type = "radio";
+                        answersContainer.name = "Question" + (i +1 );
+                        answersContainer.value = this.answers[k];
+                        var radioLabel = document.createElement("label");
+                        radioLabel.for = answersContainer.value;
+                        radioLabel.appendChild(document.createTextNode(this.answers[k]));
+
+                        this.questionSubSection.appendChild(answersContainer);
+                        this.questionSubSection.appendChild(radioLabel);
+                        if(k < this.answers.length - 1)
+                            this.questionSubSection.appendChild(document.createElement("br"));
+                    }
                 }
             }
 
@@ -122,6 +137,10 @@
                 renderExcercise(i)
                 {
                     super.renderExcercise(i);
+                    var answersContainer = document.createElement("input");
+                    answersContainer.name = "Question" + (i + 1);
+
+                    this.questionSubSection.appendChild(answersContainer);
                 }
             }
 
@@ -135,28 +154,54 @@
                 renderExcercise(i)
                 {
                     super.renderExcercise(i);
+                    for(let k = 0; k < this.answers.length; k++)
+                    {
+                        var orderLabel = document.createElement("label");
+                        orderLabel.for = this.answers[k];
+                        orderLabel.appendChild(document.createTextNode(this.answers[k]));
+                        this.questionSubSection.appendChild(orderLabel);
+
+                        if(k > 0)
+                        {
+                            var answersContainer = document.createElement("input");
+                            answersContainer.type = "button";
+                            answersContainer.value = "^";
+                            answersContainer.name = "Question" + (i + 1);
+                            this.questionSubSection.appendChild(answersContainer);
+                        }
+
+                        if(k < this.answers.length - 1)
+                        {
+                            var answersContainer = document.createElement("input");
+                            answersContainer.type = "button";
+                            answersContainer.value = "v";
+                            answersContainer.name = "Question" + (i + 1);
+                            this.questionSubSection.appendChild(answersContainer);
+                            this.questionSubSection.appendChild(document.createElement("br"));
+                        }
+                    }
                 }
             }
 
             var questions = 
             [
-                // new ordering(
-                //     "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
-                //     [
-                //         "Google Chrome",
-                //         "Safari",
-                //         "Mozilla Firefox",
-                //         "Microsoft Edge"
-                //     ]
-                // ),
-                // new open(
-                //     "What was the original name of Firefox?",
-                //     [
-                //         "Phoenix",
-                //         "Foenix",
-                //         "Poenix"
-                //     ]
-                // ),
+                new ordering(
+                    "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
+                    [
+                        "Google Chrome",
+                        "Safari",
+                        "Mozilla Firefox",
+                        "Microsoft Edge"
+                    ]
+                ),
+                new open(
+                    "What was the original name of Firefox?",
+                    [
+                        "Phoenix",
+                        "Foenix",
+                        "Poenix"
+                    ]
+                ),
                 new multipleChoice(
                     "How many versions of Internet Explorer were released between 1995 and 2011?",
                     [
@@ -166,21 +211,21 @@
                         "9",
                         "7"
                     ]
-                )//,
-                // new multiChoice(
-                //     "Which of the following are web browsers?",
-                //     [
-                //         "Firefox",
-                //         "Opera",
-                //         "Mosaic",
-                //         "DuckDuckGo",
-                //         "Facebook",
-                //         "Google",
-                //         "Yahoo",
-                //         "Hyves"
-                //     ],
-                //     3
-                // )
+                ),
+                new multiChoice(
+                    "Which of the following are web browsers?(multiple options possible)",
+                    [
+                        "Firefox",
+                        "Opera",
+                        "Mosaic",
+                        "DuckDuckGo",
+                        "Facebook",
+                        "Google",
+                        "Yahoo",
+                        "Hyves"
+                    ],
+                    3
+                )
             ]
 
             function renderQuiz()
