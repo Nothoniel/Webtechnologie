@@ -6,17 +6,24 @@ var dropbuttonText = document.createTextNode("Menu");
 
 navbar.appendChild(dropbuttonText);
 
+//Style of the menu
+var menuContent = menu.createElement('div')
+menuContent.style.display =  none;
+menuContent.style.position = absolute;
+menuContent.style.backgroundColor = this.#f9f9f9;
+menuContent.style.zIndex = 1;
+
 //showing the menu when hovering it
-var menu = navbar.querySelector("li") [5].addEventListener("mouseover", showMenu);
+var menu = navbar.querySelector("li") [5].addEventListener("mouseover", showMenu(menuContent));
 
 //Event handling for navbar
-function showMenu() {
-    var menuContent = menu.createElement('div');
-    menuContent.style.display =  none;
-    menuContent.style.position = absolute;
-    menuContent.style.backgroundColor = this.#f9f9f9;
-    menuContent.style.width = 100 + '%';
-    menuContent.style.left = 0;
-    menuContent.style.zIndex = 1;
-    return;
+function showMenu(menuContent) {
+    var showMenu;
+    if(showMenu = menuContent) {
+        if(showMenu.style) {
+            showMenu.style.display = block;
+            return 1;
+        }
+    }
+return 0;
 }
