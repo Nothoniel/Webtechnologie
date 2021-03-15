@@ -37,13 +37,14 @@
                 <p>Made by: Nathan van de Kolk, Joran van de Kolk, Do Toan Nguyen</p>
             </header>
 
-            <section id = "Questions"></section>
+            <div class = "webiQuiz">
+                <section class = "webpage-content__section"></section>
+            </div>
 
         </article>
 
         <script>
-            var questionSection = document.getElementById("Questions");
-            questionSection.class = "webpage-content__section";
+            var questionSection = document.querySelector(".webiQuiz .webpage-content__section");
 
             class excercise
             {
@@ -53,7 +54,7 @@
                     this.correctAnswer = answers[0];
                     this.answers = answers.slice();//slice so it is an independent copy, not just a reference
 
-                    //Fisher-Yates shuffle, source:https://www.w3schools.com/js/js_array_sort.asp
+                    //Fisher-Yates shuffle, source: https://www.w3schools.com/js/js_array_sort.asp
                     for (let i = this.answers.length -1; i > 0; i--) {
                     let j = Math.floor(Math.random() * i)
                     let k = this.answers[i];
@@ -65,17 +66,18 @@
                 renderExcercise(i)
                 {
                     var questionHeader = document.createElement("h2");
-                    this.questionSubSection = document.createElement("section");
-                    this.questionSubSection.class = "webpage-content__section__subsection";
+                    var questionSubSection = document.createElement("section");
+                    questionSubSection.class = "webpage-content__section__subsection";
+                    questionSubSection.className = "webpage-content__section__subsection";
                     var questionContainer = document.createElement("h6");
 
                     questionHeader.appendChild(document.createTextNode("Question" + (i+1)));
                     questionContainer.appendChild(document.createTextNode(this.question))
 
-                    this.questionSubSection.appendChild(questionContainer);
+                    questionSubSection.appendChild(questionContainer);
                     
                     questionSection.appendChild(questionHeader);
-                    questionSection.appendChild(this.questionSubSection);
+                    questionSection.appendChild(questionSubSection);
                 }
             }
 
@@ -89,6 +91,7 @@
                 renderExcercise(i)
                 {
                     super.renderExcercise(i);
+                    var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[i];
                     for(let k = 0; k < this.answers.length; k++)
                     {
                         var answersContainer = document.createElement("input");
@@ -99,10 +102,10 @@
                         radioLabel.for = answersContainer.value;
                         radioLabel.appendChild(document.createTextNode(this.answers[k]));
 
-                        this.questionSubSection.appendChild(answersContainer);
-                        this.questionSubSection.appendChild(radioLabel);
+                        questionSubSection.appendChild(answersContainer);
+                        questionSubSection.appendChild(radioLabel);
                         if(k < this.answers.length - 1)
-                            this.questionSubSection.appendChild(document.createElement("br"));
+                            questionSubSection.appendChild(document.createElement("br"));
                     }
                 }
 
@@ -119,14 +122,13 @@
                 {
                     super(question, answers);
                     this.amount = amount;
-                    
                     this.correctAnswer = answers.slice(0, amount);
-                    console.log(this.correctAnswer);
                 }
 
                 renderExcercise(i)
                 {
                     super.renderExcercise(i);
+                    var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[i];
                     for(let k = 0; k < this.answers.length; k++)
                     {
                         var answersContainer = document.createElement("input");
@@ -137,10 +139,10 @@
                         radioLabel.for = answersContainer.value;
                         radioLabel.appendChild(document.createTextNode(this.answers[k]));
 
-                        this.questionSubSection.appendChild(answersContainer);
-                        this.questionSubSection.appendChild(radioLabel);
+                        questionSubSection.appendChild(answersContainer);
+                        questionSubSection.appendChild(radioLabel);
                         if(k < this.answers.length - 1)
-                            this.questionSubSection.appendChild(document.createElement("br"));
+                            questionSubSection.appendChild(document.createElement("br"));
                     }
                 }
 
@@ -163,11 +165,12 @@
                 renderExcercise(i)
                 {
                     super.renderExcercise(i);
+                    var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[i];
                     var answersContainer = document.createElement("input");
                     answersContainer.type = "text";
                     answersContainer.name = "answersOfQ" + i;
 
-                    this.questionSubSection.appendChild(answersContainer);
+                    questionSubSection.appendChild(answersContainer);
                 }
 
                 checkAnswer = i => this.answers.indexOf(document.getElementsByName("answersOfQ" + i)[0].value) >= 0;
@@ -179,19 +182,19 @@
                 {
                     super(question, answers);
                     this.correctAnswer = answers.slice();
-                    console.log(this.correctAnswer);
                 }
 
                 renderExcercise(i)
                 {
                     super.renderExcercise(i);
+                    var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[i];
                     for(let k = 0; k < this.answers.length; k++)
                     {
                         var orderLabel = document.createElement("label");
                         orderLabel.for = this.answers[k];
                         orderLabel.id = "q" + i + "label" + k;
                         orderLabel.appendChild(document.createTextNode(this.answers[k]));
-                        this.questionSubSection.appendChild(orderLabel);
+                        questionSubSection.appendChild(orderLabel);
 
                         if(k > 0)
                         {
@@ -199,7 +202,7 @@
                             answersContainer.type = "button";
                             answersContainer.value = "^";
                             answersContainer.addEventListener("click", function() { questions[i].changeOrder(k - 1, i); });
-                            this.questionSubSection.appendChild(answersContainer);
+                            questionSubSection.appendChild(answersContainer);
                         }
 
                         if(k < this.answers.length - 1)
@@ -208,8 +211,8 @@
                             answersContainer.type = "button";
                             answersContainer.value = "v";
                             answersContainer.addEventListener("click", function() { questions[i].changeOrder(k, i); });
-                            this.questionSubSection.appendChild(answersContainer);
-                            this.questionSubSection.appendChild(document.createElement("br"));
+                            questionSubSection.appendChild(answersContainer);
+                            questionSubSection.appendChild(document.createElement("br"));
                         }
                     }
                 }
