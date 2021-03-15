@@ -110,7 +110,7 @@ nav li a {
   text-decoration: none;
 }
 
-nav li a:hover {
+nav li:hover {
   background-color: #544E68;
 }
 
