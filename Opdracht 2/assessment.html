@@ -50,7 +50,16 @@
                 constructor(question, answers)
                 {
                     this.question = question;
-                    this.answers = answers;
+                    this.correctAnswer = answers[0];
+                    this.answers = answers.slice();//slice so it is an independent copy, not just a reference
+
+                    //Fisher-Yates shuffle, source:https://www.w3schools.com/js/js_array_sort.asp
+                    for (let i = this.answers.length -1; i > 0; i--) {
+                    let j = Math.floor(Math.random() * i)
+                    let k = this.answers[i];
+                    this.answers[i] = this.answers[j];
+                    this.answers[j] = k;
+                    } 
                 }
 
                 renderExcercise(i)
@@ -84,7 +93,7 @@
                     {
                         var answersContainer = document.createElement("input");
                         answersContainer.type = "radio";
-                        answersContainer.name = "Question" + (i +1);
+                        answersContainer.name = "answersOfQ" + i;
                         answersContainer.value = this.answers[k];
                         var radioLabel = document.createElement("label");
                         radioLabel.for = answersContainer.value;
@@ -95,6 +104,12 @@
                         if(k < this.answers.length - 1)
                             this.questionSubSection.appendChild(document.createElement("br"));
                     }
+                }
+
+                checkAnswer = i => 
+                {
+                    for(var answer of document.getElementsByName("answersOfQ" + i))
+                        if(answer.value == this.correctAnswer) return answer.checked;
                 }
             }
 
@@ -104,6 +119,9 @@
                 {
                     super(question, answers);
                     this.amount = amount;
+                    
+                    this.correctAnswer = answers.slice(0, amount);
+                    console.log(this.correctAnswer);
                 }
 
                 renderExcercise(i)
@@ -112,8 +130,8 @@
                     for(let k = 0; k < this.answers.length; k++)
                     {
                         var answersContainer = document.createElement("input");
-                        answersContainer.type = "radio";
-                        answersContainer.name = "Question" + (i +1 );
+                        answersContainer.type = "checkbox";
+                        answersContainer.name = "answersOfQ" + i;
                         answersContainer.value = this.answers[k];
                         var radioLabel = document.createElement("label");
                         radioLabel.for = answersContainer.value;
@@ -124,6 +142,14 @@
                         if(k < this.answers.length - 1)
                             this.questionSubSection.appendChild(document.createElement("br"));
                     }
+                }
+
+                checkAnswer = i =>
+                {
+                    var answerCorrect = true;
+                    for(let answer of document.getElementsByName("answersOfQ" + i))
+                        answerCorrect = answerCorrect && ((this.correctAnswer.indexOf(answer.value) != -1) == answer.checked);
+                    return answerCorrect;
                 }
             }
 
@@ -138,10 +164,13 @@
                 {
                     super.renderExcercise(i);
                     var answersContainer = document.createElement("input");
-                    answersContainer.name = "Question" + (i + 1);
+                    answersContainer.type = "text";
+                    answersContainer.name = "answersOfQ" + i;
 
                     this.questionSubSection.appendChild(answersContainer);
                 }
+
+                checkAnswer = i => this.answers.indexOf(document.getElementsByName("answersOfQ" + i)[0].value) >= 0;
             }
 
             class ordering extends excercise
@@ -149,6 +178,8 @@
                 constructor(question, answers)
                 {
                     super(question, answers);
+                    this.correctAnswer = answers.slice();
+                    console.log(this.correctAnswer);
                 }
 
                 renderExcercise(i)
@@ -158,6 +189,7 @@
                     {
                         var orderLabel = document.createElement("label");
                         orderLabel.for = this.answers[k];
+                        orderLabel.id = "q" + i + "label" + k;
                         orderLabel.appendChild(document.createTextNode(this.answers[k]));
                         this.questionSubSection.appendChild(orderLabel);
 
@@ -166,7 +198,7 @@
                             var answersContainer = document.createElement("input");
                             answersContainer.type = "button";
                             answersContainer.value = "^";
-                            answersContainer.name = "Question" + (i + 1);
+                            answersContainer.addEventListener("click", function() { questions[i].changeOrder(k - 1, i); });
                             this.questionSubSection.appendChild(answersContainer);
                         }
 
@@ -175,11 +207,30 @@
                             var answersContainer = document.createElement("input");
                             answersContainer.type = "button";
                             answersContainer.value = "v";
-                            answersContainer.name = "Question" + (i + 1);
+                            answersContainer.addEventListener("click", function() { questions[i].changeOrder(k, i); });
                             this.questionSubSection.appendChild(answersContainer);
                             this.questionSubSection.appendChild(document.createElement("br"));
                         }
                     }
+                }
+
+                changeOrder = (i, j) =>
+                {
+                    this.answers.splice(i, 2, this.answers[i + 1], this.answers[i]);
+                    var elem = document.getElementById("q" + j + "label" + i);
+                    elem.replaceChild(document.createTextNode(this.answers[i]), elem.childNodes[0]);
+                    elem = document.getElementById("q" + j + "label" + (i + 1));
+                    elem.replaceChild(document.createTextNode(this.answers[i + 1]), elem.childNodes[0]);
+                }
+
+                checkAnswer = () =>
+                {
+                    var answerCorrect = true;
+                    for (let i = 0; i < this.answers.length && answerCorrect; i++)
+                    {
+                        answerCorrect = this.answers[i] == this.correctAnswer[i];
+                    }
+                    return answerCorrect;
                 }
             }
 
@@ -228,12 +279,29 @@
                 )
             ]
 
-            function renderQuiz()
+            renderQuiz = () =>
             {
                 for(let i = 0; i < questions.length; i++)
                 {
                     questions[i].renderExcercise(i);
                 }
+
+                checkButton = document.createElement("input");
+                checkButton.type = "button";
+                checkButton.value = "Check Answers";
+                checkButton.addEventListener("click", checkAnswers);
+                questionSection.appendChild(checkButton);
+            }
+            
+            checkAnswers = () =>
+            {
+                quizResults = [];
+                for(let i = 0; i < questions.length; i++)
+                {
+                    quizResults.push(questions[i].checkAnswer(i));
+                }
+                console.log(quizResults);
+                return quizResults;
             }
 
             questionSection.addEventListener("onload", renderQuiz());
