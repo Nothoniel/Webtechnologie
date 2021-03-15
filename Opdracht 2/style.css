@@ -87,10 +87,10 @@ a {
 } 
 
 /*
-    ///// Comment-section:Navigation bar /////
-    //the CSS-rules in this comment-section has declarations that determines the coloring and positioning of the navigation bar
+    ///// Comment-section:navbarigation bar /////
+    //the CSS-rules in this comment-section has declarations that determines the coloring and positioning of the navbarigation bar
 */
-nav ul {
+.navbar .navlist {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -98,11 +98,11 @@ nav ul {
   background-color: #0D2B45;
 }
 
-nav li {
+.navbar li {
   float: left;
 } 
  
-nav li a {
+.navbar li a {
   display: block;
   color: #FFECD6;
   text-align: center;
@@ -110,7 +110,7 @@ nav li a {
   text-decoration: none;
 }
 
-nav li:hover {
+.navbar li:hover {
   background-color: #544E68;
 }
 
