@@ -68,7 +68,7 @@ fontsizeChanger.appendChild(fontsizeLabel);
 fontsizeChanger.appendChild(inputNumber);
 menuContent.appendChild(fontsizeChanger);
 
-//submit changes button
+//submit button, when clicked pass the input to the functions
 var applyButton = document.createElement("button");
 var applyButtonText = document.createTextNode("Apply");
 
@@ -84,11 +84,14 @@ function addOption(selection, options, classname) {
    selection.setAttribute("class", classname);
    for (i=0; i<options.length; i++)
    {
-      var option = document.createElement("option");
-      option.setAttribute("value", options[i]);
-      var textSelected = document.createTextNode(options[i]);
-      option.appendChild(textSelected);
-      selection.appendChild(option);
+      //the if-statement checks if the element exists before adding it to the select
+      if(document.querySelector(options[i])) {
+         var option = document.createElement("option");
+         option.setAttribute("value", options[i]);
+         var textSelected = document.createTextNode(options[i]);
+         option.appendChild(textSelected);
+         selection.appendChild(option);
+      }
    }
  }
 
