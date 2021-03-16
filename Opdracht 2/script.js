@@ -74,47 +74,58 @@ var applyButtonText = document.createTextNode("Apply");
 applyButton.setAttribute("type", "button");
 
 applyButton.appendChild(applyButtonText);
-menuContent.appendChild(applyButton).addEventListener("click",ApplyNewChanges);
+menuContent.appendChild(applyButton).addEventListener("click",determineNewChanges);
+
 
  //functions
- function addOption(selection, options, classname) {
-    var i;
-    selection.setAttribute("class", classname);
-    for (i=0; i<options.length; i++)
-    {
-        var option = document.createElement("option");
-        option.setAttribute("value", options[i]);
-        var textSelected = document.createTextNode(options[i]);
-        option.appendChild(textSelected);
-        selection.appendChild(option);
-    }
+function addOption(selection, options, classname) {
+   var i;
+   selection.setAttribute("class", classname);
+   for (i=0; i<options.length; i++)
+   {
+      var option = document.createElement("option");
+      option.setAttribute("value", options[i]);
+      var textSelected = document.createTextNode(options[i]);
+      option.appendChild(textSelected);
+      selection.appendChild(option);
+   }
  }
 
- function addInput(element, type, value) {
-    for (i=0; i<type.length; i++)
-    {
-        element.setAttribute(type[i], value);
-    }
+function addInput(element, type, value) {
+   for (i=0; i<type.length; i++)
+   {
+      element.setAttribute(type[i], value);
+   }
  }
 
- function ApplyNewChanges() {
-    var currentSelectedElement = document.querySelector(".selectedOption").value.toString().toUpperCase();
-    var newColor = document.querySelector(".color").value.toString();
-    var newFontsize = document.querySelector(".number").value.toString();
-    var newFontsizepx = newFontsize+"px";
+//applying the new CSSrules
+function applyNewChanges(selected, newColor, newFontsizepx) {    
+   var selectedElement = document.querySelectorAll(selected);
+   var i;
+   for (i=0; i<selectedElement.length; i++)
+   {
+      selectedElement[i].style.fontSize = newFontsizepx;
+      if (selected !== "body")
+      {
+         selectedElement[i].style.color = newColor;
+      }
+      else
+      {
+         selectedElement[i].style.backgroundColor = newColor;
+      }
+   }
+}
 
-    //amount of elements
-    var x = document.getElementsByTagName("SECTION").length;
-    console.log(x);
+//determine the inputted values of the user
+function determineNewChanges() {
+   var currentSelectedElement = document.querySelector(".selectedOption").value;
+   var newColor = document.querySelector(".color").value;
+   var newFontsize = document.querySelector(".number").value;
+   var newFontsizepx = newFontsize +"px";
 
-    // console.log(currentSelectedElement);
-    // console.log(newColor);
-    // console.log(newFontsizepx);
-
-    //Applying the new CSSrules
-    // document.getElementsByTagName(currentSelectedElement).style.fontSize = newFontsizepx;
-    // document.getElementsByTagName(currentSelectedElement).style.color = newColor;
+   applyNewChanges(currentSelectedElement, newColor, newFontsizepx);
  }
+
 
 //make a stylesheet
 var sheet = (function() {
