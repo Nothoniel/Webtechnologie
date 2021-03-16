@@ -32,7 +32,7 @@ var selection = document.createElement("select");
 
 selectMenu.setAttribute("class", "selected");
 
-addOption(selection, options);
+addOption(selection, options,"selectedOption");
 
 selectLabel.appendChild(selectTextLabel);
 selectMenu.appendChild(selectLabel);
@@ -74,11 +74,12 @@ var applyButtonText = document.createTextNode("Apply");
 applyButton.setAttribute("type", "button");
 
 applyButton.appendChild(applyButtonText);
-menuContent.appendChild(applyButton).addEventListener("click",ApplyNewChanges());
+menuContent.appendChild(applyButton).addEventListener("click",ApplyNewChanges);
 
  //functions
- function addOption(selection, options) {
+ function addOption(selection, options, classname) {
     var i;
+    selection.setAttribute("class", classname);
     for (i=0; i<=options.length; i++)
     {
         var option = document.createElement("option");
@@ -97,7 +98,13 @@ menuContent.appendChild(applyButton).addEventListener("click",ApplyNewChanges())
  }
 
  function ApplyNewChanges() {
-     
+    var currentSelectedElement = document.querySelector(".selectedOption").value.toString();
+    var newColor = document.querySelector(".color").value.toString();
+    var newFontsize = document.querySelector(".number").value.toString();
+
+    //Applying the new CSSrules
+    document.getElementsByTagName(currentSelectedElement).style.fontSize = newFontsize;
+    document.getElementsByTagName(currentSelectedElement).style.color = newColor;
  }
 
 //make a stylesheet
