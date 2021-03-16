@@ -142,14 +142,3 @@ var sheet = (function() {
  sheet.insertRule('.menucontent { padding: 50px; display: none; position: absolute; background-color: #544E68; width:20%; z-index: 1; }', 0);
  sheet.insertRule('.dropdown:hover .menucontent { display: block; }', 1);
  sheet.insertRule('.selected { width: 300px; }', 2);
- 
-
-
-
-
- 
-
-
-
-
-
