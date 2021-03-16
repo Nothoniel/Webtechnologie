@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang = "en">
     <!-- optimisation for search engines-->
     <head>
@@ -67,7 +67,6 @@
                 {
                     var questionHeader = document.createElement("h2");
                     var questionSubSection = document.createElement("section");
-                    questionSubSection.class = "webpage-content__section__subsection";
                     questionSubSection.className = "webpage-content__section__subsection";
                     var questionContainer = document.createElement("h6");
 
@@ -238,49 +237,49 @@
             }
 
             var questions = 
-            [
-                new ordering(
-                    "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
-                    [
-                        "Google Chrome",
-                        "Safari",
-                        "Mozilla Firefox",
-                        "Microsoft Edge"
-                    ]
-                ),
-                new open(
-                    "What was the original name of Firefox?",
-                    [
-                        "Phoenix",
-                        "Foenix",
-                        "Poenix"
-                    ]
-                ),
-                new multipleChoice(
-                    "How many versions of Internet Explorer were released between 1995 and 2011?",
-                    [
-                        "10",
-                        "8",
-                        "11",
-                        "9",
-                        "7"
-                    ]
-                ),
-                new multiChoice(
-                    "Which of the following are web browsers?(multiple options possible)",
-                    [
-                        "Firefox",
-                        "Opera",
-                        "Mosaic",
-                        "DuckDuckGo",
-                        "Facebook",
-                        "Google",
-                        "Yahoo",
-                        "Hyves"
-                    ],
-                    3
-                )
-            ]
+                [
+                    new ordering(
+                        "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
+                        [
+                            "Google Chrome",
+                            "Safari",
+                            "Mozilla Firefox",
+                            "Microsoft Edge"
+                        ]
+                    ),
+                    new open(
+                        "What was the original name of Firefox?",
+                        [
+                            "Phoenix",
+                            "Foenix",
+                            "Poenix"
+                        ]
+                    ),
+                    new multipleChoice(
+                        "How many versions of Internet Explorer were released between 1995 and 2011?",
+                        [
+                            "10",
+                            "8",
+                            "11",
+                            "9",
+                            "7"
+                        ]
+                    ),
+                    new multiChoice(
+                        "Which of the following are web browsers?(multiple options possible)",
+                        [
+                            "Firefox",
+                            "Opera",
+                            "Mosaic",
+                            "DuckDuckGo",
+                            "Facebook",
+                            "Google",
+                            "Yahoo",
+                            "Hyves"
+                        ],
+                        3
+                    )
+                ]
 
             renderQuiz = () =>
             {
@@ -289,21 +288,54 @@
                     questions[i].renderExcercise(i);
                 }
 
-                checkButton = document.createElement("input");
+                var resultHeader = document.createElement("h2");
+                var resultSection = document.createElement("section");
+                resultSection.className = "webpage-content__section__subsection";
+                resultHeader.appendChild(document.createTextNode("Results"));
+
+                var checkButton = document.createElement("input");
                 checkButton.type = "button";
                 checkButton.value = "Check Answers";
                 checkButton.addEventListener("click", checkAnswers);
-                questionSection.appendChild(checkButton);
+
+                questionSection.appendChild(resultHeader);
+                resultSection.appendChild(checkButton);
+                resultSection.appendChild(document.createElement("br"));
+                resultSection.appendChild(document.createTextNode("Your results will be displayed here."));
+
+
+                questionSection.appendChild(resultSection);
+
             }
             
             checkAnswers = () =>
             {
-                quizResults = [];
+                var quizResults = [];
                 for(let i = 0; i < questions.length; i++)
                 {
                     quizResults.push(questions[i].checkAnswer(i));
                 }
-                console.log(quizResults);
+              
+                var questionSubsections = document.getElementsByClassName("webpage-content__section__subsection");
+                var resultSection = questionSubsections[questionSubsections.length - 1];
+
+                //remove all children except the "Check Answers"-button
+                for (let i = resultSection.childNodes.length - 1; i > 0; i--)
+                    resultSection.removeChild(resultSection.childNodes[i]);
+                //count the number of correctly answered questions
+                var numberCorrect = 0;
+                for(result of quizResults)
+                    if (result) numberCorrect++;
+
+                resultSection.appendChild(document.createElement("br"));
+                resultSection.appendChild(document.createTextNode("You have answered " + numberCorrect + " out of " + questions.length + " questions correctly."));
+
+                for (let i = 0; i < quizResults.length; i++)
+                {
+                    resultSection.appendChild(document.createElement("br"));
+                    resultSection.appendChild(document.createTextNode("Your answer for question " + (i + 1) + " was " + (quizResults[i]?"correct":"incorrect")));
+                }
+
                 return quizResults;
             }
 
