@@ -80,10 +80,10 @@ menuContent.appendChild(applyButton).addEventListener("click",ApplyNewChanges);
  function addOption(selection, options, classname) {
     var i;
     selection.setAttribute("class", classname);
-    for (i=0; i<=options.length; i++)
+    for (i=0; i<options.length; i++)
     {
         var option = document.createElement("option");
-        option.setAttribute("value", i);
+        option.setAttribute("value", options[i]);
         var textSelected = document.createTextNode(options[i]);
         option.appendChild(textSelected);
         selection.appendChild(option);
@@ -98,13 +98,22 @@ menuContent.appendChild(applyButton).addEventListener("click",ApplyNewChanges);
  }
 
  function ApplyNewChanges() {
-    var currentSelectedElement = document.querySelector(".selectedOption").value.toString();
+    var currentSelectedElement = document.querySelector(".selectedOption").value.toString().toUpperCase();
     var newColor = document.querySelector(".color").value.toString();
     var newFontsize = document.querySelector(".number").value.toString();
+    var newFontsizepx = newFontsize+"px";
+
+    //amount of elements
+    var x = document.getElementsByTagName("SECTION").length;
+    console.log(x);
+
+    // console.log(currentSelectedElement);
+    // console.log(newColor);
+    // console.log(newFontsizepx);
 
     //Applying the new CSSrules
-    document.getElementsByTagName(currentSelectedElement).style.fontSize = newFontsize;
-    document.getElementsByTagName(currentSelectedElement).style.color = newColor;
+    // document.getElementsByTagName(currentSelectedElement).style.fontSize = newFontsizepx;
+    // document.getElementsByTagName(currentSelectedElement).style.color = newColor;
  }
 
 //make a stylesheet
