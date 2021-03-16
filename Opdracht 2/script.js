@@ -99,19 +99,18 @@ function addInput(element, type, value) {
  }
 
 //applying the new CSSrules
-function applyNewChanges(selected, newColor, newFontsizepx) {    
-   var selectedElement = document.querySelectorAll(selected);
+function applyNewChanges(selected, collection, newColor, newFontsizepx) {    
    var i;
-   for (i=0; i<selectedElement.length; i++)
+   for (i=0; i<collection.length; i++)
    {
-      selectedElement[i].style.fontSize = newFontsizepx;
+      collection[i].style.fontSize = newFontsizepx;
       if (selected !== "body")
       {
-         selectedElement[i].style.color = newColor;
+         collection[i].style.color = newColor;
       }
       else
       {
-         selectedElement[i].style.backgroundColor = newColor;
+         collection[i].style.backgroundColor = newColor;
       }
    }
 }
@@ -119,11 +118,12 @@ function applyNewChanges(selected, newColor, newFontsizepx) {
 //determine the inputted values of the user
 function determineNewChanges() {
    var currentSelectedElement = document.querySelector(".selectedOption").value;
+   var collectionSelectedElement = document.querySelectorAll(currentSelectedElement); //collection that contains all the selected elements
    var newColor = document.querySelector(".color").value;
    var newFontsize = document.querySelector(".number").value;
-   var newFontsizepx = newFontsize +"px";
+   var newFontsizepx = newFontsize +"px"; //adding the unit of the fontsize
 
-   applyNewChanges(currentSelectedElement, newColor, newFontsizepx);
+   applyNewChanges(currentSelectedElement, collectionSelectedElement, newColor, newFontsizepx);
  }
 
 
