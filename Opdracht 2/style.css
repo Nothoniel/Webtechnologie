@@ -1,11 +1,30 @@
 /*
+    ///// Comment-section: CSS custom properties /////
+*/ 
+
+/* the default color scheme*/
+/* the number is representing how dark the color is. Higher is darker.*/
+:root {
+  --dark-1-header-color:rgb(255, 236, 218); ;
+  --dark-1-color:rgb(255, 236, 218);
+  --dark-2-footer-color:#FFD4A3;
+  --dark-2-color:#FFD4A3;
+  --dark-3-color:#FFAA5E;
+  --dark-3-mail-color:#FFAA5E;
+  --dark-4-color:#D08159;
+  --dark-5-color:#544E68;
+  --dark-6-color:#203C56;
+  --dark-7-color:#0D2B45; 
+}
+
+/*
     ///// Comment-section: Body layout /////
 */ 
 
 /* the body proportions*/
 body {
-  background-color: #203C56;
-  color: #FFD4A3;
+  background-color: var(--dark-6-color);
+  color: var(--dark-2-color);
   font-size: 18px;
   padding-left: 10px;
   padding-right: 10px;
@@ -36,20 +55,25 @@ aside {
   width: 30%;
 }
 
-footer {
+.webpage-footer {
   clear: both;
 }
 
-/*the last 4 CSS-rules of this comment-section are coloring and changing the font */
-footer {
+/*the last 5 CSS-rules of this comment-section are coloring and changing the font */
+.webpage-footer { 
+  color: var(--dark-2-footer-color);
   font-size: 11px;
   font-family: "Courier New", Monospace;
+}
+
+.footer-mail {
+ color: var(--dark-3-mail-color);
 }
 
 .webpage-content header {
   padding: 60px;
   text-align: center;
-  color: #FFECD6;
+  color: var(--dark-1-header-color);
   font-size: 30px;
 }
 
@@ -57,7 +81,7 @@ footer {
 .webpage-content__section h2 {
   margin-bottom: 3px;
   font-size: 30px;
-  color: #FFAA5E; 
+  color: var(--dark-3-color); 
 }
 
 section.webpage-content__section__subsection h3 {
@@ -65,7 +89,7 @@ section.webpage-content__section__subsection h3 {
   font-size: 22px;
   text-indent: 10pt;
   margin-bottom: 5px;
-  color: rgb(255, 236, 218); 
+  color: var(--dark-1-color);
 }
 
 /*
@@ -73,7 +97,7 @@ section.webpage-content__section__subsection h3 {
 */  
 a {
   text-decoration: none;
-  color: #FFAA5E;
+  color: var(--dark-3-color);
 }
 
 /* makes the hyperlink underline when hovering */
@@ -83,11 +107,11 @@ a {
 
 /* makes the hyperlink dark colored when clicked */
 .webpage-content a:visited {
-  color: #D08159;
+  color: var(--dark-4-color);
 } 
 
 /*
-    ///// Comment-section:navbarigation bar /////
+    ///// Comment-section:navigation bar /////
     //the CSS-rules in this comment-section has declarations that determines the coloring and positioning of the navbarigation bar
 */
 .navbar .navlist {
@@ -95,7 +119,7 @@ a {
   margin: 0;
   padding: 0;
   overflow: hidden; 
-  background-color: #0D2B45;
+  background-color:#0D2B45;
 }
 
 .navbar li {
@@ -104,14 +128,14 @@ a {
  
 .navbar li a {
   display: block;
-  color: #FFECD6;
+  color:rgb(255, 236, 218);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 .navbar li:hover {
-  background-color: #544E68;
+  background-color:#544E68;
 }
 
 /*
@@ -123,16 +147,16 @@ table, th, td{
 }
 
 table {
-  background-color:#0D2B45;
-  color:#FFD4A3;
+  background-color: var(--dark-7-color);
+  color: var(--dark-2-color);
 }
 
 table tr {
-  color:#D08159; 
+  color: var(--dark-8-color); 
 }
 
 table tr#ROW1 {
-  background-color: #544E68; 
+  background-color: var(--dark-5-color); 
   color:inherit;
 } 
 
