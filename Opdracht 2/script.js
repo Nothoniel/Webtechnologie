@@ -43,7 +43,7 @@ menuContent.appendChild(selectMenu);
  //color change
 var colorPicker = document.createElement("div");
 var colorLabel = document.createElement("label");
-var colorTextLabel = document.createTextNode("Select color scheme:");
+var colorTextLabel = document.createTextNode("Select color:");
 var inputColor = document.createElement("input");
 
 addInput(inputColor, type, "color");
@@ -276,6 +276,7 @@ var sheet = (function() {
 })();
 
 //adding css-rules to the stylesheet
- sheet.insertRule('.menucontent { padding: 50px; display: none; position: absolute; background-color: #544E68; color: #FFD4A3; width:20%; z-index: 1; }', 0); //Make inherit when coloring body
+ sheet.insertRule('.menucontent { display: none; position: absolute; background-color: #544E68; color: #FFD4A3; width: 200px; z-index: 1; }', 0); //Make inherit when coloring body
  sheet.insertRule('.dropdown:hover .menucontent { display: block; }', 1);
  sheet.insertRule('.selected { width: 300px; }', 2);
+//  sheet.insertRule(' @media only screen and (max-width: 712px) { .menucontent { width: 45%; } }', 3);
