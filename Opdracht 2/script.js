@@ -1,7 +1,7 @@
 //declarations
 var options = ["body", "article", "header", "section", "aside", "footer"];
 var type = ["type", "class", "name"];
-var cssVar = ["--dark-1-header-color", "--dark-1-color", "--dark-2-footer-color", "--dark-2-color", "--dark-3-color", "--dark-4-color", "--dark-5-color","--dark-7-color"]
+var cssVar = ["--dark-1-header-color", "--dark-1-color", "--dark-2-footer-color", "--dark-2-color", "--dark-3-color", "--dark-4-color", "--dark-5-color","--dark-7-color"];
 
 //menu that changes the lay-out of a webpage and is present in the navbar
 //adding a new button to the navbar that shows the menu
@@ -108,16 +108,20 @@ function addInput(element, type, value) {
 	hexStr = hexStr.replace(/[^0-9a-f]/gi, "");
 
    // converts hexadecimal number to decimal and change brightness
-	var rgb = "#", c, i;
+	var rgb = "#", x, i;
 	for (i = 0; i < 3; i++) {
-		c = parseInt(hexStr.substr(i*2,2), 16);
-		c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-		rgb += ("00"+c).substr(c.length);
+		x = parseInt(hexStr.substr(i*2,2), 16);
+		x = Math.round(Math.min(Math.max(0, x + (x * lum)), 255)).toString(16);
+		rgb += ("00"+x).substr(x.length);
 	}
 	return rgb;
 }
 
 function colorTheElement(newColor, selected) {
+   //coloring of the aside, since it has a high priorty, changing the external css would not work.
+   colorClasses("figure-text", newColor, 0.1);
+   colorClasses("figure-link", newColor,-0.1);
+
    var p;
    for(p=0; p<cssVar.length; p++)
    {
@@ -142,16 +146,24 @@ function colorTheElement(newColor, selected) {
    }
 }
 
-function colorHyperlink(className) {
+function colorClasses(className, newColor, lum) {
    var k;
-   var link = document.getElementsByClassName(className);
-   for (k=0; k<link.length; k++){
-   link[k].style.color = colorBrightness(newColor, -0.1);
+   var classText = document.getElementsByClassName(className);
+   for (k=0; k<classText.length; k++){
+      classText[k].style.color = colorBrightness(newColor, lum);
+   }
+
+}
+
+function fontSizeClasses(className, newFontsize){
+   var k;
+   var classText = document.getElementsByClassName(className);
+   for (k=0; k<classText.length; k++){
+      classText[k].style.fontSize = newFontsize;
    }
 }
 
-//applying the new CSSrules
-function applyNewChanges(selected, collection, newColor, newFontsizepx) {
+function executeNewColor(selected, collection, newColor) {
    if (selected == "article" || selected == "section") {
       colorTheElement(newColor, selected);
    }
@@ -159,22 +171,59 @@ function applyNewChanges(selected, collection, newColor, newFontsizepx) {
       var i;
       for (i=0; i<collection.length; i++)
       {
+         function assignColor(newColor) {collection[i].style.color = newColor; }
          switch(selected) {
             case "body":
                collection[i].style.backgroundColor = newColor;   
                break;
             case "footer":
-               colorHyperlink("footer-mail");
+               assignColor(newColor);
+               colorClasses("footer-mail", newColor, -0.1);
                break;
             case "aside":
-               colorHyperlink("figure-link");
+               assignColor(newColor);
+               colorClasses("figure-text", newColor, 0.1);
+               colorClasses("figure-link", newColor,-0.1);
                break;
             default:
-               collection[i].style.fontSize = newFontsizepx;
-               collection[i].style.color = newColor;
+               assignColor(newColor);
          }
       }
    }
+}
+
+function executeNewFont(selected, collection,newFontsize){
+   if(selected !== "body"){
+      var newFontsizepx = newFontsize +"px"; //adding the unit of the fontsize
+      var t;
+      for(t=0; t<collection.length; t++) {
+         collection[t].style.fontSize = newFontsizepx;
+         if(selected == "aside"){
+            fontSizeClasses("figure-text", newFontsizepx);
+         }
+      }
+   }
+
+   if(selected == "article" || selected == "section") {
+      var header2FontSize = (newFontsize*1.5) + "px";
+      var header3FontSize = (newFontsize*1.2) + "px";
+      document.querySelector(":root").style.setProperty("--fontsize2", header2FontSize);
+      document.querySelector(":root").style.setProperty("--fontsize3", header3FontSize); 
+   }
+
+   if(selected == "article"){
+      var header1FontSize = (newFontsize*1.6) + "px";
+      document.querySelector(":root").style.setProperty("--fontsize1", header1FontSize);
+   }
+}
+
+//applying the new CSSrules
+function applyNewChanges(selected, collection, newColor, newFontsize) {
+   //executes fontsize
+   executeNewFont(selected, collection,newFontsize);
+   
+   //execute color
+   executeNewColor(selected, collection, newColor);
 }
 
 //determine the inputted values of the user
@@ -183,9 +232,8 @@ function determineNewChanges() {
    var collectionSelectedElement = document.querySelectorAll(currentSelectedElement); //collection that contains all the selected elements
    var newColor = document.querySelector(".color").value;
    var newFontsize = document.querySelector(".number").value;
-   var newFontsizepx = newFontsize +"px"; //adding the unit of the fontsize
 
-   applyNewChanges(currentSelectedElement, collectionSelectedElement, newColor, newFontsizepx);
+   applyNewChanges(currentSelectedElement, collectionSelectedElement, newColor, newFontsize);
  }
 
 

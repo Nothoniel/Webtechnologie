@@ -15,6 +15,9 @@
   --dark-5-color:#544E68;
   --dark-6-color:#203C56;
   --dark-7-color:#0D2B45; 
+  --fontsize1:30px;
+  --fontsize2:30px;
+  --fontsize3:22px;
 }
 
 /*
@@ -74,19 +77,19 @@ aside {
   padding: 60px;
   text-align: center;
   color: var(--dark-1-header-color);
-  font-size: 30px;
+  font-size: var(--fontsize1);
 }
 
 
 .webpage-content__section h2 {
   margin-bottom: 3px;
-  font-size: 30px;
+  font-size: var(--fontsize2);
   color: var(--dark-3-color); 
 }
 
 section.webpage-content__section__subsection h3 {
   margin-top: 2px;
-  font-size: 22px;
+  font-size: var(--fontsize3);
   text-indent: 10pt;
   margin-bottom: 5px;
   color: var(--dark-1-color);
@@ -189,14 +192,10 @@ td {
 
 /*
     ///// Comment-section:Captions /////
-    //the CSS-rules of this comment-section determine the sizes of the captions
+    //the CSS-rules of this comment-section determine the color of the figcaption
 */
-caption {
-  font-size: 11px;
-}
-
 figcaption {
-  font-size: 11px;
+  color: var(--dark-2-color);
 }
 
 /*
