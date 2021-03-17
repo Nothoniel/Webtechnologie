@@ -47,6 +47,7 @@ var colorTextLabel = document.createTextNode("Select color scheme:");
 var inputColor = document.createElement("input");
 
 addInput(inputColor, type, "color");
+inputColor.setAttribute("value", "#203C56");
 
 colorLabel.appendChild(colorTextLabel);
 colorPicker.appendChild(colorLabel);
@@ -60,7 +61,9 @@ var fontsizeTextLabel = document.createTextNode("Select fontsize:");
 var inputNumber = document.createElement("input");
 
 addInput(inputNumber, type, "number");
+inputNumber.setAttribute("id", "fontinput")
 inputNumber.setAttribute("min", "1");
+inputNumber.setAttribute("value", "16");
 inputNumber.setAttribute("max", "45")
 
 fontsizeLabel.appendChild(fontsizeTextLabel);
@@ -76,6 +79,14 @@ applyButton.setAttribute("type", "button");
 
 applyButton.appendChild(applyButtonText);
 menuContent.appendChild(applyButton).addEventListener("click",determineNewChanges);
+
+var x= document.querySelector(".selectedOption").value;
+console.log(x);
+
+//disabling of button, because body should only modify the color             <<<<<<<<
+// if(document.querySelector(".selectedOption").value == "body" ) {
+// document.getElementById("fontinput").disabled = true;
+// }
 
 
  //functions
