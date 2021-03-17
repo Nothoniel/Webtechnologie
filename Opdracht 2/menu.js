@@ -2,7 +2,8 @@
 var options = ["body", "article", "header", "section", "aside", "footer"];
 var type = ["type", "class", "name"];
 var cssVar = ["--dark-1-header-color", "--dark-1-navbar-color",
- "--dark-1-color", "--dark-2-footer-color", "--dark-2-color", "--dark-3-color", "--dark-4-color", "--dark-5-color", "--dark-5-navbar-color", "--dark-7-color", "--dark-7-navbar-color"]
+ "--dark-1-color", "--dark-2-footer-color", "--dark-2-color", "--dark-3-color", "--dark-3-mail-color", "--dark-3-fig-color",
+  "--dark-4-color", "--dark-5-color", "--dark-5-navbar-color", "--dark-7-color", "--dark-7-navbar-color"]
 
 //menu that changes the lay-out of a webpage and is present in the navbar
 //adding a new button to the navbar that shows the menu
@@ -33,6 +34,7 @@ var selectTextLabel = document.createTextNode("Select element:");
 var selection = document.createElement("select");
 
 selectMenu.setAttribute("class", "selected");
+selectLabel.setAttribute("class", "text-label");
 
 addOption(selection, options,"selectedOption");
 
@@ -49,6 +51,7 @@ var inputColor = document.createElement("input");
 
 addInput(inputColor, type, "color");
 inputColor.setAttribute("value", "#203C56");
+colorLabel.setAttribute("class", "text-label");
 
 colorLabel.appendChild(colorTextLabel);
 colorPicker.appendChild(colorLabel);
@@ -61,7 +64,10 @@ var fontsizeLabel = document.createElement("label");
 var fontsizeTextLabel = document.createTextNode("Select fontsize:");
 var inputNumber = document.createElement("input");
 
+fontsizeLabel.setAttribute("class", "text-label");
+
 addInput(inputNumber, type, "number");
+
 // inputNumber.setAttribute("id", "fontinput")
 inputNumber.setAttribute("min", "1");
 inputNumber.setAttribute("value", "16");
@@ -105,7 +111,7 @@ function removingStyles() {
       document.querySelector(":root").style.removeProperty("--fontsize4"); 
    }
 
-   if (selected == "aside"){ 
+   if (selected !== "footer" || selected !== "header"){ 
       var i = 0;
       var x = document.querySelectorAll(".figure-text");
       do{
@@ -159,23 +165,23 @@ function colorTheElement(newColor, selected) {
    for(p=0; p<cssVar.length; p++)
    {
       if(selected == "section"){
-         if( cssVar[p] == "--dark-1-header-color" || cssVar[p] == "--dark-1-navbar-color" || cssVar[p] == "--dark-5-navbar-color" || cssVar[p] == "--dark-7-navbar-color") {
+         if( cssVar[p] == "--dark-1-header-color" || cssVar[p] == "--dark-1-navbar-color" 
+         || cssVar[p] == "--dark-5-navbar-color" || cssVar[p] == "--dark-7-navbar-color" 
+         || cssVar[p] == "--dark-3-mail-color") 
             continue;
-         }
       } 
 
       if(selected =="article") {
-         if(cssVar[p] == "--dark-1-navbar-color" || cssVar[p] == "--dark-5-navbar-color" || cssVar[p] == "--dark-7-navbar-color" ) {
+         if(cssVar[p] == "--dark-1-navbar-color" || cssVar[p] == "--dark-5-navbar-color" 
+         || cssVar[p] == "--dark-7-navbar-color" || cssVar[p] == "--dark-3-mail-color") 
              continue;
-         }
       }
 
       if(selected !== "body"){
-         if(cssVar[p] == "--dark-2-footer-color"){
+         if(cssVar[p] == "--dark-2-footer-color")
             continue;
-         }
       }   
-      
+
       var saturatedColor;
       if(p<4){
          saturatedColor= colorBrightness(newColor,p/2);
@@ -185,13 +191,27 @@ function colorTheElement(newColor, selected) {
       }
 
       if (p==5){
-         saturatedColor= colorBrightness(newColor,-p/3);
+         saturatedColor = colorBrightness(newColor,-p/3);
       }
 
       if (p>5){
-         saturatedColor= colorBrightness(newColor,-p/13);
+         saturatedColor = colorBrightness(newColor,-p/13);
       }
       document.querySelector(":root").style.setProperty(cssVar[p], saturatedColor);
+
+      if(selected == "body"){
+         if(p == 3){
+            var menuLabel = document.querySelectorAll(".text-label");
+            var i;
+            for(i=0; i<menuLabel.length; i++){
+               menuLabel[i].style.color = saturatedColor;
+            }
+         }
+         if(p == 10){        
+            document.querySelector(".menucontent").style.backgroundColor = saturatedColor;
+         }  
+      }    
+
    }
 }
 
@@ -212,6 +232,20 @@ function fontSizeClasses(className, newFontsize){
    }
 }
 
+function removeColors() {
+   var mail = document.querySelector(".footer-mail");
+   if(mail)
+      mail.style.removeProperty("color");
+
+   var footerText = document.querySelector("footer");
+   if(footerText)
+      footerText.style.removeProperty("color"); 
+   
+   var headerText = document.querySelector("header");
+   if(headerText)
+      headerText.style.removeProperty("color"); 
+}
+
 function executeNewColor(selected, collection, newColor) {
    if (selected == "article" || selected == "section") {
       colorTheElement(newColor, selected);
@@ -223,9 +257,9 @@ function executeNewColor(selected, collection, newColor) {
          function assignColor(newColor) {collection[i].style.color = newColor; }
          switch(selected) {
             case "body":
+               removeColors();
                collection[i].style.backgroundColor = newColor;  
                colorTheElement(colorBrightness(newColor, 0.5), selected);
-               // colorClasses("footer-mail", newColor, -0.1);   //addcssvariable <<<<<
                break;
             case "footer":
                assignColor(newColor);
@@ -318,5 +352,6 @@ var sheet = (function() {
 })();
 
 //adding css-rules to the stylesheet
- sheet.insertRule('.menucontent { display: none; position: absolute; background-color: #544E68; color: inherit; width: 200px; z-index: 1; }', 0); //Make inherit when coloring body
+ sheet.insertRule('.menucontent { display: none; position: absolute; background-color: #544E68; width: 200px; z-index: 1; }', 0); 
  sheet.insertRule('.dropdown:hover .menucontent { display: block; }', 1);
+ sheet.insertRule('.text-label { color: #FFD4A3; }', 2);

@@ -2,7 +2,7 @@
     ///// Comment-section: CSS custom properties /////
 */ 
 
-/* the default color scheme*/
+/* the default color colors and font sizes*/
 /* the number is representing how dark the color is. Higher is darker.*/
 :root {
   --dark-1-header-color:rgb(255, 236, 218);
