@@ -90,6 +90,7 @@ function removingStyles() {
    //make it possible for body
    var selected = document.querySelector(".selectedOption").value;
    document.querySelector(selected).style.removeProperty("font-size");  
+   // section needs to be selelected as an array /// <<<<<<
 
    if(selected == "section" || selected == "article" || selected == "body") {
       document.querySelector(":root").style.removeProperty("--fontsize2"); 
@@ -168,7 +169,7 @@ function colorTheElement(newColor, selected) {
              continue;
          }
       }
-      
+
       if(selected !== "body"){
          if(cssVar[p] == "--dark-2-footer-color"){
             continue;
@@ -188,7 +189,7 @@ function colorTheElement(newColor, selected) {
       }
 
       if (p>5){
-         saturatedColor= colorBrightness(newColor,-p/8);
+         saturatedColor= colorBrightness(newColor,-p/13);
       }
       document.querySelector(":root").style.setProperty(cssVar[p], saturatedColor);
    }
@@ -247,7 +248,7 @@ function executeNewFont(selected, collection, newFontsize){
    var t;
    for(t=0; t<collection.length; t++) {
       collection[t].style.fontSize = newFontsizepx;
-      if(selected == "aside"){
+      if(selected == "aside") {
          fontSizeClasses("figure-text", newFontsizepx);
       }
    }
@@ -271,14 +272,19 @@ function executeNewFont(selected, collection, newFontsize){
       var footerFontSize = (newFontsize*0.6) + "px";
       document.querySelector("footer").style.removeProperty("font-size"); //for layering styles
       document.querySelector(":root").style.setProperty("--fontsize4", footerFontSize);
-      document.querySelector(".menucontent").style.width = (parseInt(newFontsize)*15).toString() + "px";
+      var multiplier;
+      if(newFontsize < 25)
+         multiplier = 15;
+      else 
+         multiplier = 9;
+      document.querySelector(".menucontent").style.width = (parseInt(newFontsize) * multiplier).toString() + "px";      
    }
 }
 
 //applying the new CSSrules
 function applyNewChanges(selected, collection, newColor, newFontsize) {
    //executes fontsize
-   executeNewFont(selected, collection,newFontsize);
+   executeNewFont(selected, collection, newFontsize);
    
    //execute color
    executeNewColor(selected, collection, newColor);
@@ -307,7 +313,5 @@ var sheet = (function() {
 })();
 
 //adding css-rules to the stylesheet
- sheet.insertRule('.menucontent { display: none; position: absolute; background-color: #544E68; color: #FFD4A3; width: 200px; z-index: 1; }', 0); //Make inherit when coloring body
+ sheet.insertRule('.menucontent { display: none; position: absolute; background-color: #544E68; color: inherit; width: 200px; z-index: 1; }', 0); //Make inherit when coloring body
  sheet.insertRule('.dropdown:hover .menucontent { display: block; }', 1);
- sheet.insertRule('.selected { width: 300px; }', 2);
-//  sheet.insertRule(' @media only screen and (max-width: 712px) { .menucontent { width: 45%; } }', 3);
