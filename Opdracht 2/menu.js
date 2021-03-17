@@ -68,7 +68,7 @@ fontsizeLabel.setAttribute("class", "text-label");
 
 addInput(inputNumber, type, "number");
 
-// inputNumber.setAttribute("id", "fontinput")
+inputNumber.setAttribute("class", "font-input")
 inputNumber.setAttribute("min", "1");
 inputNumber.setAttribute("value", "16");
 inputNumber.setAttribute("max", "45")
@@ -93,13 +93,22 @@ window.onresize = removingStyles;
 //functions
   //when resizing removing, the font-size, so that media queries work again
 function removingStyles() {
-   //make it possible for body
    var selected = document.querySelector(".selectedOption").value;
-   document.querySelector(selected).style.removeProperty("font-size");  
-   // section needs to be selelected as an array /// <<<<<<
-
+   if(selected !== "section"){
+      document.querySelector(selected).style.removeProperty("font-size");
+   }  
+   else{
+      var t = 0;
+      var p = document.querySelectorAll(selected);
+      do{
+         p[t].style.removeProperty("font-size");
+         t++;
+      }
+      while(t<p.length)  
+   }
+   
    if(selected == "section" || selected == "article" || selected == "body") {
-      document.querySelector(":root").style.removeProperty("--fontsize2"); 
+      document.querySelector(":root").style.removeProperty("--fontsize2");
       document.querySelector(":root").style.removeProperty("--fontsize3");  
    }
 
@@ -331,12 +340,18 @@ function applyNewChanges(selected, collection, newColor, newFontsize) {
 
 //determine the inputted values of the user
 function determineNewChanges() {
-   var currentSelectedElement = document.querySelector(".selectedOption").value;
-   var collectionSelectedElement = document.querySelectorAll(currentSelectedElement); //collection that contains all the selected elements
-   var newColor = document.querySelector(".color").value;
-   var newFontsize = document.querySelector(".number").value;
+   var insertedNum = document.querySelector(".font-input"); 
+   if(insertedNum.max <= 45 && insertedNum.min >= 1 ) {
+      var currentSelectedElement = document.querySelector(".selectedOption").value;
+      var collectionSelectedElement = document.querySelectorAll(currentSelectedElement); //collection that contains all the selected elements
+      var newColor = document.querySelector(".color").value;
+      var newFontsize = document.querySelector(".number").value;
 
-   applyNewChanges(currentSelectedElement, collectionSelectedElement, newColor, newFontsize);
+      applyNewChanges(currentSelectedElement, collectionSelectedElement, newColor, newFontsize);
+   }
+   else{
+      window.alert("test");
+   }
  }
 
 
