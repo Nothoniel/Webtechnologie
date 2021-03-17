@@ -1,7 +1,8 @@
 //declarations
 var options = ["body", "article", "header", "section", "aside", "footer"];
 var type = ["type", "class", "name"];
-var cssVar = ["--dark-1-header-color", "--dark-1-color", "--dark-2-footer-color", "--dark-2-color", "--dark-3-color", "--dark-4-color", "--dark-5-color","--dark-7-color"];
+var cssVar = ["--dark-1-header-color", "--dark-1-navbar-color",
+ "--dark-1-color", "--dark-2-footer-color", "--dark-2-color", "--dark-3-color", "--dark-4-color", "--dark-5-color", "--dark-5-navbar-color", "--dark-7-color", "--dark-7-navbar-color"]
 
 //menu that changes the lay-out of a webpage and is present in the navbar
 //adding a new button to the navbar that shows the menu
@@ -88,7 +89,7 @@ window.onresize = removingStyles;
 function removingStyles() {
    //make it possible for body
    var selected = document.querySelector(".selectedOption").value;
-   document.querySelector(selected).style.removeProperty("font-size"); 
+   document.querySelector(selected).style.removeProperty("font-size");  
 
    if(selected == "section" || selected == "article" || selected == "body") {
       document.querySelector(":root").style.removeProperty("--fontsize2"); 
@@ -97,6 +98,10 @@ function removingStyles() {
 
    if (selected == "article" || selected == "body") {
       document.querySelector(":root").style.removeProperty("--fontsize1"); 
+   }
+
+   if (selected == "body") {
+      document.querySelector(":root").style.removeProperty("--fontsize4"); 
    }
 
    if (selected == "aside"){ 
@@ -153,14 +158,22 @@ function colorTheElement(newColor, selected) {
    for(p=0; p<cssVar.length; p++)
    {
       if(selected == "section"){
-         if( cssVar[p] == "--dark-1-header-color") {
+         if( cssVar[p] == "--dark-1-header-color" || cssVar[p] == "--dark-1-navbar-color" || cssVar[p] == "--dark-5-navbar-color" || cssVar[p] == "--dark-7-navbar-color") {
             continue;
          }
       } 
 
-      if(cssVar[p] == "--dark-2-footer-color"){
-         continue;
+      if(selected =="article") {
+         if(cssVar[p] == "--dark-1-navbar-color" || cssVar[p] == "--dark-5-navbar-color" || cssVar[p] == "--dark-7-navbar-color" ) {
+             continue;
+         }
       }
+      
+      if(selected !== "body"){
+         if(cssVar[p] == "--dark-2-footer-color"){
+            continue;
+         }
+      }   
       
       var saturatedColor;
       if(p<4){
@@ -209,7 +222,9 @@ function executeNewColor(selected, collection, newColor) {
          function assignColor(newColor) {collection[i].style.color = newColor; }
          switch(selected) {
             case "body":
-               collection[i].style.backgroundColor = newColor;   
+               collection[i].style.backgroundColor = newColor;  
+               colorTheElement(colorBrightness(newColor, 0.5), selected);
+               // colorClasses("footer-mail", newColor, -0.1);   //addcssvariable <<<<<
                break;
             case "footer":
                assignColor(newColor);
@@ -240,6 +255,8 @@ function executeNewFont(selected, collection, newFontsize){
    if(selected == "article" || selected == "section"  || selected == "body") {
       var header2FontSize = (newFontsize*1.5) + "px";
       var header3FontSize = (newFontsize*1.2) + "px";
+      document.querySelector(".figure-text").style.removeProperty("font-size");
+      fontSizeClasses("figure-text", newFontsizepx);
       document.querySelector(":root").style.setProperty("--fontsize2", header2FontSize);
       document.querySelector(":root").style.setProperty("--fontsize3", header3FontSize); 
    }
@@ -251,6 +268,9 @@ function executeNewFont(selected, collection, newFontsize){
 
    //to have the menu a bit of relative size to the fontsize
    if(selected == "body") {
+      var footerFontSize = (newFontsize*0.6) + "px";
+      document.querySelector("footer").style.removeProperty("font-size"); //for layering styles
+      document.querySelector(":root").style.setProperty("--fontsize4", footerFontSize);
       document.querySelector(".menucontent").style.width = (parseInt(newFontsize)*15).toString() + "px";
    }
 }
