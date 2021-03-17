@@ -256,8 +256,13 @@ function executeNewFont(selected, collection, newFontsize){
    if(selected == "article" || selected == "section"  || selected == "body") {
       var header2FontSize = (newFontsize*1.5) + "px";
       var header3FontSize = (newFontsize*1.2) + "px";
-      document.querySelector(".figure-text").style.removeProperty("font-size");
-      fontSizeClasses("figure-text", newFontsizepx);
+
+      if(document.querySelector(".figure-text"))
+      {
+         document.querySelector(".figure-text").style.removeProperty("font-size");
+         fontSizeClasses("figure-text", newFontsizepx);
+      }
+      
       document.querySelector(":root").style.setProperty("--fontsize2", header2FontSize);
       document.querySelector(":root").style.setProperty("--fontsize3", header3FontSize); 
    }
