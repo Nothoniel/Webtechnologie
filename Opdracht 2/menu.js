@@ -361,7 +361,7 @@ window.onresize = removingStyles;
   //when resizing removing, the font-size, so that media queries work again
 function removingStyles() {
    //removes the added width when resizing of the menu.
-   document.querySelector(".menucontent").style.removeProperty(width);
+   document.querySelector(".menucontent").style.removeProperty("width");
 
    var selected = document.querySelector(".selectedOption").value;
    if(selected !== "section"){
