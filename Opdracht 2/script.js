@@ -80,24 +80,34 @@ applyButton.setAttribute("type", "button");
 applyButton.appendChild(applyButtonText);
 menuContent.appendChild(applyButton).addEventListener("click",determineNewChanges);
 
-var x= document.querySelector(".selectedOption").value;
-console.log(x);
-
 //resizing
 window.onresize = removingStyles;
-
-//disabling of button, because body should only modify the color             <<<<<<<<
-// if(document.querySelector(".selectedOption").value == "body" ) {
-// document.getElementById("fontinput").disabled = true;
-// }
 
 //functions
   //when resizing removing, the font-size, so that media queries work again
 function removingStyles() {
-      document.querySelector("article").style.removeProperty("font-size"); 
-      document.querySelector(":root").style.removeProperty("--fontsize1"); 
+   //make it possible for body
+   var selected = document.querySelector(".selectedOption").value;
+   document.querySelector(selected).style.removeProperty("font-size"); 
+
+   if(selected == "section" || selected == "article" || selected == "body") {
       document.querySelector(":root").style.removeProperty("--fontsize2"); 
       document.querySelector(":root").style.removeProperty("--fontsize3");  
+   }
+
+   if (selected == "article" || selected == "body") {
+      document.querySelector(":root").style.removeProperty("--fontsize1"); 
+   }
+
+   if (selected == "aside"){ 
+      var i = 0;
+      var x = document.querySelectorAll(".figure-text");
+      do{
+         x[i].style.removeProperty("font-size");
+         i++;
+      }
+      while(i<x.length)
+   }
 }
 
 function addOption(selection, options, classname) {
@@ -217,28 +227,31 @@ function executeNewColor(selected, collection, newColor) {
    }
 }
 
-function executeNewFont(selected, collection,newFontsize){
-   if(selected !== "body"){
-      var newFontsizepx = newFontsize +"px"; //adding the unit of the fontsize
-      var t;
-      for(t=0; t<collection.length; t++) {
-         collection[t].style.fontSize = newFontsizepx;
-         if(selected == "aside"){
-            fontSizeClasses("figure-text", newFontsizepx);
-         }
+function executeNewFont(selected, collection, newFontsize){
+   var newFontsizepx = newFontsize +"px"; //adding the unit of the fontsize
+   var t;
+   for(t=0; t<collection.length; t++) {
+      collection[t].style.fontSize = newFontsizepx;
+      if(selected == "aside"){
+         fontSizeClasses("figure-text", newFontsizepx);
       }
    }
 
-   if(selected == "article" || selected == "section") {
+   if(selected == "article" || selected == "section"  || selected == "body") {
       var header2FontSize = (newFontsize*1.5) + "px";
       var header3FontSize = (newFontsize*1.2) + "px";
       document.querySelector(":root").style.setProperty("--fontsize2", header2FontSize);
       document.querySelector(":root").style.setProperty("--fontsize3", header3FontSize); 
    }
 
-   if(selected == "article"){
+   if(selected == "article" || selected == "body"){
       var header1FontSize = (newFontsize*1.6) + "px";
       document.querySelector(":root").style.setProperty("--fontsize1", header1FontSize);
+   }
+
+   //to have the menu a bit of relative size to the fontsize
+   if(selected == "body") {
+      document.querySelector(".menucontent").style.width = (parseInt(newFontsize)*15).toString() + "px";
    }
 }
 
