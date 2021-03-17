@@ -61,7 +61,7 @@ var fontsizeTextLabel = document.createTextNode("Select fontsize:");
 var inputNumber = document.createElement("input");
 
 addInput(inputNumber, type, "number");
-inputNumber.setAttribute("id", "fontinput")
+// inputNumber.setAttribute("id", "fontinput")
 inputNumber.setAttribute("min", "1");
 inputNumber.setAttribute("value", "16");
 inputNumber.setAttribute("max", "45")
