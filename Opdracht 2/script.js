@@ -83,24 +83,22 @@ menuContent.appendChild(applyButton).addEventListener("click",determineNewChange
 var x= document.querySelector(".selectedOption").value;
 console.log(x);
 
+//resizing
+window.onresize = removingStyles;
+
 //disabling of button, because body should only modify the color             <<<<<<<<
 // if(document.querySelector(".selectedOption").value == "body" ) {
 // document.getElementById("fontinput").disabled = true;
 // }
 
-//  removingStyles();
-
- //functions
+//functions
   //when resizing removing, the font-size, so that media queries work again
-  //Setting them empty does not work
-// function removingStyles() {
-//    if(window.onresize)
-//     {
-//       document.querySelector(":root").removeAttribute("--fontsize1"); 
-//       document.querySelector(":root").removeAttribute("--fontsize2");  
-//       document.querySelector(":root").removeAttribute("--fontsize3");   
-//     }
-// }
+function removingStyles() {
+      document.querySelector("article").style.removeProperty("font-size"); 
+      document.querySelector(":root").style.removeProperty("--fontsize1"); 
+      document.querySelector(":root").style.removeProperty("--fontsize2"); 
+      document.querySelector(":root").style.removeProperty("--fontsize3");  
+}
 
 function addOption(selection, options, classname) {
    var i;
