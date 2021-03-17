@@ -88,8 +88,20 @@ console.log(x);
 // document.getElementById("fontinput").disabled = true;
 // }
 
+//  removingStyles();
 
  //functions
+  //when resizing removing, the font-size, so that media queries work again
+  //Setting them empty does not work
+// function removingStyles() {
+//    if(window.onresize)
+//     {
+//       document.querySelector(":root").removeAttribute("--fontsize1"); 
+//       document.querySelector(":root").removeAttribute("--fontsize2");  
+//       document.querySelector(":root").removeAttribute("--fontsize3");   
+//     }
+// }
+
 function addOption(selection, options, classname) {
    var i;
    selection.setAttribute("class", classname);
@@ -129,10 +141,6 @@ function addInput(element, type, value) {
 }
 
 function colorTheElement(newColor, selected) {
-   //coloring of the aside, since it has a high priorty, changing the external css would not work.
-   colorClasses("figure-text", newColor, 0.1);
-   colorClasses("figure-link", newColor,-0.1);
-
    var p;
    for(p=0; p<cssVar.length; p++)
    {
@@ -149,9 +157,17 @@ function colorTheElement(newColor, selected) {
       var saturatedColor;
       if(p<4){
          saturatedColor= colorBrightness(newColor,p/2);
+         //coloring of the aside, since it has a high priorty, changing the external css would not work.
+         colorClasses("figure-text", newColor, p/2);
+         colorClasses("figure-link", newColor,-p/2);
       }
-      else{
-         saturatedColor= colorBrightness(newColor,-p/11);
+
+      if (p==5){
+         saturatedColor= colorBrightness(newColor,-p/3);
+      }
+
+      if (p>5){
+         saturatedColor= colorBrightness(newColor,-p/8);
       }
       document.querySelector(":root").style.setProperty(cssVar[p], saturatedColor);
    }
