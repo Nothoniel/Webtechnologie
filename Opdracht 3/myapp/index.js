@@ -4,7 +4,7 @@ const app = express();
 
 // this function is called every time an http request is received
 app.get ('/', function(req, res) { 
-    res.send('Hello World');
+    res.send('Kaas');
 });
 
 //now app is running - listening to requests on port 8046 
