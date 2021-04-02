@@ -1,5 +1,40 @@
 var questionSection = document.querySelector(".webpage-content__section");
 
+//buttons
+//Quiz
+var button1 = document.createElement("button");
+button1.appendChild(document.createTextNode("Quiz1"));
+
+button1.setAttribute("type", "button");
+
+questionSection.appendChild(button1) /*.addEventListener("click",goToQuizPages)*/;
+
+//Topic
+var topicLabel = document.createElement("label");
+var topicTextLabel = document.createTextNode("Internet");
+
+topicLabel.appendChild(topicTextLabel);
+questionSection.appendChild(topicLabel);
+
+//Topic Description DOM
+var topicDescriptionLabel = document.createElement("label");
+var topicDescriptionTextLabel = document.createTextNode("Description of the internet");
+
+topicDescriptionLabel.appendChild(topicDescriptionTextLabel);
+questionSection.appendChild(topicDescriptionLabel);
+
+//link of Topic
+var a = document.createElement('a');
+var linkText = document.createTextNode("information about the internet");
+a.appendChild(linkText);
+a.title = "my title text";
+a.href = "http://internet.com";
+
+questionSection.appendChild(a);
+
+
+
+
 //shuffle and sort functions, later to be used as a callback in the question constructor
 shuffle = x =>
 {
