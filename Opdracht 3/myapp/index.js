@@ -1,24 +1,13 @@
-var fs = require('fs');
 const express = require('express');
 const app = express();
 var path = require('path');
 var serveStatic = require('serve-static');
+var moduleSQL = require('./connect');
 
 const PORT=8046; 
 
-// fs.readFile('html/assessment.html', function (error, html) {
-
-//     if (error) throw error;    
-
-    
-//     // this function is called every time an http request is received
-//     app.get ('/', function(req, res) { 
-//         res.writeHeader(200, {"Content-Type": "text/html"});  
-//         res.write(html);  
-//         res.end();
-//     });
-// });  
-
+//acces database
+moduleSQL();
 
 // retrieving  files
 app.use(serveStatic(path.join(__dirname, 'public')))
