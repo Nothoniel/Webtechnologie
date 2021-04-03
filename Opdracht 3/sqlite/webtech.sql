@@ -61,7 +61,19 @@ INSERT INTO Question VALUES('P1DQ01', 'Question 4', 'Good Answer', 'Problem Stat
 -- INSERT INTO Question VALUES('P1DQ04', 'Question 3', 'Good Answer', 'Problem Statement', 'Incorrect, the good answer is this ..', 'This is the correct answer');
 -- INSERT INTO Question VALUES('P1DQ04', 'Question 4', 'Good Answer', 'Problem Statement', 'Incorrect, the good answer is this ..', 'This is the correct answer');
 
+/*table with all the user*/
+CREATE TABLE IF NOT EXISTS User (
+	`UserName` varchar(20) NOT NULL, 
+	`FirstName` varchar(20) NOT NULL, 
+	`LastName` varchar(20) NOT NULL,
+	`Password` varchar(20) NOT NULL,
+	'UserAttempts' INT NOT NULL,  
+	'CorrectAttempt' INT NOT NULL,  
+    CONSTRAINT PK_UserName PRIMARY KEY (UserName)
+);
 
+/*dummy user*/
+INSERT INTO User VALUES('ultra', 'Tom', 'Boer', 'hoi123', '20', '5');
 
 
 

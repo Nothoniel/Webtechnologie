@@ -1,4 +1,4 @@
-function moduleQuery() {
+function moduleDataTransmission(sql) {
     // opens the database
     const sqlite3 = require('sqlite3').verbose();
 
@@ -9,12 +9,6 @@ function moduleQuery() {
         console.log('Connected to the webtech database.');
     });
 
-    let sql = `SELECT TopicTitle title,
-                      DescriptionLink link,
-                      LinkName name  
-               FROM topic`;
-
-
     //printing each row            
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -22,9 +16,9 @@ function moduleQuery() {
         }
 
     rows.forEach((row) => {
-        console.log(`${row.title} ${row.link} - ${row.name}`);
+        console.log(`${row.username} - ${row.password}`);
         });
-    });    
+    });
 
     db.close((error) => {
         if (error) {
@@ -34,4 +28,4 @@ function moduleQuery() {
     });
 }
 
-module.exports = moduleQuery;
+module.exports = moduleDataTransmission;

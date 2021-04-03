@@ -2,14 +2,18 @@ const express = require('express');
 const app = express();
 var path = require('path');
 var serveStatic = require('serve-static');
-var moduleQuery = require('./query');
+var moduleDataTransmission = require('./datatransmission');
 // var moduleConversion = require('./conversion');
 
 const PORT=8046; 
 
-//acces database
-moduleQuery();
-// moduleConversion();
+//question system
+let query1 = `SELECT UserName username,
+                      Password password  
+               FROM User`;
+
+//acces database               
+moduleDataTransmission(query1); //user system
 
 // retrieving  files
 app.use(serveStatic(path.join(__dirname, 'public')))
