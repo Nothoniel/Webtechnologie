@@ -2,12 +2,14 @@ const express = require('express');
 const app = express();
 var path = require('path');
 var serveStatic = require('serve-static');
-var moduleSQL = require('./connect');
+var moduleQuery = require('./query');
+// var moduleConversion = require('./conversion');
 
 const PORT=8046; 
 
 //acces database
-moduleSQL();
+moduleQuery();
+// moduleConversion();
 
 // retrieving  files
 app.use(serveStatic(path.join(__dirname, 'public')))
@@ -21,5 +23,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, function(){
 console.log('Server started on port 8046...');
 });
-
-
