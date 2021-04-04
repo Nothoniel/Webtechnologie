@@ -1,42 +1,33 @@
-function moduleDataTransmission(sql) {
-    var dataExport = [];
+// opens the database
+const sqlite3 = require('sqlite3').verbose();
 
-    function test (data) {
-            dataExport = data.slice(); 
-            // console.log(data);    
+//connectiong to sql
+let db = new sqlite3.Database('./db/webtech.db', sqlite3.OPEN_READWRITE, (error) => {
+    if (error) {
+    console.error(error.message);
+    }
+    console.log('Connected to the webtech database.');
+});
+
+//user sql query
+let sql = `SELECT UserName username,
+                      Password password  
+               FROM User`;
+
+//printing each row            
+db.all(sql, function (error, data) {
+    if (error) {
+        throw error;
     }
 
-    // opens the database
-    const sqlite3 = require('sqlite3').verbose();
+    console.log(data[0]);
+});
 
-    var readData = function(test){
-                        let db = new sqlite3.Database('./db/webtech.db', sqlite3.OPEN_READWRITE, (error) => {
-                            if (error) {
-                            console.error(error.message);
-                            }
-                            console.log('Connected to the webtech database.');
-                        });
-
-                        //printing each row            
-                        db.all(sql, function (error, data) {
-                            if (error) {
-                                throw error;
-                            }
-                            test(data);
-                            db.close();
-                        });
-
-                            // db.close((error) => {
-                            //     if (error) {
-                            //     console.error(error.message);
-                            //     }
-                            //     console.log('Close the database connection.');
-                            // });
+db.close((error) => {
+    if (error) {
+    console.error(error.message);
     }
+    console.log('Close the database connection.');
+});
 
-    readData(test);
-    console.log(dataExport[0]);
-}
-
-
-module.exports = moduleDataTransmission;
+// module.exports = data;

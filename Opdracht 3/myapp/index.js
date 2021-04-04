@@ -3,7 +3,7 @@ const app = express();
 var path = require('path');
 const bcrypt = require('bcrypt');
 var serveStatic = require('serve-static');
-var moduleDataTransmission = require('./data');
+const users = require('./data').usersdb;
 
 const PORT=8046; 
 
@@ -17,16 +17,6 @@ app.use(serveStatic(path.join(__dirname, 'public')))
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'./public/index.html'));
 });
-
-//user sql query
-let query1 = `SELECT UserName username,
-                      Password password  
-               FROM User`;
-
-//acces database               
-moduleDataTransmission(query1); //user system
-
-
 
 //athentication of user
 // app.post('/loginpage_htmlFile', async (req, res) => {
