@@ -10,14 +10,15 @@ function moduleDataTransmission(sql) {
     });
 
     //printing each row            
-    db.all(sql, [], (err, rows) => {
+    db.all(sql, [], (err, data) => {
         if (err) {
           throw err;
         }
 
-    rows.forEach((row) => {
-        console.log(`${row.username} - ${row.password}`);
-        });
+        console.log(data[0].username);
+        console.log(data[0].password);
+        module.exports = {data};
+        
     });
 
     db.close((error) => {
