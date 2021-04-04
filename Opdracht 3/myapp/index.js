@@ -30,32 +30,39 @@ app.get('/', (req, res) => {
     // //prints out the data
     // setTimeout(function(){
     //     console.log(dataArray);
-    //     },500);
-//     try{
-           // //compares the username of db with the inserted one and stores the found user in a variable
-//         let foundUser = dataArray.find( data => req.body.username === data.username);
-//         if (foundUser) {
-    
-//             let submittedPass = req.body.password; 
-//             let storedPass = foundUser.password; 
-                // //comparing password of inserted user with that of the found user
-//             const passwordMatch = await bcrypt.compare(submittedPass, storedPass);
-//             if (passwordMatch) {
-//                 res.send(`matching password`);
-//             } else {
-//                 res.send("not matching password");
-//             }
-//         }
-//         else {
-//             res.send("username does not exist");
-//         }
-//     } 
-//     catch{
-//         res.send("Internal server error");
-//     }
+    //     },10);
+
+    // setTimeout(function(){
+    //     console.log('Attempting to log in');   
+    //     try{
+            // //compares the username of db with the inserted one and stores the found user in a variable
+    //         let foundUser = dataArray.find( data => req.body.username === data.username);
+    //         if (foundUser) {
+    //             let submittedPass = req.body.password; 
+    //             let storedPass = foundUser.password; 
+                    // //comparing password of inserted user with that of the found user
+    //             const passwordMatch = await bcrypt.compare(submittedPass, storedPass);
+    //             if (passwordMatch) {
+    //                 res.send(`matching password`);
+    //                 console.log('successful log in');
+    //             } else {
+    //                 res.send("not matching password");
+    //                 console.log('unsuccessful log in');
+    //             }
+    //         }
+    //         else {
+    //             res.send("username does not exist");
+    //             console.log('unsuccessful log in');
+    //         }
+    //     } 
+    //     catch{
+    //         res.send("Internal server error");
+    //         console.log('server error');
+    //     }
+    // },15);
 // });
 
 //now app is running - listening to requests on port 8046 
-app.listen(PORT, function(){
-console.log('Server started on port 8046...');
+app.listen(PORT, function(){     
+    console.log('Server started on port 8046...');
 });
