@@ -18,14 +18,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'./public/index.html'));
 });
 
-var array1 = [
-    {naam: 'appels', aantal: 2},
-    {naam: 'bananen', aantal: 0},
-    {naam: 'kersen', aantal: 5}
-];
-
-console.log(array1.find( data => data.naam === 'kersen')) // { naam: 'kersen', aantal: 5 }
-
 //athentication of user
 // app.post('/loginpage_htmlFile', async (req, res) => {
     // //user sql query
@@ -41,7 +33,7 @@ console.log(array1.find( data => data.naam === 'kersen')) // { naam: 'kersen', a
     //     },500);
 //     try{
            // //compares the username of db with the inserted one and stores the found user in a variable
-//         let foundUser = dataArray.find((data) => req.body.username === data.username);
+//         let foundUser = dataArray.find( data => req.body.username === data.username);
 //         if (foundUser) {
     
 //             let submittedPass = req.body.password; 
