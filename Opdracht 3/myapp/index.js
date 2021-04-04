@@ -3,7 +3,8 @@ const app = express();
 var path = require('path');
 const bcrypt = require('bcrypt');
 var serveStatic = require('serve-static');
-const users = require('./data').usersdb;
+let database = require('./data');
+// let db = require('./db');
 
 const PORT=8046; 
 

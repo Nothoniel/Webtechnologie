@@ -1,33 +1,43 @@
 // opens the database
-const sqlite3 = require('sqlite3').verbose();
+let db = require('./db');
 
-//connectiong to sql
-let db = new sqlite3.Database('./db/webtech.db', sqlite3.OPEN_READWRITE, (error) => {
-    if (error) {
-    console.error(error.message);
-    }
-    console.log('Connected to the webtech database.');
-});
+ function getData() {
+    return new Promise(function(resolve, reject) {
+        //user sql query
+        let sql = `SELECT UserName username,
+                        Password password  
+                    FROM User`;
 
-//user sql query
-let sql = `SELECT UserName username,
-                      Password password  
-               FROM User`;
+        //executing the sql-string            
+        db.all(sql, function (err, rows) {
+            if (err) {
+                throw err;
+            }
+            else{
+                resolve(rows);
+            }
+        }); 
 
-//printing each row            
-db.all(sql, function (error, data) {
-    if (error) {
-        throw error;
-    }
+        //closing the connection
+        db.close((error) => {
+            if (error) {
+            console.error(error.message);
+            }
+            console.log('Close the database connection.');
+        }); 
+    })
+}
 
-    console.log(data[0]);
-});
+getData()
+.then(function(results){
+  render(results)
+})
+.catch(function(err){
+  console.log("Promise rejection error: "+err);
+})
 
-db.close((error) => {
-    if (error) {
-    console.error(error.message);
-    }
-    console.log('Close the database connection.');
-});
+render = function(results){ console.log(results[0]) }
 
 // module.exports = data;
+
+
