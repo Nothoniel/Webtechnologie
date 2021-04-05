@@ -57,33 +57,43 @@ function createLoginPage()
     loginHeader.appendChild(document.createTextNode("Log in to your account"));
     loginSubSection.appendChild(loginHeader);
 
+    var loginForm = document.createElement("form");
+
     var usernameInput = document.createElement("input");
+    usernameInput.setAttribute("type", "text");
+    usernameInput.setAttribute("name", "username");
     var usernameLabel = document.createElement("label");
     usernameLabel.appendChild(document.createTextNode("username:"));
-    loginSubSection.appendChild(usernameLabel);
-    loginSubSection.appendChild(document.createElement("br"));
-    loginSubSection.appendChild(usernameInput);
+    loginForm.appendChild(usernameLabel);
+    loginForm.appendChild(document.createElement("br"));
+    loginForm.appendChild(usernameInput);
 
-    loginSubSection.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
 
     var passwordInput = document.createElement("input");
     passwordInput.setAttribute("type", "password");
+    passwordInput.setAttribute("name", "password");
     var passwordLabel = document.createElement("label");
     passwordLabel.appendChild(document.createTextNode("password:"));
-    loginSubSection.appendChild(passwordLabel);
-    loginSubSection.appendChild(document.createElement("br"));
-    loginSubSection.appendChild(passwordInput);
+    loginForm.appendChild(passwordLabel);
+    loginForm.appendChild(document.createElement("br"));
+    loginForm.appendChild(passwordInput);
 
-    loginSubSection.appendChild(document.createElement("br"));
-    loginSubSection.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
 
     var submitButton = document.createElement("input");
-    submitButton.setAttribute("type", "button");
+    submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "Log in");
-    loginSubSection.appendChild(submitButton);
+    loginForm.appendChild(submitButton);
 
-    loginSubSection.appendChild(document.createElement("br"));
-    loginSubSection.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
+
+    loginForm.setAttribute("method", "POST");
+    loginForm.setAttribute("action", "/login");
+    loginSubSection.appendChild(loginForm);
+
 
     //dont have an account? - button
     loginSubSection.appendChild(document.createTextNode("Don't have an account?"));
@@ -168,51 +178,6 @@ function createRegisterPage()
     var submitButton = document.createElement("input");
     submitButton.setAttribute("type", "button");
     submitButton.setAttribute("value", "submit");
-    submitButton.addEventListener("click", function () {
-
-        app.post('/loginpage_htmlFile', async (req, res) => {
-            //user sql query
-            let sql = `SELECT UserName username,
-                           Password password  
-                    FROM User`;
-            //accesing database
-            getData(sql).then(results => dataArray = results)
-
-            //prints out the data
-            setTimeout(function () {
-                console.log(dataArray);
-            }, 10);
-
-            setTimeout(function () {
-                console.log('Attempting to log in');
-                try {
-                    //compares the username of db with the inserted one and stores the found user in a variable
-                    let foundUser = dataArray.find(data => req.body.username === data.username);
-                    if (foundUser) {
-                        let submittedPass = req.body.password;
-                        let storedPass = foundUser.password;
-                        //comparing password of inserted user with that of the found user
-                        const passwordMatch = await bcrypt.compare(submittedPass, storedPass);
-                        if (passwordMatch) {
-                            res.send(`matching password`);
-                            console.log('successful log in');
-                        } else {
-                            res.send("not matching password");
-                            console.log('unsuccessful log in');
-                        }
-                    }
-                    else {
-                        res.send("username does not exist");
-                        console.log('unsuccessful log in');
-                    }
-                }
-                catch{
-                    res.send("Internal server error");
-                    console.log('server error');
-                }
-            }, 15);
-        });
-    });
 
     loginSubSection.appendChild(submitButton);
 

@@ -8,7 +8,7 @@ var dataArray;
 
 const PORT=8046; 
 
-// app.use(urlencoded());
+app.use(express.urlencoded({extended : false}));
 
 // retrieving  files
 app.use(serveStatic(path.join(__dirname, 'public')))
@@ -19,48 +19,49 @@ app.get('/', (req, res) => {
 });
 
 //athentication of user
-// app.post('/loginpage_htmlFile', async (req, res) => {
-    // //user sql query
-    // let sql = `SELECT UserName username,
-    //                       Password password  
-    //                FROM User`;
-    // //accesing database
-    // getData(sql).then( results => dataArray = results )
+app.post('/login', async (req, res) => {
+    //user sql query
+    let sql = `SELECT UserName username,
+                           Password password  
+                    FROM User`;
+    //accesing database
+    getData(sql).then( results => dataArray = results )
 
-    // //prints out the data
-    // setTimeout(function(){
+     //prints out the data
+    //setTimeout(function(){
     //     console.log(dataArray);
     //     },10);
 
-    // setTimeout(function(){
-    //     console.log('Attempting to log in');   
-    //     try{
-            // //compares the username of db with the inserted one and stores the found user in a variable
-    //         let foundUser = dataArray.find( data => req.body.username === data.username);
-    //         if (foundUser) {
-    //             let submittedPass = req.body.password; 
-    //             let storedPass = foundUser.password; 
-                    // //comparing password of inserted user with that of the found user
-    //             const passwordMatch = await bcrypt.compare(submittedPass, storedPass);
-    //             if (passwordMatch) {
-    //                 res.send(`matching password`);
-    //                 console.log('successful log in');
-    //             } else {
-    //                 res.send("not matching password");
-    //                 console.log('unsuccessful log in');
-    //             }
-    //         }
-    //         else {
-    //             res.send("username does not exist");
-    //             console.log('unsuccessful log in');
-    //         }
-    //     } 
-    //     catch{
-    //         res.send("Internal server error");
-    //         console.log('server error');
-    //     }
-    // },15);
-// });
+    setTimeout(async function () {
+         console.log('Attempting to log in');   
+         try {
+             //compares the username of db with the inserted one and stores the found user in a variable
+             console.log(req.body.username);
+             console.log(req.body.password);
+             let foundUser = dataArray.find( (data) => req.body.username === data.username);
+             if (foundUser) {
+                 console.log('user found');
+                 console.log(foundUser);
+                 //comparing password of inserted user with that of the found user
+                 if (req.body.password == foundUser.password) {
+                     res.send(`matching password`);
+                     console.log('successful log in');
+                 } else {
+                     res.send("not matching password");
+                     console.log('unsuccessful log in');
+                 }
+             }
+             else {
+                 res.send("username does not exist");
+                 console.log('unsuccessful log in');
+             }
+         } 
+         catch{
+             res.send("Internal server error");
+             console.log('server error');
+         }
+    },15);
+});
 
 //now app is running - listening to requests on port 8046 
 app.listen(PORT, function(){     
