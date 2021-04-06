@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 var serveStatic = require('serve-static');
 let getData = require('./data');
+let insertData = require('./insert_data');
 var dataArray;
 const PORT=8046; 
 
@@ -30,21 +31,22 @@ const PORT=8046;
 app.use(express.urlencoded({extended : false}));
 
 // retrieving  files
-app.use(serveStatic(path.join(__dirname, 'public')))
+app.use(serveStatic(path.join(__dirname, 'public')));
 
 //called every time an http request is received, like a starting file can be set  
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'./public/index.html'));
 });
 
-//athentication of user
+//authentication of user
 app.post('/login', async (req, res) => {
+    console.log("dit is login");
     //user sql query
     let sql = `SELECT UserName username,
                            Password password  
                     FROM User`;
     //accesing database
-    getData(sql).then( results => dataArray = results )
+    getData(sql).then(results => dataArray = results);
 
      //prints out the data
     //setTimeout(function(){
@@ -80,6 +82,27 @@ app.post('/login', async (req, res) => {
              console.log('server error');
          }
     },15);
+});
+
+app.post('/register', async (req, res) => {
+    console.log("dit is register");
+    if (req.body.password !== req.body.confirm) res.send('password confirmation did not match password');
+    
+    //user sql query
+    try {
+        //let newUser = [
+        //    req.body.username,
+        //    req.body.firstName,
+        //    req.body.lastName,
+        //    req.body.password
+        //];
+        let insert_sql = `INSERT INTO User(UserName, FirstName, LastName, Password)
+                VALUES('`+req.body.username+`','`+req.body.firstName+`','`+req.body.lastName+`','`+req.body.password+`')`;
+        insertData(insert_sql);
+    }
+    catch{
+        res.send()
+    }
 });
 
 //now app is running - listening to requests on port 8046 

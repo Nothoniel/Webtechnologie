@@ -129,57 +129,68 @@ function createRegisterPage()
     loginSubSection.appendChild(document.createElement("br"));
     loginSubSection.appendChild(document.createElement("br"));
 
+    var loginForm = document.createElement("form");
+
     var usernameLabel = document.createElement("label");
     usernameLabel.appendChild(document.createTextNode("username:"));
-    loginSubSection.appendChild(usernameLabel);
+    loginForm.appendChild(usernameLabel);
     var usernameInput = document.createElement("input");
-    loginSubSection.appendChild(usernameInput);
+    usernameInput.setAttribute("name", "username");
+    loginForm.appendChild(usernameInput);
 
-    loginSubSection.appendChild(document.createElement("br"));
-    loginSubSection.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
 
     var passwordLabel = document.createElement("label");
     passwordLabel.appendChild(document.createTextNode("password:"));
-    loginSubSection.appendChild(passwordLabel);
+    loginForm.appendChild(passwordLabel);
     var passwordInput = document.createElement("input");
     passwordInput.setAttribute("type", "password");
-    loginSubSection.appendChild(passwordInput);
+    passwordInput.setAttribute("name", "password")
+    loginForm.appendChild(passwordInput);
 
-    loginSubSection.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
 
     var confirmPasswordLabel = document.createElement("label");
-    loginSubSection.appendChild(confirmPasswordLabel);
+    loginForm.appendChild(confirmPasswordLabel);
     confirmPasswordLabel.appendChild(document.createTextNode("confirm password:"));
     var confirmPassword = document.createElement("input");
     confirmPassword.setAttribute("type", "password");
-    loginSubSection.appendChild(confirmPassword);
+    confirmPassword.setAttribute("name", "confirm");
+    loginForm.appendChild(confirmPassword);
 
-    loginSubSection.appendChild(document.createElement("br"));
-    loginSubSection.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
 
     var firstNameLabel = document.createElement("label");
     firstNameLabel.appendChild(document.createTextNode("first name:"));
-    loginSubSection.appendChild(firstNameLabel);
+    loginForm.appendChild(firstNameLabel);
     var firstNameInput = document.createElement("input");
-    loginSubSection.appendChild(firstNameInput);
+    firstNameInput.setAttribute("name", "firstName");
+    loginForm.appendChild(firstNameInput);
 
-    loginSubSection.appendChild(document.createElement("br"));
-    loginSubSection.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
 
     var lastNameLabel = document.createElement("label");
     lastNameLabel.appendChild(document.createTextNode("last name:"));
-    loginSubSection.appendChild(lastNameLabel);
+    loginForm.appendChild(lastNameLabel);
     var lastNameInput = document.createElement("input");
-    loginSubSection.appendChild(lastNameInput);
+    lastNameInput.setAttribute("name", "lastName");
+    loginForm.appendChild(lastNameInput);
 
-    loginSubSection.appendChild(document.createElement("br"));
-    loginSubSection.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
+    loginForm.appendChild(document.createElement("br"));
 
     var submitButton = document.createElement("input");
-    submitButton.setAttribute("type", "button");
+    submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "submit");
 
-    loginSubSection.appendChild(submitButton);
+    loginForm.appendChild(submitButton);
+
+    loginForm.setAttribute("method", "POST");
+    loginForm.setAttribute("action", "/register");
+    loginSubSection.appendChild(loginForm);
 
     loginSection.appendChild(loginSubSection);
 }
