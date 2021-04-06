@@ -90,15 +90,18 @@ app.post('/register', async (req, res) => {
     
     //user sql query
     try {
-        //let newUser = [
-        //    req.body.username,
-        //    req.body.firstName,
-        //    req.body.lastName,
-        //    req.body.password
-        //];
-        let insert_sql = `INSERT INTO User(UserName, FirstName, LastName, Password)
-                VALUES('`+req.body.username+`','`+req.body.firstName+`','`+req.body.lastName+`','`+req.body.password+`')`;
-        insertData(insert_sql);
+        var newUser = [
+           req.body.username,
+           req.body.firstName,
+           req.body.lastName,
+           req.body.password
+        ].toString();
+
+        // let insert_sql = `INSERT INTO User(UserName, FirstName, LastName, Password)
+        //         VALUES('`+req.body.username+`','`+req.body.firstName+`','`+req.body.lastName+`','`+req.body.password+`')`;
+
+        let insert_sql = `INSERT INTO User(UserName, FirstName, LastName, Password) VALUES (?,?,?,?)`;
+        insertData(insert_sql, newUser);
     }
     catch{
         res.send()

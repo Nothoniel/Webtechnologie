@@ -63,12 +63,12 @@ INSERT INTO Question VALUES('P1DQ01', 'Question 4', 'Good Answer', 'Problem Stat
 
 /*table with all the user*/
 CREATE TABLE IF NOT EXISTS User (
-	`UserName` varchar(20) NOT NULL, 
-	`FirstName` varchar(20) NOT NULL, 
-	`LastName` varchar(20) NOT NULL,
-	`Password` varchar(20) NOT NULL,
-	'UserAttempts' INT NOT NULL,  
-	'CorrectAttempt' INT NOT NULL,  
+	`UserName` varchar(20) DEFAULT NULL, 
+	`FirstName` varchar(20) DEFAULT NULL, 
+	`LastName` varchar(20) DEFAULT NULL,
+	`Password` varchar(20) DEFAULT NULL,
+	'UserAttempts' INT DEFAULT NULL,  
+	'CorrectAttempt' INT DEFAULT NULL,  
     CONSTRAINT PK_UserName PRIMARY KEY (UserName)
 );
 

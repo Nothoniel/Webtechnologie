@@ -1,13 +1,14 @@
 // opens the database
 let db = require('./db');
 
-function insertData(insert_sql) {
+function insertData(insert_sql, newUser) {
     //executing the sql-string            
-    db.run(insert_sql, function (err, rows) {
+    db.run(insert_sql, newUser, function (err, rows) {
         if (err) {
             throw err;
         }
-        console.log(rows);
+        console.log("Number of records inserted: " + rows);
+        console.log(`A row has been inserted with rowid ${this.username}`);
     });
 
     //closing the connection
@@ -15,8 +16,9 @@ function insertData(insert_sql) {
         if (error) {
             console.error(error.message);
         }
-        console.log('Close the database connection.');
     });
 }
 
 module.exports = insertData;
+
+
