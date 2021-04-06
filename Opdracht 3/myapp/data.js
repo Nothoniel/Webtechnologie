@@ -1,7 +1,10 @@
-// opens the database
-let db = require('./db');
+let openDB = require('./db');
+let db;
 
 function getData(sql) {
+    // opens the database
+    db = openDB();
+
     return new Promise(function(resolve, reject) {
         //executing the sql-string            
         db.all(sql, function (err, rows) {
@@ -11,6 +14,7 @@ function getData(sql) {
             else{
                 resolve(rows);
             }
+            console.log("Execute sql statement");
         }); 
 
         //closing the connection
