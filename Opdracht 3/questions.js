@@ -385,6 +385,7 @@ renderSelection = () =>
         }
         var description = document.createElement("a");
         description.href = topicArray[i][2];
+        description.appendChild(document.createTextNode("You can find the corresponding theory here!"));
         topicSection.appendChild(description);
 
         quizSection.appendChild(topicHeader);
@@ -425,7 +426,7 @@ renderQuiz = (i, j, k) =>
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "Next Question";
-        nextButton.addEventListener("click", renderQuiz(i, j, k + 1));
+        nextButton.addEventListener("click", function(i, j, k) {renderQuiz(i, j, k + 1);});
         resultSection.appendChild(nextButton);
         resultSection.appendChild(document.createElement("br"));
     }
