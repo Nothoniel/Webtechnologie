@@ -363,38 +363,33 @@ var topicArray =
 
 renderSelection = () =>
 {
-    while (quizSection.firstChild)
+    while(quizSection.firstChild)
         quizSection.removeChild(quizSection.firstChild);
 
     for(let i = 0; i < topicArray.length; i++)
     {
         var topicHeader = document.createElement("h2");
-        topicHeader.appendChild(document.createTextNode(topicArray[i][2]));
+        topicHeader.appendChild(document.createTextNode(topicArray[i][1]));
         var topicSection = document.createElement("section");
         topicSection.className = "webpage-content__section__subsection";
-        for(let j = 0; j < topicArray[i][1].length; i++)
+
+        for(let j = 0; j < topicArray[i][0].length; j++)
         {
-            var quizSelect = questionPageArray[i].selectQuizButton(i, j);
-            topicSection.appendChild(quizSelect);
+            var selectButton = document.createElement("input");
+            selectButton.type = "button";
+            selectButton.value = topicArray[i][1] + (j+1);
+            selectButton.addEventListener("click", function(i, j) {renderQuiz(i, j, 0);});
+
+            topicSection.appendChild(selectButton);
             topicSection.appendChild(document.createElement("br"));
         }
         var description = document.createElement("a");
-        description.href = topicArray[i][3];
+        description.href = topicArray[i][2];
         topicSection.appendChild(description);
 
         quizSection.appendChild(topicHeader);
         quizSection.appendChild(topicSection);
     }
-}
-
-selectQuizButton(i, j)
-{
-    var selectButton = document.createElement("input");
-    selectButton.type = "button";
-    selectButton.value = topicArray[i][2] + (j+1);
-    selectButton.addEventListener("click", renderQuiz(i, j, 0));
-
-    return selectButton;
 }
 
 //The remaining interface of the quiz is generated here  
@@ -405,7 +400,6 @@ renderQuiz = (i, j, k) =>
 
     topicArray[i][j][k].renderExcercise(k);
 
-    
     // var quizResults = [];
     // for(let i = 0; i < questions.length; i++)
     //     quizResults.push(questions[i].checkAnswer(i));
@@ -461,7 +455,6 @@ renderQuiz = (i, j, k) =>
 //The answers will be checked here, when the corresponding button has been clicked
 checkAnswers = () =>
 {
-    
     // resultSection.appendChild(document.createElement("br"));
     // resultSection.appendChild(document.createTextNode("Your results will be displayed here."));
 
