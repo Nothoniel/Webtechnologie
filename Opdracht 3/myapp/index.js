@@ -90,16 +90,10 @@ app.post('/register', async (req, res) => {
     
     //user sql query
     try {
-        var newUser = [
-           req.body.username,
-           req.body.firstName,
-           req.body.lastName,
-           req.body.password
-        ].toString();
+        //making an array that contains the info of the new user
+        var newUser = [req.body.username, req.body.firstName, req.body.lastName, req.body.password];
 
-        // let insert_sql = `INSERT INTO User(UserName, FirstName, LastName, Password)
-        //         VALUES('`+req.body.username+`','`+req.body.firstName+`','`+req.body.lastName+`','`+req.body.password+`')`;
-
+        //sql string that adds the new user to the db
         let insert_sql = `INSERT INTO User(UserName, FirstName, LastName, Password) VALUES (?,?,?,?)`;
         insertData(insert_sql, newUser);
     }

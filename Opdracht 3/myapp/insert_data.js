@@ -7,8 +7,7 @@ function insertData(insert_sql, newUser) {
         if (err) {
             throw err;
         }
-        console.log("Number of records inserted: " + rows);
-        console.log(`A row has been inserted with rowid ${this.username}`);
+        console.log("New user added");
     });
 
     //closing the connection
