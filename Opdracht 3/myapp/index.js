@@ -1,12 +1,31 @@
 const express = require('express');
 const app = express();
 var path = require('path');
+var session = require('express-session');
 const bcrypt = require('bcrypt');
+const flash = require('connect-flash');
 var serveStatic = require('serve-static');
 let getData = require('./data');
 var dataArray;
-
 const PORT=8046; 
+
+//setting up session
+// initialise and use session middleware
+// app.use(session({secret: 'power creep'}));
+
+// var curentSession; // session variable
+// app.get('/', function(req,res){
+//     curentSession = req.session; 
+//     if(curentSession.id) {
+//         res.redirect('/user');
+//     } 
+//     else {
+//         res.render('index.html');
+//     }
+// });
+
+//flash messages are possible
+// app.use(flash());
 
 app.use(express.urlencoded({extended : false}));
 
@@ -44,10 +63,10 @@ app.post('/login', async (req, res) => {
                  console.log(foundUser);
                  //comparing password of inserted user with that of the found user
                  if (req.body.password == foundUser.password) {
-                     res.send(`matching password`);
-                     console.log('successful log in');
+                     res.redirect('/assessment.html');
+                     console.log('successful log in');     
                  } else {
-                     res.send("not matching password");
+                     res.flash('not matching');  
                      console.log('unsuccessful log in');
                  }
              }
