@@ -34,15 +34,15 @@ class excercise
         questionHeader.appendChild(document.createTextNode("Question" + (i+1)));
         var questionSubSection = document.createElement("section");
 
-        questionSubSection.setAttribute("class", "webpage-content__section__subsection" );
+        questionSubSection.setAttribute("class", "webpage-content__section__subsection");
 
         var questionContainer = document.createElement("p");
         questionContainer.appendChild(document.createTextNode(this.question))
 
         questionSubSection.appendChild(questionContainer);
         
-        questionSection.appendChild(questionHeader);
-        questionSection.appendChild(questionSubSection);
+        quizSection.appendChild(questionHeader);
+        quizSection.appendChild(questionSubSection);
     }
 }
 
@@ -52,7 +52,7 @@ class multipleChoice extends excercise
     renderExcercise(i)
     {
         super.renderExcercise(i);
-        var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[i];
+        var questionSubSection = document.getElementByClassName("webpage-content__section__subsection");
         for(let k = 0; k < this.answers.length; k++)
         {
             var answersContainer = document.createElement("input");
@@ -90,7 +90,7 @@ class multiChoice extends excercise
     renderExcercise(i)
     {
         super.renderExcercise(i);
-        var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[i];
+        var questionSubSection = document.getElementByClassName("webpage-content__section__subsection");
         for(let k = 0; k < this.answers.length; k++)
         {
             var answersContainer = document.createElement("input");
@@ -126,7 +126,7 @@ class open extends excercise
         answersContainer.name = "answersOfQ" + i;
         answersContainer.type = "text";
 
-        var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[i];
+        var questionSubSection = document.getElementByClassName("webpage-content__section__subsection");
         questionSubSection.appendChild(answersContainer);
     }
 
@@ -145,7 +145,7 @@ class ordering extends excercise
     renderExcercise(i)
     {
         super.renderExcercise(i);
-        var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[i];
+        var questionSubSection = document.getElementByClassName("webpage-content__section__subsection");
         for(let k = 0; k < this.answers.length; k++)
         {
             //At all the elements, we want a label with the content it represents
@@ -161,7 +161,7 @@ class ordering extends excercise
                 var answersContainer = document.createElement("input");
                 answersContainer.type = "button";
                 answersContainer.value = "^";
-                answersContainer.addEventListener("click", function() { questions[i].changeOrder(k - 1, i); });
+                answersContainer.addEventListener("click", function() { this.changeOrder(k - 1, i); });
                 questionSubSection.appendChild(answersContainer);
             }
 
@@ -171,7 +171,7 @@ class ordering extends excercise
                 var answersContainer = document.createElement("input");
                 answersContainer.type = "button";
                 answersContainer.value = "v";
-                answersContainer.addEventListener("click", function() { questions[i].changeOrder(k, i); });
+                answersContainer.addEventListener("click", function() { this.changeOrder(k, i); });
                 questionSubSection.appendChild(answersContainer);
                 questionSubSection.appendChild(document.createElement("br"));
             }
@@ -398,59 +398,62 @@ renderQuiz = (i, j, k) =>
 {
     while(quizSection.firstChild)
         quizSection.removeChild(quizSection.firstChild);
-
-    topicArray[i][j][k].renderExcercise(k);
+    
+    topicArray[i][0][j][k].renderExcercise(k);
 
     // var quizResults = [];
     // for(let i = 0; i < questions.length; i++)
     //     quizResults.push(questions[i].checkAnswer(i));
-    var givenAnswers = [];
+    // var givenAnswers = [];
 
-    var resultHeader = document.createElement("h2");
-    resultHeader.appendChild(document.createTextNode("Results"));
-    var resultSection = document.createElement("section");
-    resultSection.className = "webpage-content__section__subsection";
+    // var resultHeader = document.createElement("h2");
+    // resultHeader.appendChild(document.createTextNode("Results"));
+    // var resultSection = document.createElement("section");
+    // resultSection.className = "webpage-content__section__subsection";
 
     // var checkButton = document.createElement("input");
     // checkButton.type = "button";
     // checkButton.value = "Check Answers";
     // checkButton.addEventListener("click", checkAnswers);
 
-    var returnSelectButton = document.createElement("input");
-    returnSelectButton.type = "button";
-    returnSelectButton.value = "return to selectscreen";
-    returnSelectButton.addEventListerner("click", renderSelection());
+    var buttonSection = document.createElement("section");
+    buttonSection.className = "webpage-content__section__subsection";
 
-    if(k < topicArray[i][j].length - 1)
-    {
-        var nextButton = document.createElement("input");
-        nextButton.type = "button";
-        nextButton.value = "Next Question";
-        nextButton.addEventListener("click", function(i, j, k) {renderQuiz(i, j, k + 1);});
-        resultSection.appendChild(nextButton);
-        resultSection.appendChild(document.createElement("br"));
-    }
     if(k > 0)
     {
         var previousButton = document.createElement("input");
         previousButton.type = "button";
         previousButton.value = "Previous Question";
-        previousButton.addEventListener("click", renderQuiz(i, j, k - 1));
-        resultSection.appendChild(previousButton);
-        resultSection.appendChild(document.createElement("br"));
+        previousButton.addEventListener("click", function(i, j, k) {renderQuiz(i, j, k - 1);});
+        buttonSection.appendChild(previousButton);
     }
+    if(k < topicArray[i][0][j].length - 1)
+    {
+        var nextButton = document.createElement("input");
+        nextButton.type = "button";
+        nextButton.value = "Next Question";
+        nextButton.addEventListener("click", function(i, j, k) {renderQuiz(i, j, k + 1);});
+        buttonSection.appendChild(nextButton);
+    }
+    buttonSection.appendChild(document.createElement("br"));
+    
+    var returnSelectButton = document.createElement("input");
+    returnSelectButton.type = "button";
+    returnSelectButton.value = "Return to Selectscreen";
+    returnSelectButton.addEventListerner("click", function() {renderSelection();});
 
-    var finishButton = document.createElement("input");
-    finishButton.type = "button";
-    finishButton.value = "Finish Quiz";
-    finishButton.addEventListener("click", checkAnswers(givenAnswers));
+    // var finishButton = document.createElement("input");
+    // finishButton.type = "button";
+    // finishButton.value = "Finish Quiz";
+    // finishButton.addEventListener("click", function(givenAnswers) {checkAnswers(givenAnswers);});
 
-    resultSection.appendChild(returnSelectButton);
-    resultSection.appendChild(document.createElement("br"));
-    resultSection.appendChild(finishButton);
+    buttonSection.appendChild(returnSelectButton);
+    // resultSection.appendChild(document.createElement("br"));
+    // resultSection.appendChild(finishButton);
 
-    quizSection.appendChild(resultHeader);
-    quizSection.appendChild(resultSection);
+    // quizSection.appendChild(resultHeader);
+    // quizSection.appendChild(resultSection);
+    quizSection.appendChild(buttonSection);
 }
 
 //The answers will be checked here, when the corresponding button has been clicked
