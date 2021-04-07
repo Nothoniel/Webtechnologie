@@ -154,6 +154,7 @@ class ordering extends excercise
             orderLabel.id = "q" + i + "label" + k;
             orderLabel.appendChild(document.createTextNode(this.answers[k]));
             questionSubSection.appendChild(orderLabel);
+            var currentQuestion = this;
 
             //At the first element, we do not want an up-button
             if(k > 0)
@@ -161,7 +162,7 @@ class ordering extends excercise
                 var answersContainer = document.createElement("input");
                 answersContainer.type = "button";
                 answersContainer.value = "^";
-                answersContainer.addEventListener("click", function() { this.changeOrder(k - 1, i); });
+                answersContainer.addEventListener("click", function() { currentQuestion.changeOrder(k - 1, i); });
                 questionSubSection.appendChild(answersContainer);
             }
 
@@ -171,7 +172,7 @@ class ordering extends excercise
                 var answersContainer = document.createElement("input");
                 answersContainer.type = "button";
                 answersContainer.value = "v";
-                answersContainer.addEventListener("click", function() { this.changeOrder(k, i); });
+                answersContainer.addEventListener("click", function() { currentQuestion.changeOrder(k, i); });
                 questionSubSection.appendChild(answersContainer);
                 questionSubSection.appendChild(document.createElement("br"));
             }
