@@ -37,9 +37,9 @@ app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(express.json({limit: '100mb'}));
 
 //called every time an http request is received, like a starting file can be set  
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'./public/index.html'));
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname,'./public/index.html'));
+// });
 
 //authentication of user
 app.post('/login', (req, res) => {
@@ -65,7 +65,8 @@ app.post('/login', (req, res) => {
                  console.log(foundUser);
                  //comparing password of inserted user with that of the found user
                  if (req.body.password == foundUser.password) {
-                     console.log('successful log in');   
+                     console.log('successful log in');
+                    return res.end();   
                  } else {
                      res.flash('not matching');  
                      console.log('unsuccessful log in');

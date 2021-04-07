@@ -22,18 +22,16 @@ function convertToJSON({formData}) {
             'Content-Type': 'application/json',
             "Accept": "application/json"
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
     };
     var convertedData = fetch(url, options);
 
     //redirects the page
-    convertedData.then(convertedData =>  { 
-        if(convertedData.response){
-            options["redirect"] = window.location.replace("https://www.google.nl/"); 
-        } else{
-            alert("Invalid Username or Password");
-        }
-    }) 
+    // convertedData.then(convertedData =>  { 
+    //     if(convertedData.response){
+    //         options.redirect = 'assessment.html'; 
+    //     }
+    // });
     return convertedData.json();
 }   
 
