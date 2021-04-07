@@ -15,18 +15,26 @@ else {
 //converts it to JSON and post the data
 function convertToJSON({formData}) {
     //converts it to a plain object
-    const data = Object.fromEntries(formData.entries());
-    const options = {
+    var data = Object.fromEntries(formData.entries());
+    var options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             "Accept": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
     };
-    const response = fetch(url, options);
+    var convertedData = fetch(url, options);
 
-    return response.json();
+    //redirects the page
+    convertedData.then(convertedData =>  { 
+        if(convertedData.response){
+            options["redirect"] = window.location.replace("https://www.google.nl/"); 
+        } else{
+            alert("Invalid Username or Password");
+        }
+    }) 
+    return convertedData.json();
 }   
 
 //Login or Register data 

@@ -65,7 +65,7 @@ app.post('/login', (req, res) => {
                  console.log(foundUser);
                  //comparing password of inserted user with that of the found user
                  if (req.body.password == foundUser.password) {
-                     console.log('successful log in');     
+                     console.log('successful log in');   
                  } else {
                      res.flash('not matching');  
                      console.log('unsuccessful log in');
