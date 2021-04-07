@@ -33,12 +33,10 @@ class excercise
         var questionHeader = document.createElement("h2");
         questionHeader.appendChild(document.createTextNode("Question" + (i+1)));
         var questionSubSection = document.createElement("section");
-
         questionSubSection.setAttribute("class", "webpage-content__section__subsection");
 
         var questionContainer = document.createElement("p");
-        questionContainer.appendChild(document.createTextNode(this.question))
-
+        questionContainer.appendChild(document.createTextNode(this.question));
         questionSubSection.appendChild(questionContainer);
         
         quizSection.appendChild(questionHeader);
@@ -77,13 +75,13 @@ class multipleChoice extends excercise
     }
 }
 
-//multichoice are multiplechoice questions were multiple correct answers have to be selected
 class multiChoice extends excercise
 {
     constructor(question, answers, orderType, amount)
     {
         super(question, answers, orderType);
         this.amount = amount;
+        //multiChoice differentiates itself from multipleChoice by having a given amount of multiple correct answers, which all have to be given by the user
         this.correctAnswer = answers.slice(0, amount);
     }
 
@@ -108,6 +106,7 @@ class multiChoice extends excercise
         }
     }
 
+    //Whether all of the correct answers are given by the users is checked upon here
     checkAnswer = i =>
     {
         var answerCorrect = true;
@@ -130,6 +129,7 @@ class open extends excercise
         questionSubSection.appendChild(answersContainer);
     }
 
+    //Regarding open question, all of the values withing the array of answers are deemed correct
     checkAnswer = i => this.answers.indexOf(document.getElementsByName("answersOfQ" + i)[0].value) >= 0;
 }
 
@@ -154,6 +154,9 @@ class ordering extends excercise
             orderLabel.id = "q" + i + "label" + k;
             orderLabel.appendChild(document.createTextNode(this.answers[k]));
             questionSubSection.appendChild(orderLabel);
+
+            /*If we don't declare this variable as this, and use this.changeOrder(), 
+            it will use this in a way that is not intended, which is fixed by first declaring it to be used as a variable*/
             var currentQuestion = this;
 
             //At the first element, we do not want an up-button
@@ -189,7 +192,7 @@ class ordering extends excercise
         elem.replaceChild(document.createTextNode(this.answers[i + 1]), elem.childNodes[0]);
     }
 
-    //When the button to finalize the quiz has been pressed down, whether the given answer of this question was right is determined here
+    //When the button to check the given answer has been pressed down, whether it was right is determined here
     checkAnswer = () =>
     {
         var answerCorrect = true;
@@ -199,7 +202,7 @@ class ordering extends excercise
     }
 }
 
-//In this objectarray the questions are put in
+//Here we define all of the quizzes, which will hereafter be put in the corresponding topicArray's array of quizzes
 let quiz1 = 
 [
     new multipleChoice(
@@ -238,7 +241,7 @@ let quiz1 =
         sortAlphabetically,
         2
     )
-]
+];
 
 let quiz2 =
 [
@@ -313,10 +316,6 @@ let quiz3 =
         ]
     )
 ];
-//The first layer consisted of a combination of HTML5, JavaScript and CSS
-
-//FireFox OS was an open-source operating system for mobile phones being developed by the Mozilla Project.
-//It has since been cancelled. It was built using 3 layers: the applicationlayer, Open Web Platform Interface and the infrastucturelayer
 
 let quiz4 =
 [
@@ -336,7 +335,6 @@ let quiz4 =
     ),
     new open(
         "What was the original name of Firefox?",
-        //In this array of answer we have assorted all the answers which are deemed correct
         [
             "Phoenix",
             "phoenix",
@@ -346,7 +344,6 @@ let quiz4 =
     ),
     new ordering(
         "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
-        //in the ordering question, the order it was put in, is the correct order
         [
             "Google Chrome",
             "Safari",
@@ -356,6 +353,8 @@ let quiz4 =
     )
 ];
 
+
+//In the topicArray we store the corresponding quizzes, the Name of the topic and a string of the link to page where the information about the topic can be found
 var topicArray =
 [
     [[quiz1, quiz2], "GoogleChrome", "page1-google-chrome.html"],
@@ -364,9 +363,11 @@ var topicArray =
 
 renderSelection = () =>
 {
+    //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
         quizSection.removeChild(quizSection.firstChild);
 
+    //This loop is run to make a seperate section for each of the topics
     for(let i = 0; i < topicArray.length; i++)
     {
         var topicHeader = document.createElement("h2");
@@ -374,16 +375,20 @@ renderSelection = () =>
         var topicSection = document.createElement("section");
         topicSection.className = "webpage-content__section__subsection";
 
+        //This loop is run to make seperate buttons for each of the topic's quizzes
         for(let j = 0; j < topicArray[i][0].length; j++)
         {
             var selectButton = document.createElement("input");
             selectButton.type = "button";
             selectButton.value = topicArray[i][1] + (j+1);
+            //here we give the third variable the value of 0, making it so the quiz will start at the first question
             selectButton.addEventListener("click", function() {renderQuiz(i, j, 0);});
 
             topicSection.appendChild(selectButton);
             topicSection.appendChild(document.createElement("br"));
         }
+
+        //Here we make the hyperlink to the corresponding topic's information, which is stored in the topicArray
         var description = document.createElement("a");
         description.href = topicArray[i][2];
         description.appendChild(document.createTextNode("You can find the corresponding theory here!"));
@@ -397,6 +402,7 @@ renderSelection = () =>
 //The remaining interface of the quiz is generated here  
 renderQuiz = (i, j, k) =>
 {
+    //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
         quizSection.removeChild(quizSection.firstChild);
     
@@ -487,4 +493,5 @@ checkAnswers = (i, j) =>
     return quizResults;
 }
 
+//When the page is loaded, the selectionscreen will be loaded.
 quizSection.addEventListener("onload", renderSelection());
