@@ -52,7 +52,7 @@ class multipleChoice extends excercise
     renderExcercise(i)
     {
         super.renderExcercise(i);
-        var questionSubSection = document.getElementByClassName("webpage-content__section__subsection");
+        var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
         for(let k = 0; k < this.answers.length; k++)
         {
             var answersContainer = document.createElement("input");
@@ -90,7 +90,7 @@ class multiChoice extends excercise
     renderExcercise(i)
     {
         super.renderExcercise(i);
-        var questionSubSection = document.getElementByClassName("webpage-content__section__subsection");
+        var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
         for(let k = 0; k < this.answers.length; k++)
         {
             var answersContainer = document.createElement("input");
@@ -126,7 +126,7 @@ class open extends excercise
         answersContainer.name = "answersOfQ" + i;
         answersContainer.type = "text";
 
-        var questionSubSection = document.getElementByClassName("webpage-content__section__subsection");
+        var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
         questionSubSection.appendChild(answersContainer);
     }
 
@@ -145,7 +145,7 @@ class ordering extends excercise
     renderExcercise(i)
     {
         super.renderExcercise(i);
-        var questionSubSection = document.getElementByClassName("webpage-content__section__subsection");
+        var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
         for(let k = 0; k < this.answers.length; k++)
         {
             //At all the elements, we want a label with the content it represents
@@ -199,7 +199,7 @@ class ordering extends excercise
 }
 
 //In this objectarray the questions are put in
-var quiz1 = 
+let quiz1 = 
 [
     new multipleChoice(
         "What year was Google Chrome first publicly on Windows?",
@@ -214,7 +214,7 @@ var quiz1 =
     ),
     new open(
         //maybe we need to add a description of the logo with the image, to make this question more userfriendly
-        "What is the Color of the middle cirkle of the Google Chrome Logo?",
+        "What is the Color of the middle circle of the Google Chrome Logo?",
         [
             "Blue",
             "blue",
@@ -239,7 +239,7 @@ var quiz1 =
     )
 ]
 
-var quiz2 =
+let quiz2 =
 [
     new open(
         "What species of dinosaurs is controlled by the user when playing the dinosaurgame?",
@@ -279,7 +279,7 @@ var quiz2 =
     )
 ];
 
-var quiz3 =
+let quiz3 =
 [
     new multipleChoice(
         "What year was Firefox 1.0 released?",
@@ -317,7 +317,7 @@ var quiz3 =
 //FireFox OS was an open-source operating system for mobile phones being developed by the Mozilla Project.
 //It has since been cancelled. It was built using 3 layers: the applicationlayer, Open Web Platform Interface and the infrastucturelayer
 
-var quiz4 =
+let quiz4 =
 [
     new multiChoice(
         "Using which of the following 3 layers was FireFox Os built?",
@@ -378,7 +378,7 @@ renderSelection = () =>
             var selectButton = document.createElement("input");
             selectButton.type = "button";
             selectButton.value = topicArray[i][1] + (j+1);
-            selectButton.addEventListener("click", function(i, j) {renderQuiz(i, j, 0);});
+            selectButton.addEventListener("click", function() {renderQuiz(i, j, 0);});
 
             topicSection.appendChild(selectButton);
             topicSection.appendChild(document.createElement("br"));
@@ -424,7 +424,7 @@ renderQuiz = (i, j, k) =>
         var previousButton = document.createElement("input");
         previousButton.type = "button";
         previousButton.value = "Previous Question";
-        previousButton.addEventListener("click", function(i, j, k) {renderQuiz(i, j, k - 1);});
+        previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1);});
         buttonSection.appendChild(previousButton);
     }
     if(k < topicArray[i][0][j].length - 1)
@@ -432,7 +432,7 @@ renderQuiz = (i, j, k) =>
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "Next Question";
-        nextButton.addEventListener("click", function(i, j, k) {renderQuiz(i, j, k + 1);});
+        nextButton.addEventListener("click", function() {renderQuiz(i, j, k + 1);});
         buttonSection.appendChild(nextButton);
     }
     buttonSection.appendChild(document.createElement("br"));
@@ -440,7 +440,7 @@ renderQuiz = (i, j, k) =>
     var returnSelectButton = document.createElement("input");
     returnSelectButton.type = "button";
     returnSelectButton.value = "Return to Selectscreen";
-    returnSelectButton.addEventListerner("click", function() {renderSelection();});
+    returnSelectButton.addEventListener("click", function() {renderSelection();});
 
     // var finishButton = document.createElement("input");
     // finishButton.type = "button";
@@ -457,7 +457,7 @@ renderQuiz = (i, j, k) =>
 }
 
 //The answers will be checked here, when the corresponding button has been clicked
-checkAnswers = () =>
+checkAnswers = (i, j) =>
 {
     // resultSection.appendChild(document.createElement("br"));
     // resultSection.appendChild(document.createTextNode("Your results will be displayed here."));
@@ -468,13 +468,14 @@ checkAnswers = () =>
     //remove all children except the "Check Answers"-button
     for (let i = resultSection.childNodes.length - 1; i > 0; i--)
         resultSection.removeChild(resultSection.childNodes[i]);
+
     //count the number of correctly answered questions
     var numberCorrect = 0;
     for(result of quizResults)
         if (result) numberCorrect++;
 
     resultSection.appendChild(document.createElement("br"));
-    resultSection.appendChild(document.createTextNode("You have answered " + numberCorrect + " out of " + questions.length + " questions correctly."));
+    resultSection.appendChild(document.createTextNode("You have answered " + numberCorrect + " out of " + topicArray[i][0][j].length + " questions correctly."));
 
     for (let i = 0; i < quizResults.length; i++)
     {
