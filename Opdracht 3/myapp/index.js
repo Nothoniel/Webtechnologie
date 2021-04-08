@@ -37,9 +37,23 @@ app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(express.json({limit: '100mb'}));
 
 //called every time an http request is received, like a starting file can be set  
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname,'./public/index.html'));
-// });
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname,'./public/index.html'));
+        //user sql query
+        let sql = `SELECT UserName username,
+        Password password,
+        FirstName firstname,
+        LastName lastname  
+ FROM User`;
+//accesing database
+getData(sql).then(results => dataArray = results);
+
+//prints out the data
+setTimeout(function(){
+console.log(dataArray);
+},10);
+
+});
 
 //authentication of user
 app.post('/login', (req, res) => {
