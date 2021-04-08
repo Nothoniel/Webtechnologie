@@ -68,7 +68,7 @@ app.post('/login', (req, res) => {
                  //comparing password of inserted user with that of the found user
                  if (req.body.password == foundUser.password) {
                      console.log('successful log in');
-                     //foundUser.username
+                     res.send(foundUser.username);
                      //foundUser.firstname
                      //foundUser.lastname
                     return res.end();   

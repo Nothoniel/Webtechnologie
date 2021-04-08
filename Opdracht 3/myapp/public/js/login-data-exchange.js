@@ -28,6 +28,8 @@ function convertToJSON({formData}) {
 
     //redirects the webiquiz page
     convertedData.then( window.location.href  = 'assessment.html')
+    convertedData.then
+
 
     // convertedData.json();
 }   
