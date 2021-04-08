@@ -26,13 +26,10 @@ function convertToJSON({formData}) {
     };
     var convertedData = fetch(url, options);
 
-    //redirects the page
-    // convertedData.then(convertedData =>  { 
-    //     if(convertedData.response){
-    //         options.redirect = 'assessment.html'; 
-    //     }
-    // });
-    return convertedData.json();
+    //redirects the webiquiz page
+    convertedData.then( window.location.href  = 'assessment.html')
+
+    // convertedData.json();
 }   
 
 //Login or Register data 

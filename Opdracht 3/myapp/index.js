@@ -45,7 +45,9 @@ app.use(express.json({limit: '100mb'}));
 app.post('/login', (req, res) => {
     //user sql query
     let sql = `SELECT UserName username,
-                           Password password  
+                           Password password,
+                           FirstName firstname,
+                           LastName lastname  
                     FROM User`;
     //accesing database
     getData(sql).then(results => dataArray = results);
@@ -66,6 +68,9 @@ app.post('/login', (req, res) => {
                  //comparing password of inserted user with that of the found user
                  if (req.body.password == foundUser.password) {
                      console.log('successful log in');
+                     //foundUser.username
+                     //foundUser.firstname
+                     //foundUser.lastname
                     return res.end();   
                  } else {
                      res.flash('not matching');  
