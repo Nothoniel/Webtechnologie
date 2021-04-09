@@ -24,12 +24,13 @@ function convertToJSON({formData}) {
         },
         body: JSON.stringify(data)
     };
-    var convertedData = fetch(url, options);
+    var response = fetch(url, options);
 
     //redirects the webiquiz page
-    convertedData.then( window.location.href  = 'assessment.html')
-    convertedData.then
-
+    //naming of the arrow function does not matter, it always references to the result before dot
+    //response.then( window.location.href  = 'assessment.html')
+    //response.then(response => reponse.json())  
+                // .then(data=>console.log(data));
 
     // convertedData.json();
 }   

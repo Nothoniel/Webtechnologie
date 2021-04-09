@@ -75,7 +75,7 @@ app.post('/login', (req, res) => {
          console.log('Attempting to log in');   
          try {
              //compares the username of db with the inserted one and stores the found user in a variable
-             let foundUser = dataArray.find( (data) => req.body.username === data.username);
+             let foundUser = dataArray.find( (dataArray) => req.body.username === dataArray.username);
              if (foundUser) {
                  console.log('user found');
                  console.log(foundUser);
