@@ -45,8 +45,23 @@ app.get('/', (req, res) => {
 
 //display of startpage of assesment system
 app.post('/start', (req, res) => {
+
+    //do something with the received data from client
+    //as example printing it out
     console.log(req.body.getData);
-    res.json(req.body);
+
+    //example 1: default
+    //rename the object and insertion of one or more values
+    const responseData = { 
+        page: req.body.getData
+    };
+    res.json(responseData);
+
+    //example 3: array of objects
+    // const responseData = [{ color: "yellow"},{ color: "green"} ];
+    // res.json(responseData);
+
+
 });
 
 //authentication of user
