@@ -15,15 +15,14 @@ function sendRequest(getData){
     };
     var response = fetch("/start", options);
         response.then(res => res.json())  
-                .then(data=> console.log(  teststring = data.getData) );   // Getdata : "Startpage" // auto.color  
+                .then(data=> console.log(  teststring = data.getData) );    
                 //data.Getdata 
     console.log(car);            
     console.log(car.color);
     // setTimeout(async function () {
     //     console.log(teststring);
     //     },3000);
-
-    return teststring;               
+           
 }
 
 
