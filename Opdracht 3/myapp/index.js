@@ -8,6 +8,7 @@ const fetch = require('node-fetch');
 var serveStatic = require('serve-static');
 let getData = require('./data');
 let insertData = require('./insert_data');
+const cookieParser = require('cookie-parser');
 
 var dataArray;
 const PORT=8046; 
@@ -29,6 +30,12 @@ const PORT=8046;
 
 //flash messages are possible
 // app.use(flash());
+app.use(cookieParser());
+app.use(session(
+    {
+    secret: 'mokergeheim',
+    })
+);
 
 app.use(express.urlencoded({extended : false}));
 
@@ -72,7 +79,7 @@ app.post('/login', (req, res) => {
         },10);
 
     setTimeout(async function () {
-         console.log('Attempting to log in');   
+         console.log('Attempting to log in, session:' + req.session.id);   
          try {
              //compares the username of db with the inserted one and stores the found user in a variable
              let foundUser = dataArray.find( (dataArray) => req.body.username === dataArray.username);
@@ -82,6 +89,7 @@ app.post('/login', (req, res) => {
                  //comparing password of inserted user with that of the found user
                  if (req.body.password == foundUser.password) {
                      console.log('successful log in');
+                     req.session.user = foundUser;
                      res.send(foundUser.username);
                      //foundUser.firstname
                      //foundUser.lastname
