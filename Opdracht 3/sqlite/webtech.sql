@@ -1,27 +1,30 @@
 /* table that containts all quizzes*/
 CREATE TABLE IF NOT EXISTS Topic (
+	`TopicID` varchar(6) NOT NULL,
 	`TopicTitle` varchar(20) NOT NULL, 
 	`DescriptionLink` varchar(20) NOT NULL,
 	`LinkName` varchar(20) NOT NULL,
-    CONSTRAINT PK_TopicTitle PRIMARY KEY (TopicTitle)
+    CONSTRAINT PK_TopicTitle PRIMARY KEY (TopicID)
 );
 
 /* inserting data into Topic table*/
-INSERT INTO Topic (TopicTitle, DescriptionLink, LinkName) VALUES('GoogleChrome', 'page1-google-chrome.html', 'Information about the correspondig theory!');
-INSERT INTO Topic (TopicTitle, DescriptionLink, LinkName) VALUES('MozillaFireFox', 'page2-mozilla-firefox.html', 'Information about the correspondig theory!');
+INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ01', 'GoogleChrome', 'page1-google-chrome.html', 'Information about the correspondig theory(Google Chrome)!');
+INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ02', 'MozillaFireFox', 'page2-mozilla-firefox.html', 'Information about the correspondig theory!(Mozilla FireFox)');
 
 
 CREATE TABLE IF NOT EXISTS Quiz (
+	`TopicID` varchar(6) NOT NULL,
 	`QuizID` varchar(6) NOT NULL, 
 	`QuizTitle` varchar(20) NOT NULL,
-    CONSTRAINT PK_QuizID PRIMARY KEY (QuizID)
+    CONSTRAINT PK_QuizID PRIMARY KEY (QuizID),
+	CONSTRAINT FK_QuizID FOREIGN KEY (TopicID ) REFERENCES Topic(TopicID)
 );
 
 /* inserting data into Quiz table*/
-INSERT INTO Quiz (QuizID, QuizTitle) VALUES('P1DQ01', 'GoogleChrome1');
-INSERT INTO Quiz (QuizID, QuizTitle) VALUES('P1DQ02', 'GoogleChrome2');
-INSERT INTO Quiz (QuizID, QuizTitle) VALUES('P1DQ03', 'MozillaFireFox1');
-INSERT INTO Quiz (QuizID, QuizTitle) VALUES('P1DQ04', 'FireFox2');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ01', 'P1DQ01', 'GoogleChrome1');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ01', 'P1DQ02', 'GoogleChrome2');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ02', 'P1DQ03', 'MozillaFireFox1');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ02', 'P1DQ04', 'FireFox2');
 
 /*table that contains all the questions of the assesment system */
 CREATE TABLE IF NOT EXISTS Question (

@@ -39,9 +39,9 @@ app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(express.json({limit: '100mb'}));
 
 //called every time an http request is received, like a starting file can be set  
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'./public/index.html'));
-});
+// app.get('/', (req, res) => {
+//     res.send('Node App is running');
+// });
 
 //ajax
 app.get('ajax.js', function(req, res) {
@@ -54,17 +54,34 @@ app.get('ajax.js', function(req, res) {
 
 //display of startpage of assesment system
 app.post('/start', (req, res) => {
+    let sql = `SELECT TopicTitle topictitle,
+                      DescriptionLink link,
+                      LinkName description,
+                      QuizTitle quiztitle
+                    FROM Topic
+                    INNER JOIN Quiz ON Quiz.TopicID = Topic.TopicID;`;
+    //accesing database
+    getData(sql).then(results => dataArray = results);
+
+    setTimeout(function(){
+        console.log(dataArray);
+        },10);
+
+    setTimeout(async function () {
+         const responseData = dataArray;
+         res.json(responseData);
+    },15);    
 
     //do something with the received data from client
     //as example printing it out
-    console.log(req.body.getData);
+    // console.log(req.body.getData);
 
     //example 1: default
     //rename the object and insertion of one or more values
-    const responseData = { 
-        page: req.body.getData
-    };
-    res.json(responseData);
+    // const responseData = { 
+    //     page: req.body.getData
+    // };
+    // res.json(responseData);
 
     //example 3: array of objects
     // const responseData = [{ color: "yellow"},{ color: "green"} ];
@@ -93,7 +110,7 @@ app.post('/login', (req, res) => {
          console.log('Attempting to log in');   
          try {
              //compares the username of db with the inserted one and stores the found user in a variable
-             let foundUser = dataArray.find( (dataArray) => req.body.username === dataArray.username);
+             let foundUser = dataArray.find( (data) => req.body.username === data.username);
              if (foundUser) {
                  console.log('user found');
                  console.log(foundUser);
