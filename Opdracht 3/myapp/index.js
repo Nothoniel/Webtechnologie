@@ -32,6 +32,8 @@ const PORT=8046;
 
 app.use(express.urlencoded({extended : false}));
 
+app.set('json spaces', 10);
+
 // retrieving  files
 app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(express.json({limit: '100mb'}));
@@ -39,20 +41,12 @@ app.use(express.json({limit: '100mb'}));
 //called every time an http request is received, like a starting file can be set  
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'./public/index.html'));
-        //user sql query
-        let sql = `SELECT UserName username,
-        Password password,
-        FirstName firstname,
-        LastName lastname  
- FROM User`;
-//accesing database
-getData(sql).then(results => dataArray = results);
+});
 
-//prints out the data
-setTimeout(function(){
-console.log(dataArray);
-},10);
-
+//display of startpage of assesment system
+app.post('/start', (req, res) => {
+    console.log(req.body.getData);
+    res.json(req.body);
 });
 
 //authentication of user
