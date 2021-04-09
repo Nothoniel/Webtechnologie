@@ -217,7 +217,6 @@ let quiz1 =
         sortNumerically
     ),
     new open(
-        //maybe we need to add a description of the logo with the image, to make this question more userfriendly
         "What is the Color of the middle circle of the Google Chrome Logo?",
         [
             "Blue",
@@ -413,16 +412,6 @@ renderQuiz = (i, j, k) =>
     //     quizResults.push(questions[i].checkAnswer(i));
     // var givenAnswers = [];
 
-    // var resultHeader = document.createElement("h2");
-    // resultHeader.appendChild(document.createTextNode("Results"));
-    // var resultSection = document.createElement("section");
-    // resultSection.className = "webpage-content__section__subsection";
-
-    // var checkButton = document.createElement("input");
-    // checkButton.type = "button";
-    // checkButton.value = "Check Answers";
-    // checkButton.addEventListener("click", checkAnswers);
-
     var buttonSection = document.createElement("section");
     buttonSection.className = "webpage-content__section__subsection";
 
@@ -430,15 +419,23 @@ renderQuiz = (i, j, k) =>
     {
         var previousButton = document.createElement("input");
         previousButton.type = "button";
-        previousButton.value = "Previous Question";
+        previousButton.value = "<-";
         previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1);});
         buttonSection.appendChild(previousButton);
+    }
+    for(let l = 0; l < topicArray[i][0][j].length; l++)
+    {
+        var questionButton = document.createElement("input");
+        questionButton.type = "button";
+        questionButton.value = l + 1;
+        questionButton.addEventListener("click", function() {renderQuiz(i, j, l)});
+        buttonSection.appendChild(questionButton);
     }
     if(k < topicArray[i][0][j].length - 1)
     {
         var nextButton = document.createElement("input");
         nextButton.type = "button";
-        nextButton.value = "Next Question";
+        nextButton.value = "->";
         nextButton.addEventListener("click", function() {renderQuiz(i, j, k + 1);});
         buttonSection.appendChild(nextButton);
     }
@@ -448,50 +445,52 @@ renderQuiz = (i, j, k) =>
     returnSelectButton.type = "button";
     returnSelectButton.value = "Return to Selectscreen";
     returnSelectButton.addEventListener("click", function() {renderSelection();});
+    
+    var checkButton = document.createElement("input");
+    checkButton.id = "Check";
+    checkButton.type = "button";
+    checkButton.value = "Check Answers";
+    checkButton.addEventListener("click", function(){checkAnswers(i, j, k)});
 
     // var finishButton = document.createElement("input");
     // finishButton.type = "button";
     // finishButton.value = "Finish Quiz";
-    // finishButton.addEventListener("click", function(givenAnswers) {checkAnswers(givenAnswers);});
+    // finishButton.addEventListener("click", function() {finishQuiz();});
 
+    buttonSection.appendChild(checkButton);
     buttonSection.appendChild(returnSelectButton);
     // resultSection.appendChild(document.createElement("br"));
     // resultSection.appendChild(finishButton);
 
-    // quizSection.appendChild(resultHeader);
-    // quizSection.appendChild(resultSection);
     quizSection.appendChild(buttonSection);
 }
 
 //The answers will be checked here, when the corresponding button has been clicked
-checkAnswers = (i, j) =>
+checkAnswers = (i, j, k) =>
 {
-    // resultSection.appendChild(document.createElement("br"));
-    // resultSection.appendChild(document.createTextNode("Your results will be displayed here."));
+    var resultSection = document.createElement("section");
+    resultSection.className = "webpage-content__section__subsection";
 
-    var questionSubsections = document.getElementsByClassName("webpage-content__section__subsection");
-    var resultSection = questionSubsections[questionSubsections.length - 1];
-
-    //remove all children except the "Check Answers"-button
-    for (let i = resultSection.childNodes.length - 1; i > 0; i--)
-        resultSection.removeChild(resultSection.childNodes[i]);
-
-    //count the number of correctly answered questions
-    var numberCorrect = 0;
-    for(result of quizResults)
-        if (result) numberCorrect++;
-
-    resultSection.appendChild(document.createElement("br"));
-    resultSection.appendChild(document.createTextNode("You have answered " + numberCorrect + " out of " + topicArray[i][0][j].length + " questions correctly."));
-
-    for (let i = 0; i < quizResults.length; i++)
-    {
-        resultSection.appendChild(document.createElement("br"));
-        resultSection.appendChild(document.createTextNode("Your answer for question " + (i + 1) + " was " + (quizResults[i]?"correct":"incorrect")));
-    }
-
-    return quizResults;
+    var checkButton = document.getElementById("Check");
+    var buttonSection = document.getElementsByClassName("webpage-content__section__subsection")[1];
+    buttonSection.removeChild(checkButton);
+    resultSection.appendChild(document.createTextNode("Your answer for this question is " + (topicArray[i][0][j][k].checkAnswer(k)?"correct":"incorrect")));
+    quizSection.appendChild(resultSection);
 }
+
+//Dit Soort shit moet je doen voor een nieuwe FinishQuiz Screen
+/////////////////////////////////////////////////////////
+// finishQuiz = () =>
+// {
+//     while(quizSection.firstChild)
+//         quizSection.removeChild(quizSection.firstChild);
+
+//     // //count the number of correctly answered questions
+//     // var numberCorrect = 0;
+//     // for(result of quizResults)
+//     //     if (result) numberCorrect++;
+//     //En daarna moet je shit nog displayen
+// }
 
 //When the page is loaded, the selectionscreen will be loaded.
 quizSection.addEventListener("onload", renderSelection());
