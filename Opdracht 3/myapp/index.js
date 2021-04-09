@@ -43,6 +43,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'./public/index.html'));
 });
 
+//ajax
+app.get('ajax.js', function(req, res) {
+    //do something with request
+    console.log(req.query.fname, req.query.lname)
+    //sending response back
+    res.send("test");
+})
+
+
 //display of startpage of assesment system
 app.post('/start', (req, res) => {
 
