@@ -1,8 +1,9 @@
 var getData='';
-var teststring;
+// var teststring;
 var car = {color : "yellow"};
 
 function sendRequest(getData){
+    var teststring;
     var data = {getData};
     var options = {
         method: 'POST',
@@ -14,21 +15,26 @@ function sendRequest(getData){
     };
     var response = fetch("/start", options);
         response.then(res => res.json())  
-                .then(data=> console.log(data.getData) );   // Getdata : "Startpage" // auto.color  
+                .then(data=> console.log(  teststring = data.getData) );   // Getdata : "Startpage" // auto.color  
                 //data.Getdata 
     console.log(car);            
-    console.log(car.color);                    
+    console.log(car.color);
+    // setTimeout(async function () {
+    //     console.log(teststring);
+    //     },3000);
+
+    return teststring;               
 }
 
 
 //function 
-// setTimeout(async function test (teststring){
-//   console.log(test);
-// } ,3000);
+
 
 function getStart() {
     getData ='Startpage';
-    sendRequest(getData);
+    var teststring = sendRequest(getData);
+    console.log(teststring);
+
 }
 
 
