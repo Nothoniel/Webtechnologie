@@ -475,6 +475,14 @@ checkAnswers = (i, j, k) =>
     var buttonSection = document.getElementsByClassName("webpage-content__section__subsection")[1];
     buttonSection.removeChild(checkButton);
     resultSection.appendChild(document.createTextNode("Your answer for this question is " + (topicArray[i][0][j][k].checkAnswer(k)?"correct":"incorrect")));
+    if(!topicArray[i][0][j][k].checkAnswer(k))
+    {
+        var linkInformation = document.createElement("a");
+        linkInformation.href = topicArray[i][2];
+        linkInformation.appendChild(document.createTextNode("You can find the corresponding theory here!"));
+        resultSection.appendChild(document.createElement("br"));
+        resultSection.appendChild(linkInformation);
+    }
     quizSection.appendChild(resultSection);
 }
 
