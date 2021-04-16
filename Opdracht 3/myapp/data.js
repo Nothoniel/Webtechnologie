@@ -18,12 +18,12 @@ function getData(sql) {
         }); 
 
         //closing the connection
-        db.close((error) => {
-            if (error) {
-            console.error(error.message);
-            }
-            console.log('Close the database connection.');
-        }); 
+        // db.close((error) => {
+        //     if (error) {
+        //     console.error(error.message);
+        //     }
+        //     console.log('Close the database connection.');
+        // }); 
     })
 }
 

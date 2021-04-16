@@ -43,29 +43,22 @@ app.use(express.json({limit: '100mb'}));
 //     res.send('Node App is running');
 // });
 
-//ajax
-app.get('ajax.js', function(req, res) {
-    //do something with request
-    console.log(req.query.fname, req.query.lname)
-    //sending response back
-    res.send("test");
-})
-
 
 //display of startpage of assesment system
 app.get('/start', (req, res) => {
     let sql = `SELECT TopicTitle topictitle,
                       DescriptionLink link,
                       LinkName description,
-                      QuizTitle quiztitle
+                      QuizTitle quiztitle,
+                      QuizID quizid
                     FROM Topic
                     INNER JOIN Quiz ON Quiz.TopicID = Topic.TopicID;`;
     //accesing database
     getData(sql).then(results => dataArray = results);
 
-    setTimeout(function(){
-        console.log(dataArray);
-        },10);
+    // setTimeout(function(){
+    //     console.log(dataArray);
+    //     },10);
 
     setTimeout(async function () {
          const responseData = dataArray;
@@ -88,6 +81,10 @@ app.get('/start', (req, res) => {
     // res.json(responseData);
 
 
+});
+
+app.get('/question-display', (req, res) => {
+    res.send(req.query.questionid);
 });
 
 //authentication of user

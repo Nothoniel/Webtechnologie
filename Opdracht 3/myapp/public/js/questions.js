@@ -352,15 +352,7 @@ let quiz4 =
     )
 ];
 
-
-//In the topicArray we store the corresponding quizzes, the Name of the topic and a string of the link to page where the information about the topic can be found
-// var topicArray =
-// [
-//     [[quiz1, quiz2], "GoogleChrome", "page1-google-chrome.html"],
-//     [[quiz3, quiz4], "MozillaFireFox", "page2-mozilla-firefox.html"]
-// ];
-
-async function renderSelection(responseQuizTitle, responseDescription, topicArray) {
+async function renderSelection(responseQuizTitle, responseQuizID, responseDescription, topicArray) {
     //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
         quizSection.removeChild(quizSection.firstChild);
@@ -377,17 +369,23 @@ async function renderSelection(responseQuizTitle, responseDescription, topicArra
         for(let j = 0; j < topicArray[i][0].length; j++)
         {
             var selectButton = document.createElement("input");
+            selectButton.setAttribute("id", responseQuizID[j]);
+
             selectButton.type = "button";
             selectButton.value = responseQuizTitle[j];
 
             //the first 2 titles are removed, so that the last 2 buttons contain their corresponding titles.
             if(j==1) {
                 responseQuizTitle.splice(0,2);
+                responseQuizID.splice(0,2);
             }
 
             //here we give the third variable the value of 0, making it so the quiz will start at the first question
-            selectButton.addEventListener("click", function() {renderQuiz(i, j, 0, topicArray);});
+            // selectButton.addEventListener("click", function() {renderQuiz(i, j, 0, topicArray);});
 
+            selectButton.addEventListener("click", myQuestion);
+
+   
             topicSection.appendChild(selectButton);
             topicSection.appendChild(document.createElement("br"));
         }
