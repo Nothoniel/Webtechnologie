@@ -1,38 +1,53 @@
-var getData='';
-var teststring;
-//example 4, global variable
-var options;
-
-//example 4: placing the fetch in the desired function
-async function RespondFunction() { 
+//using the response to create a startpage
+async function RespondFunction(options) { 
     //fetching the data of the server
     var response = await fetch("/start", options);
-    var test1 = await response.json(); 
-    console.log(test1[0].topictitle);
-    function1(page);
+    var data = await response.json(); 
+    console.log(data);
+    console.log(data[0].quiztitle);
+
+    //quiz buttons
+    var responseQuizTitle = [];
+    var responseDescription = [];
+    for(let i = 0; i < data.length; i++)
+    {
+        responseQuizTitle.push(data[i].quiztitle);
+        if(i<2){
+            responseDescription.push(data[i].description);
+        }
+    }
+
+    var quiz = [quiz1, quiz2]; //array of quizes
+    var topicArray = []; //array of topics
+
+    //creating topics 
+    //insert every topic into an array
+    for(let i = 0; i < data.length; i++)
+    {
+        if (i % 2 == 0) { continue; }
+        var topic = [quiz, data[i].topictitle, data[i].link];
+        topicArray.push(topic); 
+    }
+
+    //Google chrome topic
+    // var topic1 = [[quiz1, quiz2], data[0].topictitle, data[0].link];
+
+    //Mozilla Firefox topic
+    // var topic2 = [[quiz3, quiz4], data[2].topictitle, data[2].link];
+
+    renderSelection(responseQuizTitle, responseDescription, topicArray);
 } 
 
-async function function1(page) {
-    console.log(page);
-}
-
 async function sendRequest() {
-    options = {
-        method: 'POST',
+    var options = {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
     };
-    RespondFunction();   
+    RespondFunction(options);   
 }
-
-async function getStart() {
-    // getData ='Startpage';
-    sendRequest();
-}
-
-
 
 //event on the submit button that determines that t
-window.addEventListener("load", getStart);
+window.addEventListener("load", sendRequest);

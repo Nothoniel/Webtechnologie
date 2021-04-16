@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS Quiz (
 INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ01', 'P1DQ01', 'GoogleChrome1');
 INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ01', 'P1DQ02', 'GoogleChrome2');
 INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ02', 'P1DQ03', 'MozillaFireFox1');
-INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ02', 'P1DQ04', 'FireFox2');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ02', 'P1DQ04', 'MozillaFireFox2');
 
 /*table that contains all the questions of the assesment system */
 CREATE TABLE IF NOT EXISTS Question (

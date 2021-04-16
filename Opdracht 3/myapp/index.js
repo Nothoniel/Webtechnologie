@@ -53,7 +53,7 @@ app.get('ajax.js', function(req, res) {
 
 
 //display of startpage of assesment system
-app.post('/start', (req, res) => {
+app.get('/start', (req, res) => {
     let sql = `SELECT TopicTitle topictitle,
                       DescriptionLink link,
                       LinkName description,

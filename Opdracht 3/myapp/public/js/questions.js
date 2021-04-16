@@ -354,14 +354,13 @@ let quiz4 =
 
 
 //In the topicArray we store the corresponding quizzes, the Name of the topic and a string of the link to page where the information about the topic can be found
-var topicArray =
-[
-    [[quiz1, quiz2], "GoogleChrome", "page1-google-chrome.html"],
-    [[quiz3, quiz4], "MozillaFireFox", "page2-mozilla-firefox.html"]
-];
+// var topicArray =
+// [
+//     [[quiz1, quiz2], "GoogleChrome", "page1-google-chrome.html"],
+//     [[quiz3, quiz4], "MozillaFireFox", "page2-mozilla-firefox.html"]
+// ];
 
-renderSelection = () =>
-{
+async function renderSelection(responseQuizTitle, responseDescription, topicArray) {
     //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
         quizSection.removeChild(quizSection.firstChild);
@@ -379,9 +378,15 @@ renderSelection = () =>
         {
             var selectButton = document.createElement("input");
             selectButton.type = "button";
-            selectButton.value = topicArray[i][1] + (j+1);
+            selectButton.value = responseQuizTitle[j];
+
+            //the first 2 titles are removed, so that the last 2 buttons contain their corresponding titles.
+            if(j==1) {
+                responseQuizTitle.splice(0,2);
+            }
+
             //here we give the third variable the value of 0, making it so the quiz will start at the first question
-            selectButton.addEventListener("click", function() {renderQuiz(i, j, 0);});
+            selectButton.addEventListener("click", function() {renderQuiz(i, j, 0, topicArray);});
 
             topicSection.appendChild(selectButton);
             topicSection.appendChild(document.createElement("br"));
@@ -390,7 +395,7 @@ renderSelection = () =>
         //Here we make the hyperlink to the corresponding topic's information, which is stored in the topicArray
         var description = document.createElement("a");
         description.href = topicArray[i][2];
-        description.appendChild(document.createTextNode("You can find the corresponding theory here!"));
+        description.appendChild(document.createTextNode(responseDescription[0]));
         topicSection.appendChild(description);
 
         quizSection.appendChild(topicHeader);
@@ -399,7 +404,7 @@ renderSelection = () =>
 }
 
 //The remaining interface of the quiz is generated here  
-renderQuiz = (i, j, k) =>
+renderQuiz = (i, j, k, topicArray) =>
 {
     //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
@@ -420,7 +425,7 @@ renderQuiz = (i, j, k) =>
         var previousButton = document.createElement("input");
         previousButton.type = "button";
         previousButton.value = "<-";
-        previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1);});
+        previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1,topicArray);});
         buttonSection.appendChild(previousButton);
     }
     for(let l = 0; l < topicArray[i][0][j].length; l++)
@@ -428,7 +433,7 @@ renderQuiz = (i, j, k) =>
         var questionButton = document.createElement("input");
         questionButton.type = "button";
         questionButton.value = l + 1;
-        questionButton.addEventListener("click", function() {renderQuiz(i, j, l)});
+        questionButton.addEventListener("click", function() {renderQuiz(i, j, l, topicArray)});
         buttonSection.appendChild(questionButton);
     }
     if(k < topicArray[i][0][j].length - 1)
@@ -436,7 +441,7 @@ renderQuiz = (i, j, k) =>
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "->";
-        nextButton.addEventListener("click", function() {renderQuiz(i, j, k + 1);});
+        nextButton.addEventListener("click", function() {renderQuiz(i, j, k + 1, topicArray);});
         buttonSection.appendChild(nextButton);
     }
     buttonSection.appendChild(document.createElement("br"));
@@ -450,7 +455,7 @@ renderQuiz = (i, j, k) =>
     checkButton.id = "Check";
     checkButton.type = "button";
     checkButton.value = "Check Answers";
-    checkButton.addEventListener("click", function(){checkAnswers(i, j, k)});
+    checkButton.addEventListener("click", function(){checkAnswers(i, j, k, topicArray)});
 
     // var finishButton = document.createElement("input");
     // finishButton.type = "button";
@@ -466,7 +471,7 @@ renderQuiz = (i, j, k) =>
 }
 
 //The answers will be checked here, when the corresponding button has been clicked
-checkAnswers = (i, j, k) =>
+checkAnswers = (i, j, k, topicArray) =>
 {
     var resultSection = document.createElement("section");
     resultSection.className = "webpage-content__section__subsection";
@@ -501,4 +506,4 @@ checkAnswers = (i, j, k) =>
 // }
 
 //When the page is loaded, the selectionscreen will be loaded.
-quizSection.addEventListener("onload", renderSelection());
+// quizSection.addEventListener("onload", renderSelection());
