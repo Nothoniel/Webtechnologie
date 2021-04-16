@@ -8,8 +8,11 @@ const fetch = require('node-fetch');
 var serveStatic = require('serve-static');
 let getData = require('./data');
 let insertData = require('./insert_data');
+let sqlParams;
 
 var dataArray;
+var questions;
+var multi = [];
 const PORT=8046; 
 
 //setting up session
@@ -54,7 +57,7 @@ app.get('/start', (req, res) => {
                     FROM Topic
                     INNER JOIN Quiz ON Quiz.TopicID = Topic.TopicID;`;
     //accesing database
-    getData(sql).then(results => dataArray = results);
+    getData(sql, sqlParams).then(results => dataArray = results);
 
     // setTimeout(function(){
     //     console.log(dataArray);
@@ -84,7 +87,47 @@ app.get('/start', (req, res) => {
 });
 
 app.get('/question-display', (req, res) => {
-    res.send(req.query.questionid);
+        let sql = `SELECT QuestionID questionid,
+                          Type type,
+                          QuestionTitle questiontitle,
+                          ProblemStatement problemstatement
+                        FROM Question
+                        WHERE QuizID = ?`;
+        let sqlParams = [req.query.questionid];                 
+        //accesing database
+        getData(sql, sqlParams).then(results => questions = results);
+    
+        setTimeout(function(){
+            console.log(questions);
+            },3000);    
+    
+        setTimeout(async function () {
+             for(let i = 0; i < questions.length; i++) 
+             {
+                 var type= questions[i].type;
+                 var questionid = questions[i].questionid;
+                 if (type == "multipleChoice" || type ==  "multiChoice" || type ==  "ordering")
+                 {
+                    let sql = `SELECT QuestionID questionid,
+                                      MultichoiceValue multichoicevalue
+                                FROM Multichoice
+                                WHERE QuestionID = ?`;
+                    let sqlParams = [questionid];                 
+                    //accesing database
+                    getData(sql, sqlParams).then(results => multi.push(results));
+                 }
+             }
+
+             //print out of multi
+            setTimeout(function(){
+                console.log(multi);
+                console.log("\n\n");
+            },10);
+
+            setTimeout(function(){
+                res.json( {questions: questions, multi:multi});
+            },10);
+        },1000);     
 });
 
 //authentication of user

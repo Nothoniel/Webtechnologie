@@ -14,8 +14,13 @@ function get(url) {
     req.open ("GET", url, true);
     req.onreadystatechange = function () {
         if( req.readyState === 4 && req.status === 200) {
-            console.log(req.responseText);
+            var result = req.response;      
+            var test =  JSON.parse(result);
+            var {questions, multi} = test;
+            console.log(questions, multi);
+            createQuiz(questions, multi);
         }
     }
     req.send();
 }
+

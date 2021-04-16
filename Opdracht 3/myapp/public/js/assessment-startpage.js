@@ -1,3 +1,4 @@
+
 //using the response to create a startpage
 async function RespondFunction(options) { 
     //fetching the data of the server
@@ -18,12 +19,6 @@ async function RespondFunction(options) {
             responseDescription.push(data[i].description);
         }
     }
-
-    //array of quizes
-    var quiz = [quiz1, quiz2]; 
-
-    //in the array of topics we store the corresponding quizzes, the name of the topic and a string of the link to page where the information about the topic can be found
-    var topicArray = []; 
 
     //creating topics 
     //insert every topic into an array

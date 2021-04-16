@@ -48,7 +48,7 @@ INSERT INTO Question VALUES('P1DQ01','Q1DQ02', 'open', 'Question2', 'Good Answer
 INSERT INTO Question VALUES('P1DQ01','Q1DQ03', 'multiChoice', 'Question3', 'Good Answer', 'Which of the are the obstacles encountered by a user playing the dinosaurgame?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
 
 /* Quiz 2 */
-INSERT INTO Question VALUES('P1DQ01','Q1DQ04','open', 'Question1', 'Good Answer', 'What species of dinosaurs is controlled by the user when playing the dinosaurgame?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ02','Q1DQ04','open', 'Question1', 'Good Answer', 'What species of dinosaurs is controlled by the user when playing the dinosaurgame?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
 INSERT INTO Question VALUES('P1DQ02','Q1DQ05','multipleChoice', 'Question2', 'Good Answer', 'Which mode can be activated to for example make your browser unable to permanently store search history?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
 INSERT INTO Question VALUES('P1DQ02','Q1DQ06', 'multipleChoice', 'Question3', 'Good Answer', 'On which distribution of linux is Chrome OS based?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
 

@@ -1,13 +1,14 @@
 let openDB = require('./db');
 let db;
 
-function getData(sql) {
+function getData(sql, sqlParams) {
     // opens the database
     db = openDB();
 
     return new Promise(function(resolve, reject) {
-        //executing the sql-string            
-        db.all(sql, function (err, rows) {
+        //executing the sql-string   
+         
+        db.all(sql, sqlParams, function (err, rows) {
             if (err) {
                 throw err;
             }

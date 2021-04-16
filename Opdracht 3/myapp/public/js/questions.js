@@ -202,155 +202,208 @@ class ordering extends excercise
     }
 }
 
+//quizes
+let quiz1 = [];
+let quiz2 = [];
+
+//array of quizes
+var quiz = [quiz1, quiz2]; 
+
+//in the array of topics we store the corresponding quizzes, the name of the topic and a string of the link to page where the information about the topic can be found
+var topicArray = []; 
+
+
+
+function createQuiz(questions, multi){
+    console.log(multi[0][1].questionid);
+    for(let i=0; i<questions.length; i++) {
+        var problemStatement = questions[i].problemstatement;
+        var id = questions[i].questionid;
+            switch (questions[i].type) {
+                case "open":
+                    quiz1.push(new open(problemStatement, [1,2,3,4,5]));  
+                  break;
+                case "multipleChoice":
+                    var boxes = createMultiBoxes(id, multi);
+                    quiz1.push(new multipleChoice(problemStatement, boxes));
+                  break;
+                case "multiChoice":
+                    var boxes = createMultiBoxes(id, multi);
+                    quiz1.push(new multiChoice(problemStatement, boxes));
+                  break;
+                case "order":
+                    var boxes = createMultiBoxes(id, multi);
+                    quiz1.push(new ordering(problemStatement, boxes));
+                  break;           
+            }
+    }
+
+    // renderQuiz(i, j, k, topicArray);
+}
+
+//jagged array nummering is really bad in the for-loop bool
+function createMultiBoxes(id, multi){
+    var boxes= [];
+    for (let i=0; i<2; i++) {
+        if(id == multi[i][0].questionid ) {
+            for(let j=0; j< 4; j++) {    
+                boxes.push(multi[i][j].multichoicevalue);
+            }
+        }
+    }
+    console.log(boxes);
+    return boxes;
+}
+
 //Here we define all of the quizzes, which will hereafter be put in the corresponding topicArray's array of quizzes
-let quiz1 = 
-[
-    new multipleChoice(
-        "What year was Google Chrome first publicly on Windows?",
-        [
-            "2008",
-            "2005",
-            "2006",
-            "2007",
-            "2009"
-        ],
-        sortNumerically
-    ),
-    new open(
-        "What is the Color of the middle circle of the Google Chrome Logo?",
-        [
-            "Blue",
-            "blue",
-            "Blu",
-            "blu",
-            "Bleu",
-            "bleu"
-        ]
-    ),
-    new multiChoice(
-        "Which of the are the obstacles encountered by a user playing the dinosaurgame?",
-        [
-            "cacti",
-            "pterodactyls",
-            "bats",
-            "birds",
-            "fences",
-            "spikes",
-        ],
-        sortAlphabetically,
-        2
-    )
-];
+// let quiz1 = 
+// [
+//     new multipleChoice(
+//         "What year was Google Chrome first publicly on Windows?",
+//         [
+//             "2008",
+//             "2005",
+//             "2006",
+//             "2007",
+//             "2009"
+//         ],
+//         sortNumerically
+//     ),
+//     new open(
+//         "What is the Color of the middle circle of the Google Chrome Logo?",
+//         [
+//             "Blue",
+//             "blue",
+//             "Blu",
+//             "blu",
+//             "Bleu",
+//             "bleu"
+//         ]
+//     ),
+//     new multiChoice(
+//         "Which of the are the obstacles encountered by a user playing the dinosaurgame?",
+//         [
+//             "cacti",
+//             "pterodactyls",
+//             "bats",
+//             "birds",
+//             "fences",
+//             "spikes",
+//         ],
+//         sortAlphabetically,
+//         2
+//     )
+// ];
 
-let quiz2 =
-[
-    new open(
-        "What species of dinosaurs is controlled by the user when playing the dinosaurgame?",
-        [
-            "Trex",
-            "trex",
-            "T-rex",
-            "t-rex",
-            "Tyrannosaurus Rex",
-            "tyrannosaurus rex",
-            "Tyrannosaurus rex",
-            "tyrannosaurus Rex"
-        ]
-    ),
-    new multipleChoice(
-        "Which mode can be activated to for example make your browser unable to permanently store search history?",
-        [
-            "incognity mode",
-            "stealth mode",
-            "dark mode",
-            "invisible mode",
-            "VPNmode",
-            "privacy mode"
-        ]
-    ),
-    new multipleChoice(
-        "On which distribution of linux is Chrome OS based?",
-        [
-            "Gentoo",
-            "Gecko",
-            "Manjaro",
-            "KDE",
-            "Ubuntu",
-            "Fedora",
-            "Peppermint"     
-        ]
-    )
-];
+// let quiz2 =
+// [
+//     new open(
+//         "What species of dinosaurs is controlled by the user when playing the dinosaurgame?",
+//         [
+//             "Trex",
+//             "trex",
+//             "T-rex",
+//             "t-rex",
+//             "Tyrannosaurus Rex",
+//             "tyrannosaurus rex",
+//             "Tyrannosaurus rex",
+//             "tyrannosaurus Rex"
+//         ]
+//     ),
+//     new multipleChoice(
+//         "Which mode can be activated to for example make your browser unable to permanently store search history?",
+//         [
+//             "incognity mode",
+//             "stealth mode",
+//             "dark mode",
+//             "invisible mode",
+//             "VPNmode",
+//             "privacy mode"
+//         ]
+//     ),
+//     new multipleChoice(
+//         "On which distribution of linux is Chrome OS based?",
+//         [
+//             "Gentoo",
+//             "Gecko",
+//             "Manjaro",
+//             "KDE",
+//             "Ubuntu",
+//             "Fedora",
+//             "Peppermint"     
+//         ]
+//     )
+// ];
 
-let quiz3 =
-[
-    new multipleChoice(
-        "What year was Firefox 1.0 released?",
-        [
-            "2004",
-            "2003",
-            "2002",
-            "2001"
-        ],
-        sortNumerically
-    ),
-    new multiChoice(
-        "What programming language(s) did the application layer of FireFox OS consist of?",
-        [
-            "HTML5",
-            "JavaScript",
-            "CSS",
-            "Jade/pug",
-            "XML",
-            "JSON"
-        ],
-        shuffle,
-        3
-    ),
-    new open(
-        "What was the name of the layout-enginge used in FireFox OS?",
-        [
-            "Gecko",
-            "gecko"
-        ]
-    )
-];
+// let quiz3 =
+// [
+//     new multipleChoice(
+//         "What year was Firefox 1.0 released?",
+//         [
+//             "2004",
+//             "2003",
+//             "2002",
+//             "2001"
+//         ],
+//         sortNumerically
+//     ),
+//     new multiChoice(
+//         "What programming language(s) did the application layer of FireFox OS consist of?",
+//         [
+//             "HTML5",
+//             "JavaScript",
+//             "CSS",
+//             "Jade/pug",
+//             "XML",
+//             "JSON"
+//         ],
+//         shuffle,
+//         3
+//     ),
+//     new open(
+//         "What was the name of the layout-enginge used in FireFox OS?",
+//         [
+//             "Gecko",
+//             "gecko"
+//         ]
+//     )
+// ];
 
-let quiz4 =
-[
-    new multiChoice(
-        "Using which of the following 3 layers was FireFox Os built?",
-        [
-            "applicationlayer",
-            "Open Web Platform Interface",
-            "infrastructurelayer",
-            "Closed Web Platform Interface",
-            "datalayer",
-            "networklayer",
-            "connectionlayer"
-        ],
-        shuffle,
-        3
-    ),
-    new open(
-        "What was the original name of Firefox?",
-        [
-            "Phoenix",
-            "phoenix",
-            "Foenix",
-            "foenix"
-        ]
-    ),
-    new ordering(
-        "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
-        [
-            "Google Chrome",
-            "Safari",
-            "Mozilla Firefox",
-            "Microsoft Edge"
-        ]
-    )
-];
+// let quiz4 =
+// [
+//     new multiChoice(
+//         "Using which of the following 3 layers was FireFox Os built?",
+//         [
+//             "applicationlayer",
+//             "Open Web Platform Interface",
+//             "infrastructurelayer",
+//             "Closed Web Platform Interface",
+//             "datalayer",
+//             "networklayer",
+//             "connectionlayer"
+//         ],
+//         shuffle,
+//         3
+//     ),
+//     new open(
+//         "What was the original name of Firefox?",
+//         [
+//             "Phoenix",
+//             "phoenix",
+//             "Foenix",
+//             "foenix"
+//         ]
+//     ),
+//     new ordering(
+//         "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
+//         [
+//             "Google Chrome",
+//             "Safari",
+//             "Mozilla Firefox",
+//             "Microsoft Edge"
+//         ]
+//     )
+// ];
 
 async function renderSelection(responseQuizTitle, responseQuizID, responseDescription, topicArray) {
     //We first reset the page to its html basics, so we can reuse those
