@@ -123,10 +123,10 @@ app.get('/question-display', (req, res) => {
              }
 
              //print out of multi
-            setTimeout(function(){
-                console.log(multi);
-                console.log("\n\n");
-            },10);
+            // setTimeout(function(){
+            //     console.log(multi);
+            //     console.log("\n\n");
+            // },10);
 
             setTimeout(function(){
                 res.json( {questions: questions, multi:multi});

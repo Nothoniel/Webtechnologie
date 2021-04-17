@@ -2,7 +2,7 @@
 
 function myQuestion(e) {
     var url = "question-display?quizid="+this.id;
-    console.log(url);
+    // console.log(url);
 
     var selectedQuizId= this.id;
     get(url, selectedQuizId);
@@ -18,8 +18,7 @@ function get(url, selectedQuizId) {
             var result = req.response;      
             var test =  JSON.parse(result);
             var {questions, multi} = test;
-            console.log(multi.length);
- 
+
             createQuiz(questions, multi, selectedQuizId);
         }
     }

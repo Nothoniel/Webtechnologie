@@ -202,19 +202,6 @@ class ordering extends excercise
     }
 }
 
-//quizes
-let quiz1 = [];
-let quiz2 = [];
-let quiz3 = [];
-let quiz4 = [];
-
-//array of quizes
-var quizOfFirstTopic = [quiz1, quiz2]; 
-var quizOfSecondTopic = [quiz3, quiz4]; 
-
-//in the array of topics we store the corresponding quizzes, the name of the topic and a string of the link to page where the information about the topic can be found
-var topicArray = []; 
-
 //jagged array nummering is really bad in the for-loop bool
 function createMultiBoxes(id, multi){
     var boxes= [];
@@ -225,7 +212,7 @@ function createMultiBoxes(id, multi){
             }
         }
     }
-    console.log(boxes);
+    // console.log(boxes);
     return boxes;
 }
 
@@ -250,8 +237,8 @@ function determineQuiz(selectedQuizId) {
 
 
 function createQuiz(questions, multi, selectedQuizId){
-    console.log(multi[0][1].questionid);
-    console.log(selectedQuizId);
+    // console.log(multi[0][1].questionid);
+    // console.log(selectedQuizId);
     //index of quiz in quiz array
     var quizIndex = allQuizzes.indexOf(selectedQuizId);
 
@@ -263,10 +250,17 @@ function createQuiz(questions, multi, selectedQuizId){
         quizIndex-=2;
     }
 
+    //determines which quiz is selected
+    var quiz = determineQuiz(selectedQuizId, quiz);
+
+    //making sure the selected quiz arrays is empty
+    quiz.length = 0;
+
     for(let i=0; i<questions.length; i++) {
         var problemStatement = questions[i].problemstatement;
         var id = questions[i].questionid;
-        var quiz = determineQuiz(selectedQuizId, quiz);
+     
+        //creating the questions
             switch (questions[i].type) {
                 case "open":
                     quiz.push(new open(problemStatement, [1,2,3,4,5]));  
@@ -287,7 +281,6 @@ function createQuiz(questions, multi, selectedQuizId){
     }
     renderQuiz(topicIndex,quizIndex , 0);
 }
-
 
 
 //Here we define all of the quizzes, which will hereafter be put in the corresponding topicArray's array of quizzes
@@ -535,7 +528,7 @@ renderQuiz = (i, j, k) =>
     var returnSelectButton = document.createElement("input");
     returnSelectButton.type = "button";
     returnSelectButton.value = "Return to Selectscreen";
-    returnSelectButton.addEventListener("click", function() {renderSelection();});
+    returnSelectButton.addEventListener("click", getStartPage);
     
     var checkButton = document.createElement("input");
     checkButton.id = "Check";
@@ -591,5 +584,4 @@ checkAnswers = (i, j, k, topicArray) =>
 //     //En daarna moet je shit nog displayen
 // }
 
-//When the page is loaded, the selectionscreen will be loaded.
-// quizSection.addEventListener("onload", renderSelection());
+
