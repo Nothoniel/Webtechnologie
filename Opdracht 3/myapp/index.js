@@ -59,9 +59,9 @@ app.get('/start', (req, res) => {
     //accesing database
     getData(sql, sqlParams).then(results => dataArray = results);
 
-    // setTimeout(function(){
-    //     console.log(dataArray);
-    //     },10);
+    setTimeout(function(){
+        console.log(dataArray);
+        },10);
 
     setTimeout(async function () {
          const responseData = dataArray;
@@ -97,11 +97,15 @@ app.get('/question-display', (req, res) => {
         //accesing database
         getData(sql, sqlParams).then(results => questions = results);
     
-        setTimeout(function(){
-            console.log(questions);
-            },3000);    
+        // setTimeout(function(){
+        //     console.log(questions);
+        //     },3000);    
     
         setTimeout(async function () {
+            if(multi.length>0) {
+                multi.length = 0;
+            }
+
              for(let i = 0; i < questions.length; i++) 
              {
                  var type= questions[i].type;

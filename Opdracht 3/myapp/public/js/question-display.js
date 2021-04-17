@@ -14,11 +14,12 @@ function get(url, selectedQuizId) {
 
     req.open ("GET", url, true);
     req.onreadystatechange = function () {
-        if( req.readyState === 4 && req.status === 200) {
+        if( req.readyState === 4 && req.status === 200) {  
             var result = req.response;      
             var test =  JSON.parse(result);
             var {questions, multi} = test;
-            console.log(questions, multi);
+            console.log(multi.length);
+ 
             createQuiz(questions, multi, selectedQuizId);
         }
     }

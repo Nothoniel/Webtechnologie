@@ -1,5 +1,5 @@
 
-var allQuizzes = [];
+var allQuizzes;
 
 //using the response to create a startpage
 async function respondFunction(options) { 
@@ -16,20 +16,30 @@ async function respondFunction(options) {
     for(let i = 0; i < data.length; i++)
     {
         responseQuizID.push(data[i].quizid);
-        allQuizzes.push(data[i].quizid); //want to re-use these values
         responseQuizTitle.push(data[i].quiztitle);
         if(i<2){
             responseDescription.push(data[i].description);
         }
     }
 
-    console.log(responseQuizID);
+
+    allQuizzes = responseQuizID.slice(0,data.length); //want to re-use these values
+
+    console.log(allQuizzes);
+
     //creating topics 
     //insert every topic into an array
+    
     for(let i = 0; i < data.length; i++)
     {
+        var topic;
         if (i % 2 == 0) { continue; }
-        var topic = [quiz, data[i].topictitle, data[i].link];
+        if(i!=2) {
+            topic = [quizOfFirstTopic, data[i].topictitle, data[i].link]; 
+        }
+        else{
+            topic = [quizOfSecondTopic, data[i].topictitle, data[i].link]; 
+        }
         topicArray.push(topic); 
     }
 
