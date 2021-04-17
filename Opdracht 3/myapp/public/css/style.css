@@ -64,6 +64,8 @@ aside {
 }
 
 .accountbar {
+  float: right;
+  padding: 3px;
   background-color: var(--dark-5-navbar-color);
   overflow: hidden;
 }

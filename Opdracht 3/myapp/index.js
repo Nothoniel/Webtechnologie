@@ -90,7 +90,7 @@ app.post('/login', (req, res) => {
                  if (req.body.password == foundUser.password) {
                      console.log('successful log in');
                      req.session.user = foundUser;
-                     res.send(foundUser.username);
+                     res.send(foundUser.userName);
                      //foundUser.firstname
                      //foundUser.lastname
                     return res.end();   
@@ -125,6 +125,15 @@ app.post('/register', (req, res) => {
     }
     catch{
         res.send()
+    }
+});
+
+app.post('/username', (req, res) => {
+    if (req.session.user) {
+    console.log(req.session.user.username);
+    res.send(req.session.user.username);
+    } else {
+    res.send();
     }
 });
 
