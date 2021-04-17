@@ -215,13 +215,45 @@ var quizOfSecondTopic = [quiz3, quiz4];
 //in the array of topics we store the corresponding quizzes, the name of the topic and a string of the link to page where the information about the topic can be found
 var topicArray = []; 
 
+//jagged array nummering is really bad in the for-loop bool
+function createMultiBoxes(id, multi){
+    var boxes= [];
+    for (let i=0; i<multi.length; i++) {
+        if(id == multi[i][0].questionid ) {
+            for(let j=0; j< multi[i].length; j++) {    
+                boxes.push(multi[i][j].multichoicevalue);
+            }
+        }
+    }
+    console.log(boxes);
+    return boxes;
+}
+
+function determineQuiz(selectedQuizId) {
+    var quiz;
+    switch (selectedQuizId) {
+        case "P1DQ01":
+            quiz = quiz1;  
+          break;
+        case "P1DQ02":
+            quiz = quiz2;
+          break;
+        case "P1DQ03":
+            quiz = quiz3;
+          break;
+        case "P1DQ04":
+            quiz = quiz4;
+          break;           
+    }
+    return quiz;
+}
 
 
 function createQuiz(questions, multi, selectedQuizId){
     console.log(multi[0][1].questionid);
     console.log(selectedQuizId);
 
-    var indexQuiz = allQuizzes.indexOf(selectedQuizId);
+    // var indexQuiz = allQuizzes.indexOf(selectedQuizId);
     for(let i=0; i<questions.length; i++) {
         var problemStatement = questions[i].problemstatement;
         var id = questions[i].questionid;
@@ -244,41 +276,10 @@ function createQuiz(questions, multi, selectedQuizId){
                   break;           
             }
     }
-    renderQuiz(indexQuiz, indexQuiz, 0, topicArray);
+    renderQuiz(0, 0, 0);
 }
 
-function determineQuiz(selectedQuizId) {
-    var quiz;
-    switch (selectedQuizId) {
-        case "P1DQ01":
-            quiz = quiz1;  
-          break;
-        case "P1DQ02":
-            quiz = quiz2;
-          break;
-        case "P1DQ03":
-            quiz = quiz3;
-          break;
-        case "P1DQ04":
-            quiz = quiz4;
-          break;           
-    }
-    return quiz;
-}
 
-//jagged array nummering is really bad in the for-loop bool
-function createMultiBoxes(id, multi){
-    var boxes= [];
-    for (let i=0; i<multi.length; i++) {
-        if(id == multi[i][0].questionid ) {
-            for(let j=0; j< multi[i].length; j++) {    
-                boxes.push(multi[i][j].multichoicevalue);
-            }
-        }
-    }
-    console.log(boxes);
-    return boxes;
-}
 
 //Here we define all of the quizzes, which will hereafter be put in the corresponding topicArray's array of quizzes
 // let quiz1 = 
@@ -480,7 +481,7 @@ async function renderSelection(responseQuizTitle, responseQuizID, responseDescri
 }
 
 //The remaining interface of the quiz is generated here  
-renderQuiz = (i, j, k, topicArray) =>
+renderQuiz = (i, j, k) =>
 {
     //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
@@ -501,7 +502,7 @@ renderQuiz = (i, j, k, topicArray) =>
         var previousButton = document.createElement("input");
         previousButton.type = "button";
         previousButton.value = "<-";
-        previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1,topicArray);});
+        previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1);});
         buttonSection.appendChild(previousButton);
     }
     for(let l = 0; l < topicArray[i][0][j].length; l++)
@@ -509,7 +510,7 @@ renderQuiz = (i, j, k, topicArray) =>
         var questionButton = document.createElement("input");
         questionButton.type = "button";
         questionButton.value = l + 1;
-        questionButton.addEventListener("click", function() {renderQuiz(i, j, l, topicArray)});
+        questionButton.addEventListener("click", function() {renderQuiz(i, j, l)});
         buttonSection.appendChild(questionButton);
     }
     if(k < topicArray[i][0][j].length - 1)
@@ -517,7 +518,7 @@ renderQuiz = (i, j, k, topicArray) =>
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "->";
-        nextButton.addEventListener("click", function() {renderQuiz(i, j, k + 1, topicArray);});
+        nextButton.addEventListener("click", function() {renderQuiz(i, j, k + 1);});
         buttonSection.appendChild(nextButton);
     }
     buttonSection.appendChild(document.createElement("br"));
