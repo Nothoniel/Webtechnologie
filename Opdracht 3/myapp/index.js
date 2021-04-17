@@ -93,7 +93,7 @@ app.get('/question-display', (req, res) => {
                           ProblemStatement problemstatement
                         FROM Question
                         WHERE QuizID = ?`;
-        let sqlParams = [req.query.questionid];                 
+        let sqlParams = [req.query.quizid];                 
         //accesing database
         getData(sql, sqlParams).then(results => questions = results);
     

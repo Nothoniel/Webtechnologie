@@ -238,7 +238,7 @@ function createQuiz(questions, multi){
             }
     }
 
-    // renderQuiz(i, j, k, topicArray);
+    renderQuiz(0, 0, 0, topicArray);
 }
 
 //jagged array nummering is really bad in the for-loop bool

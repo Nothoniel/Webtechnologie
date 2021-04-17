@@ -1,7 +1,7 @@
 
 
 function myQuestion(e) {
-    var url = "question-display?questionid="+this.id;
+    var url = "question-display?quizid="+this.id;
     console.log(url);
 
     get(url);
