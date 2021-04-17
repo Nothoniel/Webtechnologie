@@ -8,6 +8,7 @@ const fetch = require('node-fetch');
 var serveStatic = require('serve-static');
 let getData = require('./data');
 let insertData = require('./insert_data');
+// let updateData = require('./update_data');
 const cookieParser = require('cookie-parser');
 
 var dataArray;
@@ -128,15 +129,40 @@ app.post('/register', (req, res) => {
     }
 });
 
-app.post('/username', (req, res) => {
+app.post('/edit', (req, res) => {
+    if (req.body.password !== req.body.confirm) res.send('password confirmation did not match password');
+    console.log("Registering new user");
+    //user sql query
+    try {
+        //making an array that contains the info of the new user
+        var user = [
+            req.body.firstName?req.body.firstName:req.session.user.firstname, 
+            req.body.lastName?req.body.lastName:req.session.user.lastname, 
+            req.body.password?req.body.password:req.session.user.password,
+            req.session.user.username,
+            req.body.oldPassword
+        ];
+
+        //sql string that adds the new user to the db
+        let update_sql = 
+        `UPDATE User 
+        SET firstName = ?, lastName = ?, Password = ?
+        WHERE UserName = ? AND Password = ?`;
+        insertData(update_sql, user);
+    }
+    catch{
+        res.send()
+    }
+});
+
+app.post('/user', (req, res) => {
     if (req.session.user) {
-    console.log(req.session.user.username);
-    res.send(req.session.user.username);
+    console.log(req.session.user);
+    res.send(req.session.user);
     } else {
     res.send();
     }
 });
-
 //now app is running - listening to requests on port 8046 
 app.listen(PORT, function(){     
     console.log('Server started on port 8046...');
