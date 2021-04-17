@@ -4,12 +4,12 @@ function myQuestion(e) {
     var url = "question-display?quizid="+this.id;
     // console.log(url);
 
-    var selectedQuizId= this.id;
-    get(url, selectedQuizId);
+    var selectedQuizID= this.id;
+    get(url, selectedQuizID);
     e.preventDefault();
 }
 
-function get(url, selectedQuizId) {
+function get(url, selectedQuizID) {
     var req = new XMLHttpRequest();
 
     req.open ("GET", url, true);
@@ -18,8 +18,8 @@ function get(url, selectedQuizId) {
             var result = req.response;      
             var test =  JSON.parse(result);
             var {questions, multi} = test;
-
-            createQuiz(questions, multi, selectedQuizId);
+            
+            createQuiz(questions, multi, selectedQuizID);
         }
     }
     req.send();

@@ -1,4 +1,7 @@
 var quizSection = document.querySelector(".webpage-content__section");
+var emptyArray= [];
+var currentquestionID; // better solution?
+var typeOfQuestion;
 
 //shuffle and sort functions, later to be used as a callback in the question constructor
 shuffle = x =>
@@ -51,21 +54,26 @@ class multipleChoice extends excercise
     {
         super.renderExcercise(i);
         var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
+        var quizForm = document.createElement("form");
+        quizForm.setAttribute("id","userAnswer");
+
         for(let k = 0; k < this.answers.length; k++)
         {
             var answersContainer = document.createElement("input");
-            answersContainer.type = "radio";
-            answersContainer.name = "answersOfQ" + i;
-            answersContainer.value = this.answers[k];
+            answersContainer.setAttribute("type", "radio");
+            answersContainer.setAttribute("name", "answersOfQ");
+            answersContainer.setAttribute("value", this.answers[k]);
             var radioLabel = document.createElement("label");
             radioLabel.for = answersContainer.value;
             radioLabel.appendChild(document.createTextNode(this.answers[k]));
 
-            questionSubSection.appendChild(answersContainer);
-            questionSubSection.appendChild(radioLabel);
-            if(k < this.answers.length - 1)
-                questionSubSection.appendChild(document.createElement("br"));
+            quizForm.appendChild(answersContainer);
+            quizForm.appendChild(radioLabel);
+            if(k < this.answers.length)
+                quizForm.appendChild(document.createElement("br"));
         }
+
+        questionSubSection.appendChild(quizForm);
     }
 
     checkAnswer = i => 
@@ -89,21 +97,26 @@ class multiChoice extends excercise
     {
         super.renderExcercise(i);
         var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
+        var quizForm = document.createElement("form");
+        quizForm.setAttribute("id","userAnswer");
+
         for(let k = 0; k < this.answers.length; k++)
         {
             var answersContainer = document.createElement("input");
-            answersContainer.type = "checkbox";
-            answersContainer.name = "answersOfQ" + i;
-            answersContainer.value = this.answers[k];
+            answersContainer.setAttribute("type", "checkbox");
+            answersContainer.setAttribute("name", "answersmultiChoice");
+            answersContainer.setAttribute("value", this.answers[k]);
             var radioLabel = document.createElement("label");
             radioLabel.for = answersContainer.value;
             radioLabel.appendChild(document.createTextNode(this.answers[k]));
 
-            questionSubSection.appendChild(answersContainer);
-            questionSubSection.appendChild(radioLabel);
-            if(k < this.answers.length - 1)
-                questionSubSection.appendChild(document.createElement("br"));
+            quizForm.appendChild(answersContainer);
+            quizForm.appendChild(radioLabel);
+
+            if(k < this.answers.length)
+                quizForm.appendChild(document.createElement("br"));
         }
+        questionSubSection.appendChild(quizForm);
     }
 
     //Whether all of the correct answers are given by the users is checked upon here
@@ -121,16 +134,24 @@ class open extends excercise
     renderExcercise(i)
     {
         super.renderExcercise(i);
+
+        var quizForm = document.createElement("form");
+        quizForm.setAttribute("id","userAnswer");
+
         var answersContainer = document.createElement("input");
-        answersContainer.name = "answersOfQ" + i;
-        answersContainer.type = "text";
+        answersContainer.setAttribute("name", "answersOfQ");
+        answersContainer.setAttribute("id", "openQuestionAnswer");
+        answersContainer.setAttribute("type", "text");
+        answersContainer.setAttribute("maxlength", 40);
 
         var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
-        questionSubSection.appendChild(answersContainer);
+        quizForm.appendChild(answersContainer);
+
+        questionSubSection.appendChild(quizForm);
     }
 
     //Regarding open question, all of the values withing the array of answers are deemed correct
-    checkAnswer = i => this.answers.indexOf(document.getElementsByName("answersOfQ" + i)[0].value) >= 0;
+    // checkAnswer = i => this.answers.indexOf(document.getElementsByName("answersOfQ" + i)[0].value) >= 0;
 }
 
 class ordering extends excercise
@@ -216,9 +237,9 @@ function createMultiBoxes(id, multi){
     return boxes;
 }
 
-function determineQuiz(selectedQuizId) {
+function determineQuiz(selectedQuizID) {
     var quiz;
-    switch (selectedQuizId) {
+    switch (selectedQuizID) {
         case "P1DQ01":
             quiz = quiz1;  
           break;
@@ -236,11 +257,11 @@ function determineQuiz(selectedQuizId) {
 }
 
 
-function createQuiz(questions, multi, selectedQuizId){
+function createQuiz(questions, multi, selectedQuizID){
     // console.log(multi[0][1].questionid);
-    // console.log(selectedQuizId);
+    // console.log(selectedQuizID);
     //index of quiz in quiz array
-    var quizIndex = allQuizzes.indexOf(selectedQuizId);
+    var quizIndex = allQuizzes.indexOf(selectedQuizID);
 
     //index of topic in topic array
     topicIndex = Math.round(quizIndex/allQuizzes.length);
@@ -251,7 +272,7 @@ function createQuiz(questions, multi, selectedQuizId){
     }
 
     //determines which quiz is selected
-    var quiz = determineQuiz(selectedQuizId, quiz);
+    var quiz = determineQuiz(selectedQuizID, quiz);
 
     //making sure the selected quiz arrays is empty
     quiz.length = 0;
@@ -263,7 +284,7 @@ function createQuiz(questions, multi, selectedQuizId){
         //creating the questions
             switch (questions[i].type) {
                 case "open":
-                    quiz.push(new open(problemStatement, [1,2,3,4,5]));  
+                    quiz.push(new open(problemStatement, emptyArray));  
                   break;
                 case "multipleChoice":
                     var boxes = createMultiBoxes(id, multi);
@@ -279,7 +300,7 @@ function createQuiz(questions, multi, selectedQuizId){
                   break;           
             }
     }
-    renderQuiz(topicIndex,quizIndex , 0);
+    renderQuiz(topicIndex, quizIndex, 0, questions);
 }
 
 
@@ -483,7 +504,7 @@ async function renderSelection(responseQuizTitle, responseQuizID, responseDescri
 }
 
 //The remaining interface of the quiz is generated here  
-renderQuiz = (i, j, k) =>
+renderQuiz = (i, j, k, questions) =>
 {
     //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
@@ -504,7 +525,7 @@ renderQuiz = (i, j, k) =>
         var previousButton = document.createElement("input");
         previousButton.type = "button";
         previousButton.value = "<-";
-        previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1);});
+        previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1, questions);});
         buttonSection.appendChild(previousButton);
     }
     for(let l = 0; l < topicArray[i][0][j].length; l++)
@@ -512,7 +533,7 @@ renderQuiz = (i, j, k) =>
         var questionButton = document.createElement("input");
         questionButton.type = "button";
         questionButton.value = l + 1;
-        questionButton.addEventListener("click", function() {renderQuiz(i, j, l)});
+        questionButton.addEventListener("click", function() {renderQuiz(i, j, l, questions)});
         buttonSection.appendChild(questionButton);
     }
     if(k < topicArray[i][0][j].length - 1)
@@ -520,7 +541,7 @@ renderQuiz = (i, j, k) =>
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "->";
-        nextButton.addEventListener("click", function() {renderQuiz(i, j, k + 1);});
+        nextButton.addEventListener("click", function() {renderQuiz(i, j, k + 1, questions);});
         buttonSection.appendChild(nextButton);
     }
     buttonSection.appendChild(document.createElement("br"));
@@ -529,17 +550,23 @@ renderQuiz = (i, j, k) =>
     returnSelectButton.type = "button";
     returnSelectButton.value = "Return to Selectscreen";
     returnSelectButton.addEventListener("click", getStartPage);
+
+    console.log(questions[k].type);
+    currentquestionID = questions[k].questionid; // better solution?
+    typeOfQuestion = questions[k].type;
     
     var checkButton = document.createElement("input");
-    checkButton.id = "Check";
-    checkButton.type = "button";
-    checkButton.value = "Check Answers";
-    checkButton.addEventListener("click", function(){checkAnswers(i, j, k, topicArray)});
+    // checkButton.setAttribute( "id", "subbutton");
+    checkButton.setAttribute( "type", "submit");
+    checkButton.setAttribute( "value", "Check Answers");
+    // checkButton.addEventListener("click", function(){checkAnswers(i, j, k, topicArray)});
+    checkButton.addEventListener("click", myAnswer);
 
     // var finishButton = document.createElement("input");
     // finishButton.type = "button";
     // finishButton.value = "Finish Quiz";
     // finishButton.addEventListener("click", function() {finishQuiz();});
+    // document.getElementById("userAnswer").addEventListener("submit", myAnswer);
 
     buttonSection.appendChild(checkButton);
     buttonSection.appendChild(returnSelectButton);
@@ -550,25 +577,26 @@ renderQuiz = (i, j, k) =>
 }
 
 //The answers will be checked here, when the corresponding button has been clicked
-checkAnswers = (i, j, k, topicArray) =>
-{
-    var resultSection = document.createElement("section");
-    resultSection.className = "webpage-content__section__subsection";
+// checkAnswers = (i, j, k, topicArray) =>
+// {
+//     var resultSection = document.createElement("section");
+//     resultSection.className = "webpage-content__section__subsection";
 
-    var checkButton = document.getElementById("Check");
-    var buttonSection = document.getElementsByClassName("webpage-content__section__subsection")[1];
-    buttonSection.removeChild(checkButton);
-    resultSection.appendChild(document.createTextNode("Your answer for this question is " + (topicArray[i][0][j][k].checkAnswer(k)?"correct":"incorrect")));
-    if(!topicArray[i][0][j][k].checkAnswer(k))
-    {
-        var linkInformation = document.createElement("a");
-        linkInformation.href = topicArray[i][2];
-        linkInformation.appendChild(document.createTextNode("You can find the corresponding theory here!"));
-        resultSection.appendChild(document.createElement("br"));
-        resultSection.appendChild(linkInformation);
-    }
-    quizSection.appendChild(resultSection);
-}
+//     var checkButton = document.getElementById("Check");
+//     var buttonSection = document.getElementsByClassName("webpage-content__section__subsection")[1];
+//     buttonSection.removeChild(checkButton);
+//     var feedback = document.createTextNode("Your answer for this question is " + (topicArray[i][0][j][k].checkAnswer(k)?"correct":"incorrect"));
+//     resultSection.appendChild(feedback);
+//     if(!topicArray[i][0][j][k].checkAnswer(k))
+//     {
+//         var linkInformation = document.createElement("a");
+//         linkInformation.href = topicArray[i][2];
+//         linkInformation.appendChild(document.createTextNode("You can find the corresponding theory here!"));
+//         resultSection.appendChild(document.createElement("br"));
+//         resultSection.appendChild(linkInformation);
+//     }
+//     quizSection.appendChild(resultSection);
+// }
 
 //Dit Soort shit moet je doen voor een nieuwe FinishQuiz Screen
 /////////////////////////////////////////////////////////

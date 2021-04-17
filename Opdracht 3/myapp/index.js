@@ -199,6 +199,12 @@ app.post('/register', (req, res) => {
     }
 });
 
+app.post('/feedback', (req, res) => {
+    console.log("request came in");
+    console.log(req.body);
+    res.send("test");
+});
+
 //now app is running - listening to requests on port 8046 
 app.listen(PORT, function(){     
     console.log('Server started on port 8046...');
