@@ -218,6 +218,7 @@ function createQuiz(questions, multi, selectedQuizId){
     console.log(multi[0][1].questionid);
     console.log(selectedQuizId);
     console.log(allQuizzes);
+    console.log(allQuizzes.indexOf(selectedQuizId));
     for(let i=0; i<questions.length; i++) {
         var problemStatement = questions[i].problemstatement;
         var id = questions[i].questionid;
