@@ -34,11 +34,11 @@ async function respondFunction(options) {
     {
         var topic;
         if (i % 2 == 0) { continue; }
-        if(i!=2) {
-            topic = [quizOfFirstTopic, data[i].topictitle, data[i].link]; 
+        if(i==3) {
+            topic = [quizOfSecondTopic, data[i].topictitle, data[i].link]; 
         }
         else{
-            topic = [quizOfSecondTopic, data[i].topictitle, data[i].link]; 
+            topic = [quizOfFirstTopic, data[i].topictitle, data[i].link]; 
         }
         topicArray.push(topic); 
     }

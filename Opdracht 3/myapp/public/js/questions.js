@@ -252,8 +252,17 @@ function determineQuiz(selectedQuizId) {
 function createQuiz(questions, multi, selectedQuizId){
     console.log(multi[0][1].questionid);
     console.log(selectedQuizId);
+    //index of quiz in quiz array
+    var quizIndex = allQuizzes.indexOf(selectedQuizId);
 
-    // var indexQuiz = allQuizzes.indexOf(selectedQuizId);
+    //index of topic in topic array
+    topicIndex = Math.round(quizIndex/allQuizzes.length);
+
+    //quiz array length is 2
+    if(quizIndex>1) {
+        quizIndex-=2;
+    }
+
     for(let i=0; i<questions.length; i++) {
         var problemStatement = questions[i].problemstatement;
         var id = questions[i].questionid;
@@ -270,13 +279,13 @@ function createQuiz(questions, multi, selectedQuizId){
                     var boxes = createMultiBoxes(id, multi);
                     quiz.push(new multiChoice(problemStatement, boxes));
                   break;
-                case "order":
+                case "ordering":
                     var boxes = createMultiBoxes(id, multi);
                     quiz.push(new ordering(problemStatement, boxes));
                   break;           
             }
     }
-    renderQuiz(0, 0, 0);
+    renderQuiz(topicIndex,quizIndex , 0);
 }
 
 
