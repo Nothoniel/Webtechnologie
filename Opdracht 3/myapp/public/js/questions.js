@@ -214,26 +214,28 @@ var topicArray = [];
 
 
 
-function createQuiz(questions, multi){
+function createQuiz(questions, multi, selectedQuizId){
     console.log(multi[0][1].questionid);
+    console.log(selectedQuizId);
     for(let i=0; i<questions.length; i++) {
         var problemStatement = questions[i].problemstatement;
         var id = questions[i].questionid;
+        var quiz = quiz1;
             switch (questions[i].type) {
                 case "open":
-                    quiz1.push(new open(problemStatement, [1,2,3,4,5]));  
+                    quiz.push(new open(problemStatement, [1,2,3,4,5]));  
                   break;
                 case "multipleChoice":
                     var boxes = createMultiBoxes(id, multi);
-                    quiz1.push(new multipleChoice(problemStatement, boxes));
+                    quiz.push(new multipleChoice(problemStatement, boxes));
                   break;
                 case "multiChoice":
                     var boxes = createMultiBoxes(id, multi);
-                    quiz1.push(new multiChoice(problemStatement, boxes));
+                    quiz.push(new multiChoice(problemStatement, boxes));
                   break;
                 case "order":
                     var boxes = createMultiBoxes(id, multi);
-                    quiz1.push(new ordering(problemStatement, boxes));
+                    quiz.push(new ordering(problemStatement, boxes));
                   break;           
             }
     }

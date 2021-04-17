@@ -4,11 +4,12 @@ function myQuestion(e) {
     var url = "question-display?quizid="+this.id;
     console.log(url);
 
-    get(url);
+    var selectedQuizId= this.id;
+    get(url, selectedQuizId);
     e.preventDefault();
 }
 
-function get(url) {
+function get(url, selectedQuizId) {
     var req = new XMLHttpRequest();
 
     req.open ("GET", url, true);
@@ -18,7 +19,7 @@ function get(url) {
             var test =  JSON.parse(result);
             var {questions, multi} = test;
             console.log(questions, multi);
-            createQuiz(questions, multi);
+            createQuiz(questions, multi, selectedQuizId);
         }
     }
     req.send();
