@@ -1,4 +1,6 @@
 
+var responseQuizID = [];
+
 //using the response to create a startpage
 async function RespondFunction(options) { 
     //fetching the data of the server
@@ -10,7 +12,6 @@ async function RespondFunction(options) {
     //quiz buttons
     var responseQuizTitle = [];
     var responseDescription = [];
-    var responseQuizID = [];
     for(let i = 0; i < data.length; i++)
     {
         responseQuizID.push(data[i].quizid);
@@ -20,6 +21,7 @@ async function RespondFunction(options) {
         }
     }
 
+    console.log(responseQuizID);
     //creating topics 
     //insert every topic into an array
     for(let i = 0; i < data.length; i++)

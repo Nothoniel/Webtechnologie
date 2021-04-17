@@ -216,6 +216,8 @@ var topicArray = [];
 
 function createQuiz(questions, multi, selectedQuizId){
     console.log(multi[0][1].questionid);
+    // console.log(responseQuizID.indexOf(selectedQuizId));
+    console.log(responseQuizID);
     console.log(selectedQuizId);
     for(let i=0; i<questions.length; i++) {
         var problemStatement = questions[i].problemstatement;
