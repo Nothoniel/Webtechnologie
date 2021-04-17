@@ -3,13 +3,17 @@
 var url;
 var id;
 
-if(!(document.getElementById("registerUsername"))) {
-    url = '/login';
-    id = "loginform";
-}
-else {
+if(document.getElementById("registerform")) {
     url = '/register';
     id = 'registerform';
+}
+else if (document.getElementById("loginform")) {
+    url = '/login';
+    id = 'loginform';
+}
+else if (document.getElementById("settingsform")) {
+    url = '/login';
+    id = 'settingsform';
 }
 
 //converts it to JSON and post the data

@@ -15,7 +15,8 @@ function getUser(callback) {
     req.open("POST", '/user', true)
     req.onreadystatechange = function () {
         if(req.readyState === 4 && req.status === 200) {
-            user = JSON.parse(req.response);
+            user = req.response;
+            if (user) user = JSON.parse(user);
             console.log(user);
             callback(user);
         }

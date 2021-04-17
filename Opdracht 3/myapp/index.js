@@ -136,14 +136,15 @@ app.post('/edit', (req, res) => {
     try {
         //making an array that contains the info of the new user
         var user = [
-            req.body.firstName?req.body.firstName:req.session.user.firstname, 
-            req.body.lastName?req.body.lastName:req.session.user.lastname, 
-            req.body.password?req.body.password:req.session.user.password,
+            //if the input is empty, use the old data stored in the session
+            req.body.firstName? req.body.firstName : req.session.user.firstname, 
+            req.body.lastName? req.body.lastName : req.session.user.lastname, 
+            req.body.password? req.body.password : req.session.user.password,
             req.session.user.username,
             req.body.oldPassword
         ];
 
-        //sql string that adds the new user to the db
+        //sql string that updates the user data in the db
         let update_sql = 
         `UPDATE User 
         SET firstName = ?, lastName = ?, Password = ?

@@ -8,6 +8,7 @@ function createSettings(user) {
     settingsFormHeader.appendChild(document.createTextNode("change account details of user: " + user.username))
 
     var settingsForm = document.createElement("form");
+    settingsForm.setAttribute("id","settingsform");
 
     var FirstNameInput = document.createElement("input");
     FirstNameInput.setAttribute("name","FirstName");
@@ -32,6 +33,11 @@ function createSettings(user) {
     oldPasswordInput.setAttribute("name","oldPassword");
     settingsForm.appendChild(oldPasswordInput);
 
+    var submitButton = document.createElement("input");
+    submitButton.setAttribute("type","submit");
+    submitButton.setAttribute("value","Submit");
+    settingsForm.appendChild(submitButton);    
+
     settingsSubSection.appendChild(settingsFormHeader);
     settingsSubSection.appendChild(settingsForm);
 
@@ -45,7 +51,8 @@ function getUser(callback) {
     req.open("POST", '/user', true)
     req.onreadystatechange = function () {
         if(req.readyState === 4 && req.status === 200) {
-            user = JSON.parse(req.response);
+            user = req.response;
+            if (user) user = JSON.parse(user);
             console.log(user);
             callback(user);
         }
