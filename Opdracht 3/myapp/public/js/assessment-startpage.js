@@ -1,8 +1,8 @@
 
-var responseQuizID = [];
+var allQuizzes = [];
 
 //using the response to create a startpage
-async function RespondFunction(options) { 
+async function respondFunction(options) { 
     //fetching the data of the server
     var response = await fetch("/start", options);
     var data = await response.json(); 
@@ -12,9 +12,11 @@ async function RespondFunction(options) {
     //quiz buttons
     var responseQuizTitle = [];
     var responseDescription = [];
+    var responseQuizID = [];
     for(let i = 0; i < data.length; i++)
     {
         responseQuizID.push(data[i].quizid);
+        allQuizzes.push(data[i].quizid); //want to re-use these values
         responseQuizTitle.push(data[i].quiztitle);
         if(i<2){
             responseDescription.push(data[i].description);
@@ -48,7 +50,7 @@ async function sendRequest() {
             'Accept': 'application/json'
         }
     };
-    RespondFunction(options);   
+    respondFunction(options);   
 }
 
 //event on the submit button that determines that t
