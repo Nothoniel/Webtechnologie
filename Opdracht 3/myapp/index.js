@@ -59,9 +59,9 @@ app.get('/start', (req, res) => {
     //accesing database
     getData(sql, sqlParams).then(results => dataArray = results);
 
-    setTimeout(function(){
-        console.log(dataArray);
-        },10);
+    // setTimeout(function(){
+    //     console.log(dataArray);
+    //     },10);
 
     setTimeout(async function () {
          const responseData = dataArray;
@@ -110,7 +110,7 @@ app.get('/question-display', (req, res) => {
              {
                  var type= questions[i].type;
                  var questionid = questions[i].questionid;
-                 if (type == "multipleChoice" || type ==  "multiChoice" || type ==  "ordering")
+                 if (type !== "open")
                  {
                     let sql = `SELECT QuestionID questionid,
                                       MultichoiceValue multichoicevalue
