@@ -35,8 +35,11 @@ async function sendAnswer(currentquestionID, answer) {
     req.onreadystatechange = function () {
         if( req.readyState === 4 && req.status === 200) {  
             var result = req.response;
-            console.log(result);      
-            // var feedback =  JSON.parse(result);
+            var feedback = JSON.parse(result);
+            //printing out the whole object
+            console.log(feedback); 
+            //printing out something specific
+            console.log(feedback[0].feedback);      
             // var {questions, multi} = test;
         }
     }

@@ -13,6 +13,7 @@ let sqlParams;
 var dataArray;
 var questions;
 var multi = [];
+var answerReturn;
 const PORT=8046; 
 
 //setting up session
@@ -55,7 +56,7 @@ app.get('/start', (req, res) => {
                       QuizTitle quiztitle,
                       QuizID quizid
                     FROM Topic
-                    INNER JOIN Quiz ON Quiz.TopicID = Topic.TopicID;`;
+                    INNER JOIN Quiz ON Quiz.TopicID = Topic.TopicID`;
     //accesing database
     getData(sql, sqlParams).then(results => dataArray = results);
 
@@ -201,8 +202,47 @@ app.post('/register', (req, res) => {
 
 app.post('/feedback', (req, res) => {
     console.log("request came in");
-    console.log(req.body);
-    res.send("test");
+    console.log(req.body.currentquestionID, req.body.answer);
+
+    var answer = req.body.answer;
+    if(Array.isArray(req.body.answer)) {
+        answer = req.body.answer.join();
+    }
+
+    let sql = `SELECT FeedbackCorrect feedback
+                    FROM Question
+                    WHERE QuestionID = ? AND CorrectAnswer = ?`;
+     var currentQuestion = [req.body.currentquestionID, answer];                
+    //accesing database
+    getData(sql, currentQuestion).then(results => { 
+        if(results.length>0) {  
+              answerReturn = results;
+        }
+        else {
+            let sql = `SELECT FeedbackIncorrect feedback,
+                                DescriptionLink link,
+                                LinkName linkname
+                            FROM Question
+                            INNER JOIN Quiz ON Quiz.QuizID = Question.QuizID
+                            INNER JOIN Topic ON Topic.TopicID = Quiz.TopicID
+                            WHERE QuestionID = ?`;
+                var questionWrong = [req.body.currentquestionID];
+            getData(sql, questionWrong).then(results => answerReturn = results);
+        }                            
+    });
+        //print out of the feedback
+    setTimeout(function(){
+        console.log(answerReturn);
+        },3000);
+
+    setTimeout(async function () {
+            const responseData = answerReturn;
+            res.json(responseData);
+        },15);      
+             
+    
+    
+
 });
 
 //now app is running - listening to requests on port 8046 
