@@ -3,14 +3,10 @@ const app = express();
 var path = require("path");
 var session = require("express-session");
 var morgan = require("morgan")
-const bcrypt = require("bcrypt");
-const flash = require("connect-flash");
-const fetch = require("node-fetch");
 var serveStatic = require("serve-static");
 let getData = require("./data");
 let db = require("./db");
 let insertData = require("./insert_data");
-const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 let sqlParams;
 
 var dataArray, questions, answerReturn;
@@ -115,7 +111,6 @@ app.post("/login", (req, res) => {
                     req.session.user.correctAttempts = 0;
                     res.json({message: "succesful log in"});
                 } else {
-                    res.flash("not matching");
                     res.json({message: "user or password not found"})  
                     console.log("unsuccessful log in");
                 }
