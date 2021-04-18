@@ -1,11 +1,10 @@
-function clearPage()
-{
+clearPage = () => {
     var loginSection = document.querySelector(".webpage-content__section");
-    for (child of loginSection.childNodes) loginSection.removeChild(child);
+    for (child of loginSection.childNodes)
+        loginSection.removeChild(child);
 }
 
-function createLoginPage()
-{
+createLoginPage = () => {
     clearPage();
     var loginSection = document.querySelector(".webpage-content__section");
     var loginSubSection = document.createElement("section");
@@ -28,7 +27,6 @@ function createLoginPage()
     loginForm.appendChild(usernameLabel);
     loginForm.appendChild(document.createElement("br"));
     loginForm.appendChild(usernameInput);
-
     loginForm.appendChild(document.createElement("br"));
 
     var passwordInput = document.createElement("input");
@@ -40,7 +38,6 @@ function createLoginPage()
     loginForm.appendChild(passwordLabel);
     loginForm.appendChild(document.createElement("br"));
     loginForm.appendChild(passwordInput);
-
     loginForm.appendChild(document.createElement("br"));
     loginForm.appendChild(document.createElement("br"));
 
@@ -48,7 +45,6 @@ function createLoginPage()
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "Log in");
     loginForm.appendChild(submitButton);
-
     loginForm.appendChild(document.createElement("br"));
     loginForm.appendChild(document.createElement("br"));
 
@@ -59,12 +55,11 @@ function createLoginPage()
     var RegisterButton = document.createElement("input");
     RegisterButton.setAttribute("type", "button");
     RegisterButton.setAttribute("value", "Register an account");
-    RegisterButton.addEventListener("click", function () { location.replace("register-page.html") });
+    RegisterButton.addEventListener("click", function() {location.replace("register-page.html")});
     loginSubSection.appendChild(RegisterButton);
 
     //add the login subsection to the screen
     loginSection.appendChild(loginSubSection);
 }
-
 createLoginPage();
 

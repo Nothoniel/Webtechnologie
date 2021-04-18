@@ -1,7 +1,5 @@
-var getData='';
-var teststring;
-//example 4, global variable
-var options;
+var getData = "";
+var teststring, options;
 
 //example 4: placing the fetch in the desired function
 async function RespondFunction() { 
@@ -15,18 +13,16 @@ async function RespondFunction() {
     function1(page);
 } 
 
-async function function1(page) {
-    console.log(page);
-}
+function1 = page => {console.log(page);}
 
 async function sendRequest(getData) {
     var data = {getData};
 
     options = {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            "Content-Type" : "application/json",
+            "Accept" : "application/json"
         },
         body: JSON.stringify(data)
     };
@@ -47,7 +43,7 @@ async function sendRequest(getData) {
 
 async function getStart() {
     var teststring;
-    getData ='Startpage';
+    getData = "Startpage";
     // var response = sendRequest(getData);
 
     //example 4
@@ -69,4 +65,4 @@ async function getStart() {
 
 
 //event on the submit button that determines that t
-window.addEventListener("load", getStart);
+window.addEventListener("load", getStart());

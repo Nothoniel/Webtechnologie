@@ -1,30 +1,30 @@
 
-async function myAnswer(e) {
+myAnswer = e => {
     var answer;
-    var answerArray=[];
-    switch (typeOfQuestion) {
+    var answerArray = [];
+    switch(typeOfQuestion) {
         case "open":
-                //open question
-                answer = document.getElementById("openQuestionAnswer").value;  
+            //open question
+            answer = document.getElementById("openQuestionAnswer").value;  
             break;
         case "multipleChoice":
-                //answer of multipleChoice
-                answer = document.querySelector('input[name="answersOfQ"]:checked').value;
+            //answer of multipleChoice
+            answer = document.querySelector('input[name="answersOfQ"]:checked').value;
             break;
         case "multiChoice":
-                var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                    for (var checkbox of checkboxes) { answerArray.push(checkbox.value)}
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            for (var checkbox of checkboxes)
+                answerArray.push(checkbox.value)
             break;
         case "ordering":
-                //get the array in correct sequence of order question
-                var sequence = document.querySelectorAll('label[name="orderValue"]');
-                     for (let i = 0; i < sequence.length; i++) {
-                        answerArray.push(sequence[i].textContent);
-                    }                    
+            //get the array in correct sequence of order question
+            var sequence = document.querySelectorAll('label[name="orderValue"]');
+            for (let i = 0; i < sequence.length; i++)
+                answerArray.push(sequence[i].textContent);                  
             break;
     }
 
-    if(answerArray.length>0){
+    if(answerArray.length>0) {
         answer = answerArray;
         console.log(answer);
     }
@@ -38,10 +38,10 @@ async function sendAnswer(currentquestionID, answer, type) {
     var data = {currentquestionID, answer, type};
     var options = JSON.stringify(data);
 
-    req.open ("POST","feedback", true);
-    req.setRequestHeader( "Content-Type", "application/json" );
-    req.onreadystatechange = function () {
-        if( req.readyState === 4 && req.status === 200) {  
+    req.open ("POST", "feedback", true);
+    req.setRequestHeader("Content-Type", "application/json");
+    req.onreadystatechange = function() {
+        if(req.readyState === 4 && req.status === 200) {  
             var result = req.response;
             var feedback = JSON.parse(result);
             //printing out the whole object
