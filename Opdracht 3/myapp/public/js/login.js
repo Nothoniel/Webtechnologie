@@ -55,7 +55,7 @@ createLoginPage = () => {
     var RegisterButton = document.createElement("input");
     RegisterButton.setAttribute("type", "button");
     RegisterButton.setAttribute("value", "Register an account");
-    RegisterButton.addEventListener("click", function() {location.replace("register-page.html")});
+    RegisterButton.addEventListener("click", function() {location.replace("register-page.html");});
     loginSubSection.appendChild(RegisterButton);
 
     //add the login subsection to the screen

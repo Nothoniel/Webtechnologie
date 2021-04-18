@@ -1,6 +1,6 @@
 let openDB = require("./db");
 
-insertData = (insert_sql, newUser) => {
+function insertData(insert_sql, newUser) {
     // opens the database
     let db = openDB();
 

@@ -29,7 +29,7 @@ class excercise {
 
     renderExcercise(i) {
         var questionHeader = document.createElement("h2");
-        questionHeader.appendChild(document.createTextNode("Question" + (i+1)));
+        questionHeader.appendChild(document.createTextNode("Question" + (i + 1)));
 
         var questionSubSection = document.createElement("section");
         questionSubSection.setAttribute("class", "webpage-content__section__subsection");
@@ -507,16 +507,14 @@ renderQuiz = (i, j, k, questions) =>
         previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1, questions);});
         buttonSection.appendChild(previousButton);
     }
-    for(let l = 0; l < topicArray[i][0][j].length; l++)
-    {
+    for(let l = 0; l < topicArray[i][0][j].length; l++) {
         var questionButton = document.createElement("input");
         questionButton.type = "button";
         questionButton.value = l + 1;
         questionButton.addEventListener("click", function() {renderQuiz(i, j, l, questions)});
         buttonSection.appendChild(questionButton);
     }
-    if(k < topicArray[i][0][j].length - 1)
-    {
+    if(k < topicArray[i][0][j].length - 1) {
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "->";
@@ -536,10 +534,16 @@ renderQuiz = (i, j, k, questions) =>
     
     var checkButton = document.createElement("input");
     // checkButton.setAttribute( "id", "subbutton");
-    checkButton.setAttribute( "type", "submit");
-    checkButton.setAttribute( "value", "Check Answers");
+    checkButton.setAttribute("type", "submit");
+    checkButton.setAttribute("value", "Check Answers");
     // checkButton.addEventListener("click", function(){checkAnswers(i, j, k, topicArray)});
-    checkButton.addEventListener("click", myAnswer);
+
+    getUser(function(user) {
+        if(user) 
+            checkButton.addEventListener("click", myAnswer);
+        else
+            checkButton.addEventListener("click", function() {window.alert("You have to log in to check your given answers!");});
+    });   
 
     // var finishButton = document.createElement("input");
     // finishButton.type = "button";

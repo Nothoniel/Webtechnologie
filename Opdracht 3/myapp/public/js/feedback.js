@@ -24,7 +24,7 @@ myAnswer = e => {
             break;
     }
 
-    if(answerArray.length>0) {
+    if(answerArray.length > 0) {
         answer = answerArray;
         console.log(answer);
     }
@@ -38,7 +38,7 @@ async function sendAnswer(currentquestionID, answer, type) {
     var data = {currentquestionID, answer, type};
     var options = JSON.stringify(data);
 
-    req.open ("POST", "feedback", true);
+    req.open("POST", "feedback", true);
     req.setRequestHeader("Content-Type", "application/json");
     req.onreadystatechange = function() {
         if(req.readyState === 4 && req.status === 200) {  
@@ -50,7 +50,7 @@ async function sendAnswer(currentquestionID, answer, type) {
             console.log(feedback[0].feedback);      
             // var {questions, multi} = test;
         }
-    }
+    };
     req.send(options);
 }
 

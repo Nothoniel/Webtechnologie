@@ -107,6 +107,10 @@ section.webpage-content__section__subsection h3 {
   color: var(--dark-1-color);
 }
 
+form {
+  max-width: 50%;
+}
+
 /*
     ///// Comment-section: Hyperlinks of webpage /////
 */  

@@ -4,7 +4,7 @@ var url, id;
 if(document.getElementById("registerform")) {
     url = "/register";
     id = "#registerform";
-} else if (document.getElementById("loginform")) {
+} else if(document.getElementById("loginform")) {
     url = "/login";
     id = "#loginform";
 } else {
@@ -13,31 +13,32 @@ if(document.getElementById("registerform")) {
 }
 
 //converts it to JSON and post the data
-convertToJSON = ({formData}) => {
+async function convertToJSON({formData}) {
     //converts it to a plain object
     var data = Object.fromEntries(formData.entries());
     var options = {
-        method: "POST",
-        headers: {
+        method : "POST",
+        headers : {
             "Content-Type" : "application/json",
             "Accept" : "application/json"
         },
         body : JSON.stringify(data)
     };
-    var response = fetch(url, options);
+    var rawResponse = await fetch(url, options);
+    console.log(rawResponse.message);
+    var response = await rawResponse.json();
+    if(response.message == "succesful log in") {
+        //redirect to index.html
+        window.location.replace("index.html");
+    } else {
+        //wrong username/password
+        window.alert(response.message);
+    }
+}
 
-    //redirects the webiquiz page
-    //naming of the arrow function does not matter, it always references to the result before dot
-    //response.then( window.location.href  = 'assessment.html')
-    //response.then(response => reponse.json())  
-                // .then(data=>console.log(data));
-
-    // convertedData.json();
-}   
-
-//Login or Register data 
+//Login or Register data
 //Reads the values of the inputs inserted into the form
-readForm = e => {
+async function readForm (e) {
     e.preventDefault();
     const form = e.currentTarget;
 

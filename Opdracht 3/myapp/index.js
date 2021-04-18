@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 var path = require("path");
 var session = require("express-session");
+var morgan = require("morgan")
 const bcrypt = require("bcrypt");
 const flash = require("connect-flash");
 const fetch = require("node-fetch");
@@ -39,6 +40,8 @@ app.use(session({
     saveUninitialized : false
     })
 );
+
+app.use(morgan("tiny"))
 
 app.use(express.urlencoded({extended : false}));
 
@@ -160,22 +163,30 @@ app.post("/login", (req, res) => {
                 if (req.body.password == foundUser.password) {
                     console.log("successful log in");
                     req.session.user = foundUser;
-                    res.send(foundUser.userName);
+                    req.session.user.attempts = 0;
+                    req.session.user.correctAttempts = 0;
+                    res.json({message: "succesful log in"});
                     //foundUser.firstname
                     //foundUser.lastname
-                    return res.end();   
+                } else {
+                    res.flash("not matching");
+                    res.json({message: "user or password not found"})  
+                    console.log("unsuccessful log in");
                 }
-                res.flash("not matching");  
-                console.log("unsuccessful log in");
             } else {
-                res.send("username does not exist");
+                res.json({message: "user or password not found"}) 
                 console.log("unsuccessful log in");
             }
         } catch {
-            res.send("Internal server error");
+            res.json({message: "internal server error"}) 
             console.log("server error");
         }
     }, 15);
+});
+
+app.post("/logout", (req, res) => {
+    req.session.user = null;
+    res.send();
 });
 
 app.post("/register", (req, res) => {
@@ -224,8 +235,14 @@ app.post("/edit", (req, res) => {
 app.post('/feedback', (req, res) => {
     console.log("request came in");
     // console.log(req.body.currentquestionID, req.body.answer);
+    let user = [req.session.user.username];
 
-    //query for when user ansered incorrect
+    //query correct answer for multiChoice and open
+    let sqlCorrect =   `SELECT FeedbackCorrect feedback
+                        FROM Question
+                        WHERE QuestionID = ?`;
+
+    //query for when user answered incorrect
     let sqlIncorrect = `SELECT FeedbackIncorrect feedback,
                                DescriptionLink link,
                                LinkName linkname
@@ -233,6 +250,18 @@ app.post('/feedback', (req, res) => {
                         INNER JOIN Quiz ON Quiz.QuizID = Question.QuizID
                         INNER JOIN Topic ON Topic.TopicID = Quiz.TopicID
                         WHERE QuestionID = ?`;
+
+    //query that increments the correct and total attempts, for correct answer
+    let sqlCorrectAttempt =    `UPDATE User
+                                SET UserAttempts = UserAttempts + 1,
+                                    CorrectAttempt = CorrectAttempt + 1
+                                WHERE Username = ?`;
+
+    //query that increments only the total attempts, for incorrect answer
+    let sqlIncorrectAttempt =  `UPDATE User
+                                SET UserAttempts = UserAttempts + 1
+                                WHERE Username = ?`;
+    
     var receivedQuestion = [req.body.currentquestionID]; 
 
     if(req.body.type == "multipleChoice") {
@@ -246,8 +275,9 @@ app.post('/feedback', (req, res) => {
         var currentQuestion = [req.body.currentquestionID, answer];                
         //accesing database
         getData(sql, currentQuestion).then(results => { 
-            if(results.length>0)  
+            if(results.length > 0) {  
                 answerReturn = results;
+            }
             else {
                 let sql = sqlIncorrect;
                 getData(sql, receivedQuestion).then(results => answerReturn = results);
@@ -262,10 +292,6 @@ app.post('/feedback', (req, res) => {
         return array1.length === array2.length && array1.every((val, index) => val === array2[index]);
     }
 
-    //query correct answer for multiChoice and open
-    let sqlCorrect = `SELECT FeedbackCorrect feedback
-                      FROM Question
-                      WHERE QuestionID = ?`;
     if(req.body.type == "multiChoice" || req.body.type == "open") {
         let sql = `SELECT CorrectAnswer correctanswer
                    FROM Question
@@ -275,9 +301,9 @@ app.post('/feedback', (req, res) => {
             var arrayOfCorrect = (results[0].correctanswer).split(",");  
             const insertedAnswer = (currentValue) => currentValue === req.body.answer;
             if(req.body.type == "open") { 
-                if(arrayOfCorrect.some(insertedAnswer)) {
+                if(arrayOfCorrect.some(insertedAnswer)) {   
                     let sql = sqlCorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results);                   
+                    getData(sql, receivedQuestion).then(results => answerReturn = results);              
                 } else {
                     let sql = sqlIncorrect;
                     getData(sql, receivedQuestion).then(results => answerReturn = results);    
@@ -299,10 +325,30 @@ app.post('/feedback', (req, res) => {
 
     setTimeout(async function () {
             const responseData = answerReturn;
+            if(responseData[0].feedback.length == 26) {
+                insertData(sqlCorrectAttempt, user);
+                req.session.attempts++;
+                req.session.correctAttempts++;
+            } else {
+                insertData(sqlIncorrectAttempt, user);
+                req.session.attempts++;
+            }
             res.json(responseData);
     }, 15);  
 });
 
+app.post("/report", (req, res) => {
+    let sql =  `SELECT UserAttempts, CorrectAttempt
+                FROM User
+                WHERE UserName = ?`
+    getData(sql, req.session.user.username).then(results => res.json({
+        username: req.session.user.username,
+        sessionAttempts: req.session.attempts,
+        sessionCorrectAttempts: req.session.correctAttempts,
+        overallAttempts: results[0].UserAttempts,
+        overallCorrectAttempts: results[0].CorrectAttempt
+    }));
+});
 
 app.post("/user", (req, res) => {
     if(req.session.user) {

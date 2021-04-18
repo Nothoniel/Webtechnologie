@@ -10,9 +10,21 @@ createSettings = user => {
     var settingsForm = document.createElement("form");
     settingsForm.setAttribute("id", "settingsform");
 
+    var logoutHeader = document.createElement("h2");
+    logoutHeader.appendChild(document.createTextNode("log out here"));
+
+    var logoutButton = document.createElement("input");
+    logoutButton.setAttribute("type", "button");
+    logoutButton.setAttribute("value", "Log out");
+    logoutButton.addEventListener("click", logout);
+
+    var logoutForm = document.createElement("form");
+    logoutForm.appendChild(logoutButton);
+
     var firstNameLabel = document.createElement("label");
     firstNameLabel.setAttribute("for", "fName");
-    settingsForm.appendChild(firstNameLabel.appendTextNode("First Name:"));
+    firstNameLabel.appendChild(document.createTextNode("First Name:"));
+    settingsForm.appendChild(firstNameLabel);
     var firstNameInput = document.createElement("input");
     firstNameInput.setAttribute("name", "firstName");
     firstNameInput.setAttribute("id", "fName")
@@ -21,7 +33,8 @@ createSettings = user => {
 
     var lastNameLabel = document.createElement("label");
     lastNameLabel.setAttribute("for", "lName");
-    settingsForm.appendChild(lastNameLabel.appendTextNode("Last Name:"))
+    lastNameLabel.appendChild(document.createTextNode("Last Name:"));
+    settingsForm.appendChild(lastNameLabel);
     var lastNameInput = document.createElement("input");
     lastNameInput.setAttribute("name", "lastName");
     lastNameInput.setAttribute("id", "lName");
@@ -30,7 +43,8 @@ createSettings = user => {
 
     var passwordLabel = document.createElement("label");
     passwordLabel.setAttribute("for", "pw");
-    settingsForm.appendChild(passwordLabel.appendTextNode("New Password:"))
+    passwordLabel.appendChild(document.createTextNode("New Password:"));
+    settingsForm.appendChild(passwordLabel);
     var passwordInput = document.createElement("input");
     passwordInput.setAttribute("type", "password");
     passwordInput.setAttribute("name", "password");
@@ -40,7 +54,8 @@ createSettings = user => {
 
     var confirmLabel = document.createElement("label");
     confirmLabel.setAttribute("for", "cpw");
-    settingsForm.appendChild(confirmLabel.appendTextNode("Confirm New PassWord:"));
+    confirmLabel.appendChild(document.createTextNode("Confirm New PassWord:"));
+    settingsForm.appendChild(confirmLabel);
     var confirmInput = document.createElement("input");
     confirmInput.setAttribute("type", "password");
     confirmInput.setAttribute("name", "confirm");
@@ -50,7 +65,8 @@ createSettings = user => {
     
     var oldPasswordLabel = document.createElement("label");
     oldPasswordLabel.setAttribute("for", "opw");
-    settingsForm.appendChild(oldPasswordLabel.appendTextNode("Old Password:"));
+    oldPasswordLabel.appendChild(document.createTextNode("Old Password:"));
+    settingsForm.appendChild(oldPasswordLabel);
     var oldPasswordInput = document.createElement("input");
     oldPasswordInput.setAttribute("type", "password");
     oldPasswordInput.setAttribute("name", "oldPassword");
@@ -66,8 +82,22 @@ createSettings = user => {
 
     settingsSubSection.appendChild(settingsFormHeader);
     settingsSubSection.appendChild(settingsForm);
+    settingsSubSection.appendChild(logoutHeader);
+    settingsSubSection.appendChild(logoutForm
+);
 
     settingsSection.appendChild(settingsSubSection);
+}
+
+logout = () => {
+    var req = new XMLHttpRequest();
+
+    req.open("POST", "/logout", true);
+    req.onreadystatechange = function() {
+        if(req.readyState === 4 && req.status === 200)
+            window.location.replace("index.html");
+    };
+    req.send();
 }
 
 createSettings();

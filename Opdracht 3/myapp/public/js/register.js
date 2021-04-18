@@ -14,7 +14,7 @@ createRegisterPage = () => {
     var backButton = document.createElement("input");
     backButton.setAttribute("type", "button");
     backButton.setAttribute("value", "Back to Log in");
-    backButton.addEventListener("click", function () { location.replace("login-page.html") });
+    backButton.addEventListener("click", function() {location.replace("login-page.html");});
     registerForm.appendChild(backButton);
 
     registerForm.appendChild(document.createElement("br"));

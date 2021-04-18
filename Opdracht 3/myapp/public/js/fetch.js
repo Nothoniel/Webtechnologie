@@ -19,12 +19,12 @@ async function sendRequest(getData) {
     var data = {getData};
 
     options = {
-        method: "POST",
-        headers: {
+        method : "POST",
+        headers : {
             "Content-Type" : "application/json",
             "Accept" : "application/json"
         },
-        body: JSON.stringify(data)
+        body : JSON.stringify(data)
     };
 
     RespondFunction();
@@ -61,8 +61,6 @@ async function getStart() {
     //using a for-loop for creating a new array with the data.
     // response.then(data => console.log( data[1]));
 }
-
-
 
 //event on the submit button that determines that t
 window.addEventListener("load", getStart());
