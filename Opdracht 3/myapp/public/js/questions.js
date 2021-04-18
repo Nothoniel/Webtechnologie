@@ -171,6 +171,7 @@ class ordering extends excercise
         {
             //At all the elements, we want a label with the content it represents
             var orderLabel = document.createElement("label");
+            orderLabel.setAttribute("name", "orderValue");
             orderLabel.for = this.answers[k];
             orderLabel.id = "q" + i + "label" + k;
             orderLabel.appendChild(document.createTextNode(this.answers[k]));

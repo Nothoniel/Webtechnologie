@@ -14,11 +14,19 @@ async function myAnswer(e) {
         case "multiChoice":
                 var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
                     for (var checkbox of checkboxes) { answerArray.push(checkbox.value)}
-            break;                   
+            break;
+        case "ordering":
+                //get the array in correct sequence of order question
+                var sequence = document.querySelectorAll('label[name="orderValue"]');
+                     for (let i = 0; i < sequence.length; i++) {
+                        answerArray.push(sequence[i].textContent);
+                    }                    
+            break;
     }
 
     if(answerArray.length>0){
         answer = answerArray;
+        console.log(answer);
     }
 
     sendAnswer(currentquestionID, answer, typeOfQuestion); 
