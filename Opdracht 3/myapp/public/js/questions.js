@@ -1,11 +1,9 @@
 var quizSection = document.querySelector(".webpage-content__section");
 
 //shuffle and sort functions, later to be used as a callback in the question constructor
-shuffle = x =>
-{
+shuffle = x => {
     //Fisher-Yates shuffle, source: https://www.w3schools.com/js/js_array_sort.asp
-    for (let i = x.length -1; i > 0; i--)
-    {
+    for (let i = x.length -1; i > 0; i--) {
         let j = Math.floor(Math.random() * i)
         let k = x[i];
         x[i] = x[j];
@@ -18,20 +16,18 @@ sortAlphabetically = x => x.sort();
 sortNumerically = x => x.sort(function(a, b){return a - b});
 
 //This is the fundamental class of the question-objects
-class excercise
-{
-    constructor(question, answers, orderType)
-    {
+class excercise {
+    constructor(question, answers, orderType) {
         this.question = question;
         this.correctAnswer = answers[0];
         this.answers = answers.slice();//slice so it is an independent copy, not just a reference
         (orderType === undefined? shuffle:orderType) (this.answers);
     }
 
-    renderExcercise(i)
-    {
+    renderExcercise(i) {
         var questionHeader = document.createElement("h2");
         questionHeader.appendChild(document.createTextNode("Question" + (i+1)));
+
         var questionSubSection = document.createElement("section");
         questionSubSection.setAttribute("class", "webpage-content__section__subsection");
 
@@ -45,14 +41,11 @@ class excercise
 }
 
 //Here the special properties of the multiplechoice questions are defined
-class multipleChoice extends excercise
-{
-    renderExcercise(i)
-    {
+class multipleChoice extends excercise {
+    renderExcercise(i) {
         super.renderExcercise(i);
         var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
-        for(let k = 0; k < this.answers.length; k++)
-        {
+        for(let k = 0; k < this.answers.length; k++) {
             var answersContainer = document.createElement("input");
             answersContainer.type = "radio";
             answersContainer.name = "answersOfQ" + i;
@@ -68,29 +61,26 @@ class multipleChoice extends excercise
         }
     }
 
-    checkAnswer = i => 
-    {
+    checkAnswer = i => {
         for(var answer of document.getElementsByName("answersOfQ" + i))
-            if(answer.value == this.correctAnswer) return answer.checked;
+            if(answer.value == this.correctAnswer) 
+                return answer.checked;
     }
 }
 
 class multiChoice extends excercise
 {
-    constructor(question, answers, orderType, amount)
-    {
+    constructor(question, answers, orderType, amount) {
         super(question, answers, orderType);
         this.amount = amount;
         //multiChoice differentiates itself from multipleChoice by having a given amount of multiple correct answers, which all have to be given by the user
         this.correctAnswer = answers.slice(0, amount);
     }
 
-    renderExcercise(i)
-    {
+    renderExcercise(i) {
         super.renderExcercise(i);
         var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
-        for(let k = 0; k < this.answers.length; k++)
-        {
+        for(let k = 0; k < this.answers.length; k++) {
             var answersContainer = document.createElement("input");
             answersContainer.type = "checkbox";
             answersContainer.name = "answersOfQ" + i;
@@ -107,8 +97,7 @@ class multiChoice extends excercise
     }
 
     //Whether all of the correct answers are given by the users is checked upon here
-    checkAnswer = i =>
-    {
+    checkAnswer = i => {
         var answerCorrect = true;
         for(let answer of document.getElementsByName("answersOfQ" + i))
             answerCorrect = answerCorrect && ((this.correctAnswer.indexOf(answer.value) != -1) == answer.checked);
@@ -116,10 +105,8 @@ class multiChoice extends excercise
     }
 }
 
-class open extends excercise
-{
-    renderExcercise(i)
-    {
+class open extends excercise {
+    renderExcercise(i) {
         super.renderExcercise(i);
         var answersContainer = document.createElement("input");
         answersContainer.name = "answersOfQ" + i;
@@ -133,21 +120,17 @@ class open extends excercise
     checkAnswer = i => this.answers.indexOf(document.getElementsByName("answersOfQ" + i)[0].value) >= 0;
 }
 
-class ordering extends excercise
-{
-    constructor(question, answers, orderType)
-    {
+class ordering extends excercise {
+    constructor(question, answers, orderType) {
         super(question, answers, orderType);
         this.correctAnswer = answers.slice();
     }
 
     //determining all needed elements and adding these to a container, which is then added to the questionSubSection
-    renderExcercise(i)
-    {
+    renderExcercise(i) {
         super.renderExcercise(i);
         var questionSubSection = document.getElementsByClassName("webpage-content__section__subsection")[0];
-        for(let k = 0; k < this.answers.length; k++)
-        {
+        for(let k = 0; k < this.answers.length; k++) {
             //At all the elements, we want a label with the content it represents
             var orderLabel = document.createElement("label");
             orderLabel.for = this.answers[k];
@@ -160,8 +143,7 @@ class ordering extends excercise
             var currentQuestion = this;
 
             //At the first element, we do not want an up-button
-            if(k > 0)
-            {
+            if(k > 0) {
                 var answersContainer = document.createElement("input");
                 answersContainer.type = "button";
                 answersContainer.value = "^";
@@ -170,8 +152,7 @@ class ordering extends excercise
             }
 
             //At the last element, we do not want a down-button
-            if(k < this.answers.length - 1)
-            {
+            if(k < this.answers.length - 1) {
                 var answersContainer = document.createElement("input");
                 answersContainer.type = "button";
                 answersContainer.value = "v";
@@ -183,8 +164,7 @@ class ordering extends excercise
     }
 
     //Here we determine the new ordering when a button has been clicked
-    changeOrder = (i, j) =>
-    {
+    changeOrder = (i, j) => {
         this.answers.splice(i, 2, this.answers[i + 1], this.answers[i]);
         var elem = document.getElementById("q" + j + "label" + i);
         elem.replaceChild(document.createTextNode(this.answers[i]), elem.childNodes[0]);
@@ -193,8 +173,7 @@ class ordering extends excercise
     }
 
     //When the button to check the given answer has been pressed down, whether it was right is determined here
-    checkAnswer = () =>
-    {
+    checkAnswer = () => {
         var answerCorrect = true;
         for (let i = 0; i < this.answers.length && answerCorrect; i++)
             answerCorrect = this.answers[i] == this.correctAnswer[i];
@@ -203,8 +182,7 @@ class ordering extends excercise
 }
 
 //Here we define all of the quizzes, which will hereafter be put in the corresponding topicArray's array of quizzes
-let quiz1 = 
-[
+let quiz1 = [
     new multipleChoice(
         "What year was Google Chrome first publicly on Windows?",
         [
@@ -243,8 +221,7 @@ let quiz1 =
     )
 ];
 
-let quiz2 =
-[
+let quiz2 = [
     new open(
         "What species of dinosaurs is controlled by the user when playing the dinosaurgame?",
         [
@@ -283,8 +260,7 @@ let quiz2 =
     )
 ];
 
-let quiz3 =
-[
+let quiz3 = [
     new multipleChoice(
         "What year was Firefox 1.0 released?",
         [
@@ -317,8 +293,7 @@ let quiz3 =
     )
 ];
 
-let quiz4 =
-[
+let quiz4 = [
     new multiChoice(
         "Using which of the following 3 layers was FireFox Os built?",
         [
@@ -355,29 +330,25 @@ let quiz4 =
 
 
 //In the topicArray we store the corresponding quizzes, the Name of the topic and a string of the link to page where the information about the topic can be found
-var topicArray =
-[
+var topicArray = [
     [[quiz1, quiz2], "GoogleChrome", "page1-google-chrome.html"],
     [[quiz3, quiz4], "MozillaFireFox", "page2-mozilla-firefox.html"]
 ];
 
-renderSelection = () =>
-{
+renderSelection = () => {
     //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
         quizSection.removeChild(quizSection.firstChild);
 
     //This loop is run to make a seperate section for each of the topics
-    for(let i = 0; i < topicArray.length; i++)
-    {
+    for(let i = 0; i < topicArray.length; i++) {
         var topicHeader = document.createElement("h2");
         topicHeader.appendChild(document.createTextNode(topicArray[i][1]));
         var topicSection = document.createElement("section");
         topicSection.className = "webpage-content__section__subsection";
 
         //This loop is run to make seperate buttons for each of the topic's quizzes
-        for(let j = 0; j < topicArray[i][0].length; j++)
-        {
+        for(let j = 0; j < topicArray[i][0].length; j++) {
             var selectButton = document.createElement("input");
             selectButton.type = "button";
             selectButton.value = topicArray[i][1] + (j+1);
@@ -400,8 +371,7 @@ renderSelection = () =>
 }
 
 //The remaining interface of the quiz is generated here  
-renderQuiz = (i, j, k) =>
-{
+renderQuiz = (i, j, k) => {
     //We first reset the page to its html basics, so we can reuse those
     while(quizSection.firstChild)
         quizSection.removeChild(quizSection.firstChild);
@@ -426,16 +396,14 @@ renderQuiz = (i, j, k) =>
     var buttonSection = document.createElement("section");
     buttonSection.className = "webpage-content__section__subsection";
 
-    if(k > 0)
-    {
+    if(k > 0) {
         var previousButton = document.createElement("input");
         previousButton.type = "button";
         previousButton.value = "Previous Question";
         previousButton.addEventListener("click", function() {renderQuiz(i, j, k - 1);});
         buttonSection.appendChild(previousButton);
     }
-    if(k < topicArray[i][0][j].length - 1)
-    {
+    if(k < topicArray[i][0][j].length - 1) {
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "Next Question";
@@ -464,8 +432,7 @@ renderQuiz = (i, j, k) =>
 }
 
 //The answers will be checked here, when the corresponding button has been clicked
-checkAnswers = (i, j) =>
-{
+checkAnswers = (i, j) => {
     // resultSection.appendChild(document.createElement("br"));
     // resultSection.appendChild(document.createTextNode("Your results will be displayed here."));
 
@@ -484,8 +451,7 @@ checkAnswers = (i, j) =>
     resultSection.appendChild(document.createElement("br"));
     resultSection.appendChild(document.createTextNode("You have answered " + numberCorrect + " out of " + topicArray[i][0][j].length + " questions correctly."));
 
-    for (let i = 0; i < quizResults.length; i++)
-    {
+    for (let i = 0; i < quizResults.length; i++) {
         resultSection.appendChild(document.createElement("br"));
         resultSection.appendChild(document.createTextNode("Your answer for question " + (i + 1) + " was " + (quizResults[i]?"correct":"incorrect")));
     }
