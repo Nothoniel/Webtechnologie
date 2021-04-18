@@ -30,7 +30,7 @@ async function respondFunction(options) {
     {
         responseQuizID.push(data[i].quizid);
         responseQuizTitle.push(data[i].quiztitle);
-        if(i<2){
+        if(i % 2 == 0){
             responseDescription.push(data[i].description);
         }
     }

@@ -475,7 +475,7 @@ async function renderSelection(responseQuizTitle, responseQuizID, responseDescri
         //Here we make the hyperlink to the corresponding topic's information, which is stored in the topicArray
         var description = document.createElement("a");
         description.href = topicArray[i][2];
-        description.appendChild(document.createTextNode(responseDescription[0]));
+        description.appendChild(document.createTextNode(responseDescription[i]));
         topicSection.appendChild(description);
 
         quizSection.appendChild(topicHeader);
