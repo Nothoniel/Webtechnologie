@@ -1,32 +1,28 @@
-
 //the id of the form and the url for the posting
-var url;
-var id;
+var url, id;
 
 if(document.getElementById("registerform")) {
-    url = '/register';
-    id = '#registerform';
-}
-else if (document.getElementById("loginform")) {
-    url = '/login';
-    id = '#loginform';
-}
-else {
-    url = '/edit';
-    id = '#settingsform';
+    url = "/register";
+    id = "#registerform";
+} else if (document.getElementById("loginform")) {
+    url = "/login";
+    id = "#loginform";
+} else {
+    url = "/edit";
+    id = "#settingsform";
 }
 
 //converts it to JSON and post the data
-function convertToJSON({formData}) {
+convertToJSON = ({formData}) => {
     //converts it to a plain object
     var data = Object.fromEntries(formData.entries());
     var options = {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            "Content-Type" : "application/json",
+            "Accept" : "application/json"
         },
-        body: JSON.stringify(data)
+        body : JSON.stringify(data)
     };
     var response = fetch(url, options);
 
@@ -41,8 +37,7 @@ function convertToJSON({formData}) {
 
 //Login or Register data 
 //Reads the values of the inputs inserted into the form
-function readForm(e) {
-
+readForm = e => {
     e.preventDefault();
     const form = e.currentTarget;
 

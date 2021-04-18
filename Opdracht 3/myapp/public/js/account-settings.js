@@ -1,4 +1,4 @@
-function createSettings(user) { 
+createSettings = user => { 
     var settingsSection = document.querySelector(".webpage-content__section");
 
     var settingsSubSection = document.createElement("section");

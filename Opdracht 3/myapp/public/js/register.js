@@ -1,4 +1,4 @@
-function createRegisterPage() {   
+createRegisterPage = () => {   
     var loginSection = document.querySelector(".webpage-content__section");
     var loginSubSection = document.createElement("section");
     loginSubSection.setAttribute("class", "webpage-content__section__subsection");

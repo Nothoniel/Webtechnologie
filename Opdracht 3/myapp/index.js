@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-var path = require('path');
-var session = require('express-session');
-const bcrypt = require('bcrypt');
-const flash = require('connect-flash');
-const fetch = require('node-fetch');
-var serveStatic = require('serve-static');
-let getData = require('./data');
-let insertData = require('./insert_data');
-const cookieParser = require('cookie-parser');
+var path = require("path");
+var session = require("express-session");
+const bcrypt = require("bcrypt");
+const flash = require("connect-flash");
+const fetch = require("node-fetch");
+var serveStatic = require("serve-static");
+let getData = require("./data");
+let insertData = require("./insert_data");
+const cookieParser = require("cookie-parser");
 
 var dataArray;
 const PORT = 8046; 
@@ -32,7 +32,7 @@ const PORT = 8046;
 // app.use(flash());
 app.use(cookieParser());
 app.use(session({
-    secret : 'mokergeheim',
+    secret : "mokergeheim",
     resave : true,
     saveUninitialized : false
     })
@@ -41,12 +41,12 @@ app.use(session({
 app.use(express.urlencoded({extended : false}));
 
 // retrieving  files
-app.use(serveStatic(path.join(__dirname, 'public')));
-app.use(express.json({limit : '100mb'}));
+app.use(serveStatic(path.join(__dirname, "public")));
+app.use(express.json({limit : "100mb"}));
 
 //called every time an http request is received, like a starting file can be set  
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
     //user sql query
     let sql = `SELECT UserName username,
                       Password password,
@@ -57,11 +57,11 @@ app.get('/', (req, res) => {
     getData(sql).then(results => dataArray = results);
 
     //prints out the data
-    setTimeout(function(){console.log(dataArray);}, 10);
+    setTimeout(function() {console.log(dataArray);}, 10);
 });
 
 //authentication of user
-app.post('/login', (req, res) => {
+app.post("/login", (req, res) => {
     //user sql query
     let sql = `SELECT UserName username,
                       Password password,
@@ -72,42 +72,42 @@ app.post('/login', (req, res) => {
     getData(sql).then(results => dataArray = results);
 
     //prints out the data
-    setTimeout(function(){console.log(dataArray);}, 10);
+    setTimeout(function() {console.log(dataArray);}, 10);
 
-    setTimeout(async function () {
-        console.log('Attempting to log in, session:' + req.session.id);   
+    setTimeout(async function() {
+        console.log("Attempting to log in, session:" + req.session.id);   
         try {
             //compares the username of db with the inserted one and stores the found user in a variable
-            let foundUser = dataArray.find( (dataArray) => req.body.username === dataArray.username);
+            let foundUser = dataArray.find(dataArray => req.body.username === dataArray.username);
             if (foundUser) {
-                console.log('user found');
+                console.log("user found");
                 console.log(foundUser);
                 //comparing password of inserted user with that of the found user
                 if (req.body.password == foundUser.password) {
-                    console.log('successful log in');
+                    console.log("successful log in");
                     req.session.user = foundUser;
                     res.send(foundUser.userName);
                     //foundUser.firstname
                     //foundUser.lastname
                     return res.end();   
                 } else {
-                    res.flash('not matching');  
-                    console.log('unsuccessful log in');
+                    res.flash("not matching");  
+                    console.log("unsuccessful log in");
                 }
             } else {
                 res.send("username does not exist");
-                console.log('unsuccessful log in');
+                console.log("unsuccessful log in");
             }
         } catch {
             res.send("Internal server error");
-            console.log('server error');
+            console.log("server error");
         }
     }, 15);
 });
 
-app.post('/register', (req, res) => {
+app.post("/register", (req, res) => {
     if (req.body.password !== req.body.confirm)
-        res.send('password confirmation did not match password');
+        res.send("password confirmation did not match password");
     console.log("Registering new user");
     //user sql query
     try {
@@ -120,10 +120,11 @@ app.post('/register', (req, res) => {
     } catch {res.send();}
 });
 
-app.post('/edit', (req, res) => {
+app.post("/edit", (req, res) => {
     if (req.body.password !== req.body.confirm)
-        res.send('password confirmation did not match password');
+        res.send("password confirmation did not match password");
     console.log("Registering new user");
+
     //user sql query
     try {
         //making an array that contains the info of the new user
@@ -138,13 +139,15 @@ app.post('/edit', (req, res) => {
 
         //sql string that updates the user data in the db
         let update_sql = `UPDATE User 
-                          SET firstName = ?, lastName = ?, Password = ?
+                          SET firstName = ?, 
+                              lastName = ?, 
+                              Password = ?
                           WHERE UserName = ? AND Password = ?`;
         insertData(update_sql, user);
     } catch {res.send();}
 });
 
-app.post('/user', (req, res) => {
+app.post("/user", (req, res) => {
     if (req.session.user) {
         console.log(req.session.user);
         res.send(req.session.user);
@@ -152,4 +155,4 @@ app.post('/user', (req, res) => {
 });
 
 //now app is running - listening to requests on port 8046 
-app.listen(PORT, function() {console.log('Server started on port 8046...');});
+app.listen(PORT, function() {console.log("Server started on port 8046...");});
