@@ -202,47 +202,93 @@ app.post('/register', (req, res) => {
 
 app.post('/feedback', (req, res) => {
     console.log("request came in");
-    console.log(req.body.currentquestionID, req.body.answer);
+    // console.log(req.body.currentquestionID, req.body.answer);
 
-    var answer = req.body.answer;
-    if(Array.isArray(req.body.answer)) {
-        answer = req.body.answer.join();
+    //query for when user ansered incorrect
+    let sqlIncorrect = `SELECT FeedbackIncorrect feedback,
+                                    DescriptionLink link,
+                                    LinkName linkname
+                                FROM Question
+                                INNER JOIN Quiz ON Quiz.QuizID = Question.QuizID
+                                INNER JOIN Topic ON Topic.TopicID = Quiz.TopicID
+                                WHERE QuestionID = ?`;
+    var receivedQuestion = [req.body.currentquestionID]; 
+
+    if(req.body.type == "multipleChoice") {
+        var answer = req.body.answer;
+        if(Array.isArray(req.body.answer)) {
+            answer = req.body.answer.join();
+        }
+
+        let sql = `SELECT FeedbackCorrect feedback
+                        FROM Question
+                        WHERE QuestionID = ? AND CorrectAnswer = ?`;
+        var currentQuestion = [req.body.currentquestionID, answer];                
+        //accesing database
+        getData(sql, currentQuestion).then(results => { 
+            if(results.length>0) {  
+                answerReturn = results;
+            }
+            else {
+                let sql = sqlIncorrect;
+                getData(sql, receivedQuestion).then(results => answerReturn = results);
+            }                            
+        });    
+    } 
+
+    //determines the correction for the multiChoice questions
+    function determineCorrection(array1, array2) {
+        array1= array1.sort();
+        array2= array2.sort();
+        return array1.length === array2.length &&
+            array1.every((val, index) => val === array2[index]);
     }
 
-    let sql = `SELECT FeedbackCorrect feedback
-                    FROM Question
-                    WHERE QuestionID = ? AND CorrectAnswer = ?`;
-     var currentQuestion = [req.body.currentquestionID, answer];                
-    //accesing database
-    getData(sql, currentQuestion).then(results => { 
-        if(results.length>0) {  
-              answerReturn = results;
-        }
-        else {
-            let sql = `SELECT FeedbackIncorrect feedback,
-                                DescriptionLink link,
-                                LinkName linkname
-                            FROM Question
-                            INNER JOIN Quiz ON Quiz.QuizID = Question.QuizID
-                            INNER JOIN Topic ON Topic.TopicID = Quiz.TopicID
-                            WHERE QuestionID = ?`;
-                var questionWrong = [req.body.currentquestionID];
-            getData(sql, questionWrong).then(results => answerReturn = results);
-        }                            
-    });
-        //print out of the feedback
-    setTimeout(function(){
-        console.log(answerReturn);
-        },3000);
+    //query correct answer for multiChoice and open
+    let sqlCorrect= `SELECT FeedbackCorrect feedback
+                        FROM Question
+                        WHERE QuestionID = ?`;
 
-    setTimeout(async function () {
-            const responseData = answerReturn;
-            res.json(responseData);
-        },15);      
-             
+    if(req.body.type == "multiChoice" ||req.body.type == "open") {
+        let sql = `SELECT CorrectAnswer correctanswer
+                        FROM Question
+                        WHERE QuestionID = ?`;                
+        //accesing database
+        getData(sql, receivedQuestion).then(results => { 
+            var arrayOfCorrect = (results[0].correctanswer).split(',');  
+            const insertedAnswer = (currentValue) => currentValue === req.body.answer;
+            if(req.body.type == "open") { 
+                if(arrayOfCorrect.some(insertedAnswer)){
+                    let sql = sqlCorrect;
+                    getData(sql, receivedQuestion).then(results => answerReturn = results);                   
+                }
+                else {
+                    let sql = sqlIncorrect;
+                    getData(sql, receivedQuestion).then(results => answerReturn = results);    
+                }
+            }
+            else{
+                if(determineCorrection(arrayOfCorrect, req.body.answer)) {
+                    let sql = sqlCorrect;
+                    getData(sql, receivedQuestion).then(results => answerReturn = results); 
+                }
+                else {
+                    let sql = sqlIncorrect;
+                    getData(sql, receivedQuestion).then(results => answerReturn = results); 
+                }
+            }
+        });
+    }
     
+            //print out of the feedback
+            setTimeout(function(){
+                console.log(answerReturn);
+            },3000);
     
-
+            setTimeout(async function () {
+                    const responseData = answerReturn;
+                    res.json(responseData);
+            },15);  
 });
 
 //now app is running - listening to requests on port 8046 

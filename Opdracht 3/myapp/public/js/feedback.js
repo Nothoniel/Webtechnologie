@@ -21,13 +21,13 @@ async function myAnswer(e) {
         answer = answerArray;
     }
 
-    sendAnswer(currentquestionID, answer); 
+    sendAnswer(currentquestionID, answer, typeOfQuestion); 
     e.preventDefault();
 }
 
-async function sendAnswer(currentquestionID, answer) {
+async function sendAnswer(currentquestionID, answer, type) {
     var req = new XMLHttpRequest();
-    var data = {currentquestionID, answer};
+    var data = {currentquestionID, answer, type};
     var options = JSON.stringify(data);
 
     req.open ("POST","feedback", true);
@@ -43,7 +43,7 @@ async function sendAnswer(currentquestionID, answer) {
             // var {questions, multi} = test;
         }
     }
-    req.send( options);
+    req.send(options);
 }
 
 
