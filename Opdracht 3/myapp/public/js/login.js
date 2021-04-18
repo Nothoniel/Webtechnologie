@@ -1,6 +1,6 @@
 clearPage = () => {
     var loginSection = document.querySelector(".webpage-content__section");
-    for (child of loginSection.childNodes)
+    for(child of loginSection.childNodes)
         loginSection.removeChild(child);
 }
 

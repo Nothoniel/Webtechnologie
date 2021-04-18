@@ -6,8 +6,8 @@ var typeOfQuestion;
 //shuffle and sort functions, later to be used as a callback in the question constructor
 shuffle = x => {
     //Fisher-Yates shuffle, source: https://www.w3schools.com/js/js_array_sort.asp
-    for(let i = x.length -1; i > 0; i--) {
-        let j = Math.floor(Math.random() * i)
+    for(let i = x.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * i);
         let k = x[i];
         x[i] = x[j];
         x[j] = k;
@@ -24,7 +24,7 @@ class excercise {
         this.question = question;
         this.correctAnswer = answers[0];
         this.answers = answers.slice();//slice so it is an independent copy, not just a reference
-        (orderType === undefined? shuffle:orderType) (this.answers);
+        (orderType === undefined? shuffle : orderType)(this.answers);
     }
 
     renderExcercise(i) {
@@ -51,8 +51,7 @@ class multipleChoice extends excercise {
         var quizForm = document.createElement("form");
         quizForm.setAttribute("id","userAnswer");
 
-        for(let k = 0; k < this.answers.length; k++)
-        {
+        for(let k = 0; k < this.answers.length; k++) {
             var answersContainer = document.createElement("input");
             answersContainer.setAttribute("type", "radio");
             answersContainer.setAttribute("name", "answersOfQ");
