@@ -1,22 +1,27 @@
-var getData = "";
 
-function sendRequest(getData) {
-    var data = {getData};
-    var options = {
-        method : "POST",
-        headers : {
-            "Content-Type" : "application/json",
-            "Accept" : "application/json"
-        },
-        body : JSON.stringify(data)
-    };
-    var response = fetch("/start", options);
+
+function myQuestion(e) {
+    var url = "question-display?quizid="+this.id;
+    // console.log(url);
+
+    var selectedQuizID= this.id;
+    get(url, selectedQuizID);
+    e.preventDefault();
 }
 
-function getStart() {
-    getData = "Startpage";
-    sendRequest(getData);
+function get(url, selectedQuizID) {
+    var req = new XMLHttpRequest();
+
+    req.open ("GET", url, true);
+    req.onreadystatechange = function () {
+        if( req.readyState === 4 && req.status === 200) {  
+            var result = req.response;      
+            var test =  JSON.parse(result);
+            var {questions, multi} = test;
+            
+            createQuiz(questions, multi, selectedQuizID);
+        }
+    }
+    req.send();
 }
 
-//event on the submit button that determines that t
-window.addEventListener("load", getStart());

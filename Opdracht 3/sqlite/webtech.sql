@@ -1,27 +1,30 @@
 /* table that containts all quizzes*/
 CREATE TABLE IF NOT EXISTS Topic (
+	`TopicID` varchar(6) NOT NULL,
 	`TopicTitle` varchar(20) NOT NULL, 
 	`DescriptionLink` varchar(20) NOT NULL,
 	`LinkName` varchar(20) NOT NULL,
-    CONSTRAINT PK_TopicTitle PRIMARY KEY (TopicTitle)
+    CONSTRAINT PK_TopicTitle PRIMARY KEY (TopicID)
 );
 
 /* inserting data into Topic table*/
-INSERT INTO Topic (TopicTitle, DescriptionLink, LinkName) VALUES('GoogleChrome', 'page1-google-chrome.html', 'Information about the correspondig theory!');
-INSERT INTO Topic (TopicTitle, DescriptionLink, LinkName) VALUES('MozillaFireFox', 'page2-mozilla-firefox.html', 'Information about the correspondig theory!');
+INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ01', 'GoogleChrome', 'page1-google-chrome.html', 'Information about the correspondig theory(Google Chrome)!');
+INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ02', 'MozillaFireFox', 'page2-mozilla-firefox.html', 'Information about the correspondig theory!(Mozilla FireFox)');
 
 
 CREATE TABLE IF NOT EXISTS Quiz (
+	`TopicID` varchar(6) NOT NULL,
 	`QuizID` varchar(6) NOT NULL, 
 	`QuizTitle` varchar(20) NOT NULL,
-    CONSTRAINT PK_QuizID PRIMARY KEY (QuizID)
+    CONSTRAINT PK_QuizID PRIMARY KEY (QuizID),
+	CONSTRAINT FK_QuizID FOREIGN KEY (TopicID ) REFERENCES Topic(TopicID)
 );
 
 /* inserting data into Quiz table*/
-INSERT INTO Quiz (QuizID, QuizTitle) VALUES('P1DQ01', 'GoogleChrome1');
-INSERT INTO Quiz (QuizID, QuizTitle) VALUES('P1DQ02', 'GoogleChrome2');
-INSERT INTO Quiz (QuizID, QuizTitle) VALUES('P1DQ03', 'MozillaFireFox1');
-INSERT INTO Quiz (QuizID, QuizTitle) VALUES('P1DQ04', 'FireFox2');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ01', 'P1DQ01', 'GoogleChrome1');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ01', 'P1DQ02', 'GoogleChrome2');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ02', 'P1DQ03', 'MozillaFireFox1');
+INSERT INTO Quiz (TopicID, QuizID, QuizTitle) VALUES('T2DQ02', 'P1DQ04', 'MozillaFireFox2');
 
 /*table that contains all the questions of the assesment system */
 CREATE TABLE IF NOT EXISTS Question (
@@ -40,24 +43,24 @@ CREATE TABLE IF NOT EXISTS Question (
 /* inserting data into question tables*/
 
 /* Quiz 1 */
-INSERT INTO Question VALUES('P1DQ01','Q1DQ01', 'multipleChoice', 'Question1', 'Good Answer', 'What year was Google Chrome first publicly on Windows?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
-INSERT INTO Question VALUES('P1DQ01','Q1DQ02', 'open', 'Question2', 'Good Answer', 'What is the Color of the middle circle of the Google Chrome Logo?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
-INSERT INTO Question VALUES('P1DQ01','Q1DQ03', 'multiChoice', 'Question3', 'Good Answer', 'Which of the are the obstacles encountered by a user playing the dinosaurgame?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ01','Q1DQ01', 'multipleChoice', 'Question1', '2008', 'What year was Google Chrome first publicly on Windows?', 'Incorrect, the correct answer was 2008', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ01','Q1DQ02', 'open', 'Question2', 'Blue,blue,Blu,Bleu', 'What is the Color of the middle circle of the Google Chrome Logo?', 'Incorrect, the correct answer was Blue, blue, Blu or Bleu', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ01','Q1DQ03', 'multiChoice', 'Question3', 'cacti,pterodactyls', 'Which of the are the obstacles encountered by a user playing the dinosaurgame?', 'Incorrect, the correct answer was cacti and pterodactyls', 'This is the correct answer');
 
 /* Quiz 2 */
-INSERT INTO Question VALUES('P1DQ01','Q1DQ04','open', 'Question1', 'Good Answer', 'What species of dinosaurs is controlled by the user when playing the dinosaurgame?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
-INSERT INTO Question VALUES('P1DQ02','Q1DQ05','multipleChoice', 'Question2', 'Good Answer', 'Which mode can be activated to for example make your browser unable to permanently store search history?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
-INSERT INTO Question VALUES('P1DQ02','Q1DQ06', 'multipleChoice', 'Question3', 'Good Answer', 'On which distribution of linux is Chrome OS based?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ02','Q1DQ04','open', 'Question1', 'Trex,trex,T-rex,Tyrannosaurus Rex', 'What species of dinosaurs is controlled by the user when playing the dinosaurgame?', 'Incorrect, the correct answer was Trex,trex,T-rex or Tyrannosaurus Rex', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ02','Q1DQ05','multipleChoice', 'Question2', 'incognity mode', 'Which mode can be activated to for example make your browser unable to permanently store search history?', 'Incorrect, the correct answer was incognity mode', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ02','Q1DQ06', 'multipleChoice', 'Question3', 'Gentoo', 'On which distribution of linux is Chrome OS based?', 'Incorrect, the correct answer was Gentoo', 'This is the correct answer');
 
 -- /* Quiz 3 */
-INSERT INTO Question VALUES('P1DQ03', 'Q1DQ07','multipleChoice', 'Question1', 'Good Answer', 'What year was Firefox 1.0 released?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
-INSERT INTO Question VALUES('P1DQ03', 'Q1DQ08', 'multiChoice', 'Question2', 'Good Answer', 'What programming language(s) did the application layer of FireFox OS consist of?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
-INSERT INTO Question VALUES('P1DQ03', 'Q1DQ09', 'open', 'Question3', 'Good Answer', 'What was the name of the layout-enginge used in FireFox OS?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ03', 'Q1DQ07','multipleChoice', 'Question1', '2004', 'What year was Firefox 1.0 released?', 'Incorrect, the correct answer was 2004', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ03', 'Q1DQ08', 'multiChoice', 'Question2', 'JavaScript,CSS,HTML5', 'What programming language(s) did the application layer of FireFox OS consist of?', 'Incorrect, the correct answer was JavaScript, CSS and HTML5', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ03', 'Q1DQ09', 'open', 'Question3', 'Gecko,gecko', 'What was the name of the layout-enginge used in FireFox OS?', 'Incorrect, the correct answer was Gecko or gecko', 'This is the correct answer');
 
 -- /* Quiz 4 */
-INSERT INTO Question VALUES('P1DQ04', 'Q1DQ10','multiChoice', 'Question1', 'Good Answer', 'Using which of the following 3 layers was FireFox Os built?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
-INSERT INTO Question VALUES('P1DQ04', 'Q1DQ11', 'open', 'Question2', 'Good Answer', 'What was the original name of Firefox?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
-INSERT INTO Question VALUES('P1DQ04', 'Q1DQ12', 'ordering', 'Question3', 'Good Answer', 'What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?', 'Incorrect, the good answer is this ..', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ04', 'Q1DQ10','multiChoice', 'Question1', 'applicationlayer,Open Web Platform Interface,infrastructurelayer ', 'Using which of the following 3 layers was FireFox Os built?', 'Incorrect, the correct answer was applicationlayer, Open Web Platform Interface and infrastructurelayer', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ04', 'Q1DQ11', 'open', 'Question2', 'Phoenix,phoenix,Foenix,foenix', 'What was the original name of Firefox?', 'Incorrect, the correct answer was Phoenix,phoenix,Foenix or foenix', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ04', 'Q1DQ12', 'ordering', 'Question3', 'Google Chrome,Safari,Mozilla Firefox,Microsoft Edge', 'What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?', 'Incorrect, the correct order was Google Chrome,Safari,Mozilla Firefox,Microsoft Edge', 'This is the correct answer');
 
 /* table that contains the multichoice values for a question */
 CREATE TABLE IF NOT EXISTS Multichoice (
