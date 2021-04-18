@@ -1,3 +1,4 @@
+//Register page DOM
 createRegisterPage = () => {   
     var loginSection = document.querySelector(".webpage-content__section");
     var loginSubSection = document.createElement("section");

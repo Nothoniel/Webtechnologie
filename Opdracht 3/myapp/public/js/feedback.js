@@ -1,4 +1,4 @@
-
+//sends users input to server, processes the feedback response
 myAnswer = e => {
     var answer;
     var answerArray = [];

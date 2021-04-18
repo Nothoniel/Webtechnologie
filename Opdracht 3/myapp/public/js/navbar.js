@@ -1,4 +1,4 @@
-
+//this function creates the content of the account tab with DOM
 createAccountTab = () => {
     var navlist = document.querySelector(".navlist");
     var user = document.cookie.user;

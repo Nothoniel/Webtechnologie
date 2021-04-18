@@ -10,31 +10,14 @@ var serveStatic = require("serve-static");
 let getData = require("./data");
 let db = require("./db");
 let insertData = require("./insert_data");
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 let sqlParams;
 
 var dataArray, questions, answerReturn;
 var multi = [];
 const PORT = 8046; 
 
-//setting up session
-// initialise and use session middleware
-// app.use(session({secret: 'power creep'}));
-
-// var curentSession; // session variable
-// app.get('/', function(req,res){
-//     curentSession = req.session; 
-//     if(curentSession.id) {
-//         res.redirect('/user');
-//     } 
-//     else {
-//         res.render('index.html');
-//     }
-// });
-
-//flash messages are possible
-// app.use(flash());
-
-// app.use(cookieParser());
+//create session
 app.use(session({
     secret : "mokergeheim",
     resave : true,
@@ -52,12 +35,6 @@ app.set("json spaces", 10);
 app.use(serveStatic(path.join(__dirname, "public")));
 app.use(express.json({limit : "100mb"}));
 
-//called every time an http request is received, like a starting file can be set  
-// app.get('/', (req, res) => {
-//     res.send('Node App is running');
-// });
-
-
 //display of startpage of assesment system
 app.get("/start", (req, res) => {
     let sql = `SELECT TopicTitle topictitle,
@@ -70,29 +47,10 @@ app.get("/start", (req, res) => {
     //accesing database
     getData(sql, sqlParams).then(results => dataArray = results);
 
-    // setTimeout(function(){
-    //     console.log(dataArray);
-    //     },10);
-
     setTimeout(async function() {
          const responseData = dataArray;
          res.json(responseData);
     }, 15);    
-
-    //do something with the received data from client
-    //as example printing it out
-    // console.log(req.body.getData);
-
-    //example 1: default
-    //rename the object and insertion of one or more values
-    // const responseData = { 
-    //     page: req.body.getData
-    // };
-    // res.json(responseData);
-
-    //example 3: array of objects
-    // const responseData = [{ color: "yellow"},{ color: "green"} ];
-    // res.json(responseData);
 });
 
 app.get('/question-display', (req, res) => {
@@ -123,7 +81,6 @@ app.get('/question-display', (req, res) => {
                     getData(sql, sqlParams).then(results => multi.push(results));
                 }
             }
-
             setTimeout(function() {res.json({questions : questions, multi : multi});},10);
         },1000);     
 });
@@ -147,18 +104,16 @@ app.post("/login", (req, res) => {
         try {
             //compares the username of db with the inserted one and stores the found user in a variable
             let foundUser = dataArray.find(dataArray => req.body.username === dataArray.username);
-            if (foundUser) {
+            if(foundUser) {
                 console.log("user found");
                 console.log(foundUser);
                 //comparing password of inserted user with that of the found user
-                if (req.body.password == foundUser.password) {
+                if(req.body.password == foundUser.password) {
                     console.log("successful log in");
                     req.session.user = foundUser;
                     req.session.user.attempts = 0;
                     req.session.user.correctAttempts = 0;
                     res.json({message: "succesful log in"});
-                    //foundUser.firstname
-                    //foundUser.lastname
                 } else {
                     res.flash("not matching");
                     res.json({message: "user or password not found"})  
@@ -181,7 +136,7 @@ app.post("/logout", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-    if (req.body.password !== req.body.confirm)
+    if(req.body.password !== req.body.confirm)
         res.send("password confirmation did not match password");
     console.log("Registering new user");
     //user sql query
@@ -196,7 +151,7 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/edit", (req, res) => {
-    if (req.body.password !== req.body.confirm)
+    if(req.body.password !== req.body.confirm)
         res.send("password confirmation did not match password");
     console.log("Registering new user");
 
@@ -223,7 +178,7 @@ app.post("/edit", (req, res) => {
 });    
     
 
-app.post('/feedback', (req, res) => {
+app.post("/feedback", (req, res) => {
     console.log("request came in");
     // console.log(req.body.currentquestionID, req.body.answer);
     let user = [req.session.user.username];
@@ -271,9 +226,8 @@ app.post('/feedback', (req, res) => {
         var currentQuestion = [req.body.currentquestionID, answer];                
         //accesing database
         getData(sql, currentQuestion).then(results => { 
-            if(results.length > 0) {  
+            if(results.length > 0)
                 answerReturn = results;
-            }
             else {
                 executeQuery(sqlIncorrect, receivedQuestion);  
             }                            
@@ -351,10 +305,9 @@ app.post("/report", (req, res) => {
 });
 
 app.post("/user", (req, res) => {
-    if(req.session.user) {
-        console.log(req.session.user);
+    if(req.session.user)
         res.send(req.session.user);
-    } else {res.send();}
+    res.send();
 });
 
 app.use(function (err, req, res, next) {

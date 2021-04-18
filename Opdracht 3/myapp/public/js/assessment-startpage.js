@@ -1,3 +1,5 @@
+//script for rendering the assessment startpage
+
 //quizes
 let quiz1 = [], quiz2 =[], quiz3 = [], quiz4 = [];
 

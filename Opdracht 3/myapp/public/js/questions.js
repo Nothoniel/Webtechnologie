@@ -1,3 +1,4 @@
+//this is the js file containing most of the functions regarding questions
 var quizSection = document.querySelector(".webpage-content__section");
 var emptyArray= [];
 var currentquestionID; 
@@ -255,7 +256,6 @@ function createQuiz(questions, multi, selectedQuizID){
     }
     renderQuiz(topicIndex, quizIndex, 0, questions);
 }
-
 
 async function renderSelection(responseQuizTitle, responseQuizID, responseDescription, topicArray) {
     //We first reset the page to its html basics, so we can reuse those

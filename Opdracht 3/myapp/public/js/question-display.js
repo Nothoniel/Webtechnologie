@@ -1,8 +1,7 @@
-
+//js file containing function to display a question
 
 function myQuestion(e) {
     var url = "question-display?quizid=" + this.id;
-    // console.log(url);
 
     var selectedQuizID = this.id;
     get(url, selectedQuizID);
