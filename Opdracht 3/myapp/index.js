@@ -8,7 +8,6 @@ const fetch = require('node-fetch');
 var serveStatic = require('serve-static');
 let getData = require('./data');
 let insertData = require('./insert_data');
-// let updateData = require('./update_data');
 const cookieParser = require('cookie-parser');
 
 var dataArray;
@@ -35,6 +34,8 @@ app.use(cookieParser());
 app.use(session(
     {
     secret: 'mokergeheim',
+    resave: true,
+    saveUninitialized: false
     })
 );
 
@@ -164,6 +165,7 @@ app.post('/user', (req, res) => {
     res.send();
     }
 });
+
 //now app is running - listening to requests on port 8046 
 app.listen(PORT, function(){     
     console.log('Server started on port 8046...');

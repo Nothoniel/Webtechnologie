@@ -5,15 +5,15 @@ var id;
 
 if(document.getElementById("registerform")) {
     url = '/register';
-    id = 'registerform';
+    id = '#registerform';
 }
 else if (document.getElementById("loginform")) {
     url = '/login';
-    id = 'loginform';
+    id = '#loginform';
 }
-else if (document.getElementById("settingsform")) {
-    url = '/login';
-    id = 'settingsform';
+else {
+    url = '/edit';
+    id = '#settingsform';
 }
 
 //converts it to JSON and post the data
@@ -52,7 +52,8 @@ function readForm(e) {
 }
 
 //event on the submit button that makes a new user
-document.getElementById(id).addEventListener("submit", readForm);
+console.log(id);
+document.querySelector(id).addEventListener("submit", readForm);
 
 
 

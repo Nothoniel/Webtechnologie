@@ -5,13 +5,13 @@ function createSettings(user) {
     settingsSubSection.setAttribute("class","webpage-content__section__subsection");
 
     var settingsFormHeader = document.createElement("h2");
-    settingsFormHeader.appendChild(document.createTextNode("change account details of user: " + user.username))
+    settingsFormHeader.appendChild(document.createTextNode("change account details"))
 
     var settingsForm = document.createElement("form");
     settingsForm.setAttribute("id","settingsform");
 
     var FirstNameInput = document.createElement("input");
-    FirstNameInput.setAttribute("name","FirstName");
+    FirstNameInput.setAttribute("name","firstName");
     settingsForm.appendChild(FirstNameInput);
 
     var lastNameInput = document.createElement("input");
@@ -35,6 +35,7 @@ function createSettings(user) {
 
     var submitButton = document.createElement("input");
     submitButton.setAttribute("type","submit");
+    submitButton.setAttribute("id","submit");
     submitButton.setAttribute("value","Submit");
     settingsForm.appendChild(submitButton);    
 
@@ -44,20 +45,4 @@ function createSettings(user) {
     settingsSection.appendChild(settingsSubSection);
 }
 
-function getUser(callback) {
-    var req = new XMLHttpRequest();
-    var user;
-
-    req.open("POST", '/user', true)
-    req.onreadystatechange = function () {
-        if(req.readyState === 4 && req.status === 200) {
-            user = req.response;
-            if (user) user = JSON.parse(user);
-            console.log(user);
-            callback(user);
-        }
-    }
-    req.send();
-}
-
-getUser(createSettings);
+createSettings();
