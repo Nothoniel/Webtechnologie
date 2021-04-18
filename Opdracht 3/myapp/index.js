@@ -227,6 +227,9 @@ app.post("/edit", (req, res) => {
                           WHERE UserName = ? AND Password = ?`;
         insertData(update_sql, user);
     } catch {res.send();}
+});    
+    
+
 app.post('/feedback', (req, res) => {
     console.log("request came in");
     // console.log(req.body.currentquestionID, req.body.answer);
@@ -318,10 +321,6 @@ app.post('/feedback', (req, res) => {
     },15);  
 });
 
-//now app is running - listening to requests on port 8046 
-app.listen(PORT, function(){     
-    console.log('Server started on port 8046...');
-});
 
 app.post("/user", (req, res) => {
     if (req.session.user) {
@@ -331,4 +330,6 @@ app.post("/user", (req, res) => {
 });
 
 //now app is running - listening to requests on port 8046 
-app.listen(PORT, function() {console.log("Server started on port 8046...");});
+app.listen(PORT, function(){     
+    console.log('Server started on port 8046...');
+});
