@@ -26,7 +26,6 @@ async function myAnswer(e) {
 
     if(answerArray.length>0){
         answer = answerArray;
-        console.log(answer);
     }
 
     sendAnswer(currentquestionID, answer, typeOfQuestion); 

@@ -246,6 +246,11 @@ app.post('/feedback', (req, res) => {
                                 WHERE QuestionID = ?`;
     var receivedQuestion = [req.body.currentquestionID]; 
 
+    //get data from database
+    function executeQuery(sql, receivedQuestion){
+        getData(sql, receivedQuestion).then(results => answerReturn = results);
+    }
+
     if(req.body.type == "multipleChoice") {
         var answer = req.body.answer;
         if(Array.isArray(req.body.answer)) {
@@ -262,16 +267,17 @@ app.post('/feedback', (req, res) => {
                 answerReturn = results;
             }
             else {
-                let sql = sqlIncorrect;
-                getData(sql, receivedQuestion).then(results => answerReturn = results);
+                executeQuery(sqlIncorrect, receivedQuestion);  
             }                            
         });    
     } 
 
-    //determines the correction for the multiChoice questions
+    //determines the correction for questions where multiple answers can be given
     function determineCorrection(array1, array2) {
-        array1= array1.sort();
-        array2= array2.sort();
+        if(req.body.type == "multiChoice") {
+            array1= array1.sort();
+            array2= array2.sort();
+        }
         return array1.length === array2.length &&
             array1.every((val, index) => val === array2[index]);
     }
@@ -281,7 +287,7 @@ app.post('/feedback', (req, res) => {
                         FROM Question
                         WHERE QuestionID = ?`;
 
-    if(req.body.type == "multiChoice" ||req.body.type == "open") {
+    if(req.body.type !== "multipleChoice") {
         let sql = `SELECT CorrectAnswer correctanswer
                         FROM Question
                         WHERE QuestionID = ?`;                
@@ -291,22 +297,19 @@ app.post('/feedback', (req, res) => {
             const insertedAnswer = (currentValue) => currentValue === req.body.answer;
             if(req.body.type == "open") { 
                 if(arrayOfCorrect.some(insertedAnswer)){
-                    let sql = sqlCorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results);                   
+                    executeQuery(sqlCorrect, receivedQuestion);                  
                 }
                 else {
-                    let sql = sqlIncorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results);    
+                    executeQuery(sqlIncorrect, receivedQuestion);     
                 }
             }
-            else{
+            //order and multiChoce question
+            else {
                 if(determineCorrection(arrayOfCorrect, req.body.answer)) {
-                    let sql = sqlCorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results); 
+                    executeQuery(sqlCorrect, receivedQuestion);  
                 }
                 else {
-                    let sql = sqlIncorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results); 
+                    executeQuery(sqlIncorrect, receivedQuestion);  
                 }
             }
         });
