@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Topic (
 
 /* inserting data into Topic table*/
 INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ01', 'GoogleChrome', 'page1-google-chrome.html', 'Information about the correspondig theory(Google Chrome)!');
-INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ02', 'MozillaFireFox', 'page2-mozilla-firefox.html', 'Information about the correspondig theory!(Mozilla FireFox)');
+INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ02', 'MozillaFireFox', 'page2-mozilla-firefox.html', 'Information about the correspondig theory(Mozilla FireFox)!');
 
 
 CREATE TABLE IF NOT EXISTS Quiz (
