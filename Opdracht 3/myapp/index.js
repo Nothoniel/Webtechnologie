@@ -280,15 +280,15 @@ app.post('/feedback', (req, res) => {
         });
     }
     
-            //print out of the feedback
-            setTimeout(function(){
-                console.log(answerReturn);
-            },3000);
-    
-            setTimeout(async function () {
-                    const responseData = answerReturn;
-                    res.json(responseData);
-            },15);  
+    //print out of the feedback
+    setTimeout(function(){
+        console.log(answerReturn);
+    },3000);
+
+    setTimeout(async function () {
+            const responseData = answerReturn;
+            res.json(responseData);
+    },15);  
 });
 
 //now app is running - listening to requests on port 8046 
