@@ -1,6 +1,6 @@
 var quizSection = document.querySelector(".webpage-content__section");
 var emptyArray= [];
-var currentquestionID; // better solution?
+var currentquestionID; 
 var typeOfQuestion;
 
 //shuffle and sort functions, later to be used as a callback in the question constructor
@@ -17,7 +17,6 @@ shuffle = x => {
 sortAlphabetically = x => x.sort();
 
 sortNumerically = x => x.sort(function(a, b){return a - b});
-
 //This is the fundamental class of the question-objects
 class excercise {
     constructor(question, answers, orderType) {
@@ -190,7 +189,6 @@ function createMultiBoxes(id, multi){
             }
         }
     }
-    // console.log(boxes);
     return boxes;
 }
 
@@ -286,8 +284,6 @@ async function renderSelection(responseQuizTitle, responseQuizID, responseDescri
             }
 
             //here we give the third variable the value of 0, making it so the quiz will start at the first question
-            // selectButton.addEventListener("click", function() {renderQuiz(i, j, 0, topicArray);});
-
             selectButton.addEventListener("click", myQuestion);
 
    
@@ -314,11 +310,6 @@ renderQuiz = (i, j, k, questions) =>
         quizSection.removeChild(quizSection.firstChild);
     
     topicArray[i][0][j][k].renderExcercise(k);
-
-    // var quizResults = [];
-    // for(let i = 0; i < questions.length; i++)
-    //     quizResults.push(questions[i].checkAnswer(i));
-    // var givenAnswers = [];
 
     var buttonSection = document.createElement("section");
     buttonSection.className = "webpage-content__section__subsection";
@@ -353,65 +344,17 @@ renderQuiz = (i, j, k, questions) =>
     returnSelectButton.value = "Return to Selectscreen";
     returnSelectButton.addEventListener("click", getStartPage);
 
-    console.log(questions[k].type);
-    currentquestionID = questions[k].questionid; // better solution?
+    currentquestionID = questions[k].questionid; 
     typeOfQuestion = questions[k].type;
     
     var checkButton = document.createElement("input");
-    // checkButton.setAttribute( "id", "subbutton");
     checkButton.setAttribute( "type", "submit");
     checkButton.setAttribute( "value", "Check Answers");
-    // checkButton.addEventListener("click", function(){checkAnswers(i, j, k, topicArray)});
     checkButton.addEventListener("click", myAnswer);
-
-    // var finishButton = document.createElement("input");
-    // finishButton.type = "button";
-    // finishButton.value = "Finish Quiz";
-    // finishButton.addEventListener("click", function() {finishQuiz();});
-    // document.getElementById("userAnswer").addEventListener("submit", myAnswer);
 
     buttonSection.appendChild(checkButton);
     buttonSection.appendChild(returnSelectButton);
-    // resultSection.appendChild(document.createElement("br"));
-    // resultSection.appendChild(finishButton);
-
     quizSection.appendChild(buttonSection);
 }
-
-//The answers will be checked here, when the corresponding button has been clicked
-// checkAnswers = (i, j, k, topicArray) =>
-// {
-//     var resultSection = document.createElement("section");
-//     resultSection.className = "webpage-content__section__subsection";
-
-//     var checkButton = document.getElementById("Check");
-//     var buttonSection = document.getElementsByClassName("webpage-content__section__subsection")[1];
-//     buttonSection.removeChild(checkButton);
-//     var feedback = document.createTextNode("Your answer for this question is " + (topicArray[i][0][j][k].checkAnswer(k)?"correct":"incorrect"));
-//     resultSection.appendChild(feedback);
-//     if(!topicArray[i][0][j][k].checkAnswer(k))
-//     {
-//         var linkInformation = document.createElement("a");
-//         linkInformation.href = topicArray[i][2];
-//         linkInformation.appendChild(document.createTextNode("You can find the corresponding theory here!"));
-//         resultSection.appendChild(document.createElement("br"));
-//         resultSection.appendChild(linkInformation);
-//     }
-//     quizSection.appendChild(resultSection);
-// }
-
-//Dit Soort shit moet je doen voor een nieuwe FinishQuiz Screen
-/////////////////////////////////////////////////////////
-// finishQuiz = () =>
-// {
-//     while(quizSection.firstChild)
-//         quizSection.removeChild(quizSection.firstChild);
-
-//     // //count the number of correctly answered questions
-//     // var numberCorrect = 0;
-//     // for(result of quizResults)
-//     //     if (result) numberCorrect++;
-//     //En daarna moet je shit nog displayen
-// }
 
 

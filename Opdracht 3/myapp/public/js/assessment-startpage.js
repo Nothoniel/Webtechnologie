@@ -19,8 +19,6 @@ async function respondFunction(options) {
     //fetching the data of the server
     var response = await fetch("/start", options);
     var data = await response.json(); 
-    // console.log(data);
-    // console.log(data[0].quiztitle);
 
     //quiz buttons
     var responseQuizTitle = [];
@@ -37,12 +35,8 @@ async function respondFunction(options) {
 
     allQuizzes = responseQuizID.slice(0,data.length); //want to re-use these values
 
-    // console.log(allQuizzes);
-
     //creating topics 
     //insert every topic into an array
-
-    
     topicArray.length = 0;
     for(let i = 0; i < data.length; i++)
     {
