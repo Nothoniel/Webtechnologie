@@ -6,7 +6,7 @@ var typeOfQuestion;
 //shuffle and sort functions, later to be used as a callback in the question constructor
 shuffle = x => {
     //Fisher-Yates shuffle, source: https://www.w3schools.com/js/js_array_sort.asp
-    for (let i = x.length -1; i > 0; i--) {
+    for(let i = x.length -1; i > 0; i--) {
         let j = Math.floor(Math.random() * i)
         let k = x[i];
         x[i] = x[j];
@@ -16,7 +16,7 @@ shuffle = x => {
 
 sortAlphabetically = x => x.sort();
 
-sortNumerically = x => x.sort(function(a, b){return a - b});
+sortNumerically = x => x.sort(function(a, b) {return a - b});
 
 //This is the fundamental class of the question-objects
 class excercise {
