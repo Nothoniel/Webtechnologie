@@ -104,14 +104,13 @@ app.get('/question-display', (req, res) => {
                           ProblemStatement problemstatement
                         FROM Question
                         WHERE QuizID = ?`;
-        let sqlParams = [req.query.quizid];                 
+        let sqlParams = [req.query.quizid]; 
+
+                        
         //accesing database
         getData(sql, sqlParams).then(results => questions = results);
     
-        // setTimeout(function(){
-        //     console.log(questions);
-        //     },3000);    
-    
+  
         setTimeout(async function () {
             if(multi.length>0) {
                 multi.length = 0;
@@ -333,6 +332,15 @@ app.post("/user", (req, res) => {
         console.log(req.session.user);
         res.send(req.session.user);
     } else {res.send();}
+});
+
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    next(err);
+});
+
+app.use(function (err, req, res, next) {
+    res.status(500).send("Something failed!");
 });
 
 //closing of the db, when closing server
