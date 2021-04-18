@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const fetch = require('node-fetch');
 var serveStatic = require('serve-static');
 let getData = require('./data');
+
 let insertData = require('./insert_data');
 let sqlParams;
 
@@ -33,7 +34,8 @@ const PORT=8046;
 
 //flash messages are possible
 // app.use(flash());
-app.use(cookieParser());
+
+// app.use(cookieParser());
 app.use(session({
     secret : "mokergeheim",
     resave : true,

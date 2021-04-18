@@ -19,6 +19,6 @@ insertData = (insert_sql, newUser) => {
     });
 }
 
-module.exports = insertData();
+module.exports = insertData;
 
 

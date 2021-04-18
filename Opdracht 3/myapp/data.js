@@ -25,6 +25,6 @@ function getData(sql, sqlParams) {
     });
 }
 
-module.exports = getData();
+module.exports = getData;
 
 
