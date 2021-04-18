@@ -1,3 +1,5 @@
+//js file containing methods regarding data exchange on login, register and edit page
+
 //the id of the form and the url for the posting
 var url, id;
 
@@ -25,7 +27,6 @@ async function convertToJSON({formData}) {
         body : JSON.stringify(data)
     };
     var rawResponse = await fetch(url, options);
-    console.log(rawResponse.message);
     var response = await rawResponse.json();
     if(response.message == "succesful log in") {
         //redirect to index.html
@@ -48,7 +49,6 @@ async function readForm (e) {
 }
 
 //event on the submit button that makes a new user
-console.log(id);
 document.querySelector(id).addEventListener("submit", readForm);
 
 

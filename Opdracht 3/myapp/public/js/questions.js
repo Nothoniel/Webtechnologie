@@ -1,5 +1,6 @@
+//this is the js file containing most of the functions regarding questions
 var quizSection = document.querySelector(".webpage-content__section");
-var emptyArray= [];
+var emptyArray = [];
 var currentquestionID; // better solution?
 var typeOfQuestion;
 
@@ -214,7 +215,6 @@ function createMultiBoxes(id, multi){
             }
         }
     }
-    // console.log(boxes);
     return boxes;
 }
 
@@ -239,8 +239,6 @@ function determineQuiz(selectedQuizID) {
 
 
 function createQuiz(questions, multi, selectedQuizID){
-    // console.log(multi[0][1].questionid);
-    // console.log(selectedQuizID);
     //index of quiz in quiz array
     var quizIndex = allQuizzes.indexOf(selectedQuizID);
 
@@ -283,157 +281,6 @@ function createQuiz(questions, multi, selectedQuizID){
     }
     renderQuiz(topicIndex, quizIndex, 0, questions);
 }
-
-
-//Here we define all of the quizzes, which will hereafter be put in the corresponding topicArray's array of quizzes
-// let quiz1 = 
-// [
-//     new multipleChoice(
-//         "What year was Google Chrome first publicly on Windows?",
-//         [
-//             "2008",
-//             "2005",
-//             "2006",
-//             "2007",
-//             "2009"
-//         ],
-//         sortNumerically
-//     ),
-//     new open(
-//         "What is the Color of the middle circle of the Google Chrome Logo?",
-//         [
-//             "Blue",
-//             "blue",
-//             "Blu",
-//             "blu",
-//             "Bleu",
-//             "bleu"
-//         ]
-//     ),
-//     new multiChoice(
-//         "Which of the are the obstacles encountered by a user playing the dinosaurgame?",
-//         [
-//             "cacti",
-//             "pterodactyls",
-//             "bats",
-//             "birds",
-//             "fences",
-//             "spikes",
-//         ],
-//         sortAlphabetically,
-//         2
-//     )
-// ];
-
-// let quiz2 =
-// [
-//     new open(
-//         "What species of dinosaurs is controlled by the user when playing the dinosaurgame?",
-//         [
-//             "Trex",
-//             "trex",
-//             "T-rex",
-//             "t-rex",
-//             "Tyrannosaurus Rex",
-//             "tyrannosaurus rex",
-//             "Tyrannosaurus rex",
-//             "tyrannosaurus Rex"
-//         ]
-//     ),
-//     new multipleChoice(
-//         "Which mode can be activated to for example make your browser unable to permanently store search history?",
-//         [
-//             "incognity mode",
-//             "stealth mode",
-//             "dark mode",
-//             "invisible mode",
-//             "VPNmode",
-//             "privacy mode"
-//         ]
-//     ),
-//     new multipleChoice(
-//         "On which distribution of linux is Chrome OS based?",
-//         [
-//             "Gentoo",
-//             "Gecko",
-//             "Manjaro",
-//             "KDE",
-//             "Ubuntu",
-//             "Fedora",
-//             "Peppermint"     
-//         ]
-//     )
-// ];
-
-// let quiz3 =
-// [
-//     new multipleChoice(
-//         "What year was Firefox 1.0 released?",
-//         [
-//             "2004",
-//             "2003",
-//             "2002",
-//             "2001"
-//         ],
-//         sortNumerically
-//     ),
-//     new multiChoice(
-//         "What programming language(s) did the application layer of FireFox OS consist of?",
-//         [
-//             "HTML5",
-//             "JavaScript",
-//             "CSS",
-//             "Jade/pug",
-//             "XML",
-//             "JSON"
-//         ],
-//         shuffle,
-//         3
-//     ),
-//     new open(
-//         "What was the name of the layout-enginge used in FireFox OS?",
-//         [
-//             "Gecko",
-//             "gecko"
-//         ]
-//     )
-// ];
-
-// let quiz4 =
-// [
-//     new multiChoice(
-//         "Using which of the following 3 layers was FireFox Os built?",
-//         [
-//             "applicationlayer",
-//             "Open Web Platform Interface",
-//             "infrastructurelayer",
-//             "Closed Web Platform Interface",
-//             "datalayer",
-//             "networklayer",
-//             "connectionlayer"
-//         ],
-//         shuffle,
-//         3
-//     ),
-//     new open(
-//         "What was the original name of Firefox?",
-//         [
-//             "Phoenix",
-//             "phoenix",
-//             "Foenix",
-//             "foenix"
-//         ]
-//     ),
-//     new ordering(
-//         "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
-//         [
-//             "Google Chrome",
-//             "Safari",
-//             "Mozilla Firefox",
-//             "Microsoft Edge"
-//         ]
-//     )
-// ];
 
 async function renderSelection(responseQuizTitle, responseQuizID, responseDescription, topicArray) {
     //We first reset the page to its html basics, so we can reuse those
@@ -491,11 +338,6 @@ renderQuiz = (i, j, k, questions) =>
     
     topicArray[i][0][j][k].renderExcercise(k);
 
-    // var quizResults = [];
-    // for(let i = 0; i < questions.length; i++)
-    //     quizResults.push(questions[i].checkAnswer(i));
-    // var givenAnswers = [];
-
     var buttonSection = document.createElement("section");
     buttonSection.className = "webpage-content__section__subsection";
 
@@ -527,15 +369,12 @@ renderQuiz = (i, j, k, questions) =>
     returnSelectButton.value = "Return to Selectscreen";
     returnSelectButton.addEventListener("click", getStartPage);
 
-    console.log(questions[k].type);
-    currentquestionID = questions[k].questionid; // better solution?
+    currentquestionID = questions[k].questionid;
     typeOfQuestion = questions[k].type;
     
     var checkButton = document.createElement("input");
-    // checkButton.setAttribute( "id", "subbutton");
     checkButton.setAttribute("type", "submit");
     checkButton.setAttribute("value", "Check Answers");
-    // checkButton.addEventListener("click", function(){checkAnswers(i, j, k, topicArray)});
 
     getUser(function(user) {
         if(user) 
@@ -544,54 +383,9 @@ renderQuiz = (i, j, k, questions) =>
             checkButton.addEventListener("click", function() {window.alert("You have to log in to check your given answers!");});
     });   
 
-    // var finishButton = document.createElement("input");
-    // finishButton.type = "button";
-    // finishButton.value = "Finish Quiz";
-    // finishButton.addEventListener("click", function() {finishQuiz();});
-    // document.getElementById("userAnswer").addEventListener("submit", myAnswer);
-
     buttonSection.appendChild(checkButton);
     buttonSection.appendChild(returnSelectButton);
-    // resultSection.appendChild(document.createElement("br"));
-    // resultSection.appendChild(finishButton);
 
     quizSection.appendChild(buttonSection);
 }
-
-//The answers will be checked here, when the corresponding button has been clicked
-// checkAnswers = (i, j, k, topicArray) =>
-// {
-//     var resultSection = document.createElement("section");
-//     resultSection.className = "webpage-content__section__subsection";
-
-//     var checkButton = document.getElementById("Check");
-//     var buttonSection = document.getElementsByClassName("webpage-content__section__subsection")[1];
-//     buttonSection.removeChild(checkButton);
-//     var feedback = document.createTextNode("Your answer for this question is " + (topicArray[i][0][j][k].checkAnswer(k)?"correct":"incorrect"));
-//     resultSection.appendChild(feedback);
-//     if(!topicArray[i][0][j][k].checkAnswer(k))
-//     {
-//         var linkInformation = document.createElement("a");
-//         linkInformation.href = topicArray[i][2];
-//         linkInformation.appendChild(document.createTextNode("You can find the corresponding theory here!"));
-//         resultSection.appendChild(document.createElement("br"));
-//         resultSection.appendChild(linkInformation);
-//     }
-//     quizSection.appendChild(resultSection);
-// }
-
-//Dit Soort shit moet je doen voor een nieuwe FinishQuiz Screen
-/////////////////////////////////////////////////////////
-// finishQuiz = () =>
-// {
-//     while(quizSection.firstChild)
-//         quizSection.removeChild(quizSection.firstChild);
-
-//     // //count the number of correctly answered questions
-//     // var numberCorrect = 0;
-//     // for(result of quizResults)
-//     //     if (result) numberCorrect++;
-//     //En daarna moet je shit nog displayen
-// }
-
 

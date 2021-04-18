@@ -1,3 +1,5 @@
+//script for rendering the assessment startpage
+
 //quizes
 let quiz1 = [], quiz2 =[], quiz3 = [], quiz4 = [];
 
@@ -15,8 +17,6 @@ async function respondFunction(options) {
     //fetching the data of the server
     var response = await fetch("/start", options);
     var data = await response.json(); 
-    // console.log(data);
-    // console.log(data[0].quiztitle);
 
     //quiz buttons
     var responseQuizTitle = [], responseDescription = [], responseQuizID = [];
@@ -28,8 +28,6 @@ async function respondFunction(options) {
     }
 
     allQuizzes = responseQuizID.slice(0, data.length); //want to re-use these values
-
-    // console.log(allQuizzes);
 
     //creating topics 
     //insert every topic into an array

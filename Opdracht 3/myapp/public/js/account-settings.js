@@ -1,3 +1,4 @@
+//account settings page DOM
 createSettings = user => { 
     var settingsSection = document.querySelector(".webpage-content__section");
 
@@ -89,6 +90,7 @@ createSettings = user => {
     settingsSection.appendChild(settingsSubSection);
 }
 
+//sends request to server, so that the user is logged out
 logout = () => {
     var req = new XMLHttpRequest();
 

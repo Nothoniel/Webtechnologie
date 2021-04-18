@@ -1,4 +1,4 @@
-
+//report.html DOM
 function renderReport(user) {
     var reportSection = document.querySelector(".webpage-content__section");
 
@@ -12,6 +12,7 @@ function renderReport(user) {
     var reportList = document.createElement("ul");
 
     var userReport = document.createElement("li");
+    //displays percentage, rounded rounded on 2nd decimal
     if(user.overallAttempts)
         userReport.appendChild(document.createTextNode("User's overall succes rate: " + Math.round(10000 * user.overallCorrectAttempts / user.overallAttempts) / 100 + "%"));
     else
@@ -29,6 +30,7 @@ function renderReport(user) {
     reportSection.appendChild(reportSubsection);
 }
 
+//gets the user and runs a callback with it
 getUserStats = callback => {
     var req = new XMLHttpRequest();
 
@@ -38,7 +40,6 @@ getUserStats = callback => {
             var user = req.response;
             if(user)
                 user = JSON.parse(user);
-            console.log(user);
             callback(user);
         }
     };

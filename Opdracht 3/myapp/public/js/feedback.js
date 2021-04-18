@@ -1,4 +1,4 @@
-
+//sends users input to server, processes the feedback response
 myAnswer = e => {
     var answer;
     var answerArray = [];
@@ -43,24 +43,8 @@ async function sendAnswer(currentquestionID, answer, type) {
     req.onreadystatechange = function() {
         if(req.readyState === 4 && req.status === 200) {  
             var result = req.response;
-            var feedback = JSON.parse(result);
-            //printing out the whole object
-            console.log(feedback); 
-            //printing out something specific
-            console.log(feedback[0].feedback);      
-            // var {questions, multi} = test;
+            var feedback = JSON.parse(result);  
         }
     };
     req.send(options);
 }
-
-
-// var answerForm = document.getElementById("userAnswer");
-// if(answerForm){
-//     answerForm.addEventListener("click", myAnswer);
-// }
-
-// var answerForm= document.getElementById("userAnswer");
-// answerForm.addEventListener("submit", myAnswer);
-
-// document.getElementById("userAnswer").removeEventListener("load", getStartPage);

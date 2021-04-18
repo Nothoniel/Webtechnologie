@@ -1,4 +1,5 @@
 //in this js file, the client fetches the userdata of the current user.
+
 //based on the fetched data, the "accountbar" in the top right of the screen is populated with buttons related to the account
 renderBar = user => {
     var accountbar = document.querySelector(".accountbar");
@@ -18,6 +19,7 @@ renderBar = user => {
     }
 }
 
+//gets the required userdata from server and performs callback
 getUser = callback => {
     var req = new XMLHttpRequest();
 
@@ -27,7 +29,6 @@ getUser = callback => {
             var user = req.response;
             if(user)
                 user = JSON.parse(user);
-            console.log(user);
             callback(user);
         }
     };
