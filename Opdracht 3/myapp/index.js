@@ -330,4 +330,4 @@ process.on('SIGINT', exitHandler.bind(null, {exit:true}));
 process.on('SIGTERM', exitHandler.bind(null, {exit:true}));
 
 //now app is running - listening to requests on port 8046 
-app.listen(PORT, function() {console.log("Server started on port 8046...");});
+app.listen(PORT,"localhost");
