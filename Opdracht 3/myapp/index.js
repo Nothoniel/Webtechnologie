@@ -8,6 +8,7 @@ const flash = require("connect-flash");
 const fetch = require("node-fetch");
 var serveStatic = require("serve-static");
 let getData = require("./data");
+let db = require("./db");
 let insertData = require("./insert_data");
 let sqlParams;
 
@@ -105,10 +106,6 @@ app.get('/question-display', (req, res) => {
         //accesing database
         getData(sql, sqlParams).then(results => questions = results);
     
-        // setTimeout(function(){
-        //     console.log(questions);
-        //     },3000);    
-    
         setTimeout(async function() {
             if(multi.length > 0)
                 multi.length = 0;
@@ -126,12 +123,6 @@ app.get('/question-display', (req, res) => {
                     getData(sql, sqlParams).then(results => multi.push(results));
                 }
             }
-
-            //print out of multi
-            // setTimeout(function(){
-            //     console.log(multi);
-            //     console.log("\n\n");
-            // },10);
 
             setTimeout(function() {res.json({questions : questions, multi : multi});},10);
         },1000);     
@@ -264,6 +255,11 @@ app.post('/feedback', (req, res) => {
     
     var receivedQuestion = [req.body.currentquestionID]; 
 
+    //get data from database
+    function executeQuery(sql, receivedQuestion){
+        getData(sql, receivedQuestion).then(results => answerReturn = results);
+    }
+
     if(req.body.type == "multipleChoice") {
         var answer = req.body.answer;
         if(Array.isArray(req.body.answer))
@@ -279,20 +275,27 @@ app.post('/feedback', (req, res) => {
                 answerReturn = results;
             }
             else {
-                let sql = sqlIncorrect;
-                getData(sql, receivedQuestion).then(results => answerReturn = results);
+                executeQuery(sqlIncorrect, receivedQuestion);  
             }                            
         });    
     } 
 
-    //determines the correction for the multiChoice questions
+    //determines the correction for questions where multiple answers can be given
     function determineCorrection(array1, array2) {
-        array1 = array1.sort();
-        array2 = array2.sort();
-        return array1.length === array2.length && array1.every((val, index) => val === array2[index]);
+        if(req.body.type == "multiChoice") {
+            array1= array1.sort();
+            array2= array2.sort();
+        }
+        return array1.length === array2.length &&
+            array1.every((val, index) => val === array2[index]);
     }
 
-    if(req.body.type == "multiChoice" || req.body.type == "open") {
+    //query correct answer for multiChoice and open
+    let sqlCorrect= `SELECT FeedbackCorrect feedback
+                        FROM Question
+                        WHERE QuestionID = ?`;
+
+    if(req.body.type !== "multipleChoice") {
         let sql = `SELECT CorrectAnswer correctanswer
                    FROM Question
                    WHERE QuestionID = ?`;                
@@ -301,28 +304,25 @@ app.post('/feedback', (req, res) => {
             var arrayOfCorrect = (results[0].correctanswer).split(",");  
             const insertedAnswer = (currentValue) => currentValue === req.body.answer;
             if(req.body.type == "open") { 
-                if(arrayOfCorrect.some(insertedAnswer)) {   
-                    let sql = sqlCorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results);              
-                } else {
-                    let sql = sqlIncorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results);    
+                if(arrayOfCorrect.some(insertedAnswer)){
+                    executeQuery(sqlCorrect, receivedQuestion);                  
                 }
-            } else {
+                else {
+                    executeQuery(sqlIncorrect, receivedQuestion);     
+                }
+            }
+            //order and multiChoice question
+            else {
                 if(determineCorrection(arrayOfCorrect, req.body.answer)) {
-                    let sql = sqlCorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results); 
-                } else {
-                    let sql = sqlIncorrect;
-                    getData(sql, receivedQuestion).then(results => answerReturn = results); 
+                    executeQuery(sqlCorrect, receivedQuestion);  
+                }
+                else {
+                    executeQuery(sqlIncorrect, receivedQuestion);  
                 }
             }
         });
     }
     
-    //print out of the feedback
-    setTimeout(function() {console.log(answerReturn);}, 3000);
-
     setTimeout(async function () {
             const responseData = answerReturn;
             if(responseData[0].feedback.length == 26) {
@@ -356,6 +356,31 @@ app.post("/user", (req, res) => {
         res.send(req.session.user);
     } else {res.send();}
 });
+
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    next(err);
+});
+
+app.use(function (err, req, res, next) {
+    res.status(500).send("Something failed!");
+});
+
+//closing of the db, when closing server
+function exitHandler(options, exitCode) {
+    db.close(err => {
+            if (err)
+                console.error(err.message);
+            }); 
+    if (exitCode || exitCode === 0) console.log(exitCode);
+    if (options.exit) process.exit();
+}
+
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+
+//catches for pm2
+process.on('SIGTERM', exitHandler.bind(null, {exit:true}));
 
 //now app is running - listening to requests on port 8046 
 app.listen(PORT, function() {console.log("Server started on port 8046...");});

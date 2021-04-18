@@ -26,7 +26,6 @@ myAnswer = e => {
 
     if(answerArray.length > 0) {
         answer = answerArray;
-        console.log(answer);
     }
 
     sendAnswer(currentquestionID, answer, typeOfQuestion); 
@@ -43,24 +42,37 @@ async function sendAnswer(currentquestionID, answer, type) {
     req.onreadystatechange = function() {
         if(req.readyState === 4 && req.status === 200) {  
             var result = req.response;
-            var feedback = JSON.parse(result);
-            //printing out the whole object
-            console.log(feedback); 
-            //printing out something specific
-            console.log(feedback[0].feedback);      
-            // var {questions, multi} = test;
+            var infoResponse = JSON.parse(result);
+
+            //check if there is not already a feedback present
+            if(document.getElementById("resultQuestion")){
+                var feedback = document.getElementById("resultQuestion")
+                feedback.parentNode.removeChild(feedback);    
+            }
+            renderFeedback(infoResponse);
         }
     };
     req.send(options);
 }
 
-
-// var answerForm = document.getElementById("userAnswer");
-// if(answerForm){
-//     answerForm.addEventListener("click", myAnswer);
-// }
-
-// var answerForm= document.getElementById("userAnswer");
-// answerForm.addEventListener("submit", myAnswer);
-
-// document.getElementById("userAnswer").removeEventListener("load", getStartPage);
+//rendering of the feedback
+function renderFeedback (infoResponse) {
+    var resultDiv = document.createElement("div");
+    resultDiv.setAttribute("id", "resultQuestion");
+    var resultSection = document.createElement("section");
+    resultSection.className = "webpage-content__section__subsection";
+ 
+    var feedback = document.createTextNode(infoResponse[0].feedback);
+    resultSection.appendChild(feedback);
+    //incorrect answer, would result in an response object with length bigger than 1
+    if(Object.keys(infoResponse[0]).length>1)  
+    {
+        var linkInformation = document.createElement("a");
+        linkInformation.href = infoResponse[0].link;
+        linkInformation.appendChild(document.createTextNode(infoResponse[0].linkname));
+        resultSection.appendChild(document.createElement("br"));
+        resultSection.appendChild(linkInformation);
+    }
+    resultDiv.appendChild(resultSection);
+    quizSection.appendChild(resultDiv);
+}

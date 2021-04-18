@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Topic (
 
 /* inserting data into Topic table*/
 INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ01', 'GoogleChrome', 'page1-google-chrome.html', 'Information about the correspondig theory(Google Chrome)!');
-INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ02', 'MozillaFireFox', 'page2-mozilla-firefox.html', 'Information about the correspondig theory!(Mozilla FireFox)');
+INSERT INTO Topic (TopicID, TopicTitle, DescriptionLink, LinkName) VALUES('T2DQ02', 'MozillaFireFox', 'page2-mozilla-firefox.html', 'Information about the correspondig theory(Mozilla FireFox)!');
 
 
 CREATE TABLE IF NOT EXISTS Quiz (
@@ -58,7 +58,7 @@ INSERT INTO Question VALUES('P1DQ03', 'Q1DQ08', 'multiChoice', 'Question2', 'Jav
 INSERT INTO Question VALUES('P1DQ03', 'Q1DQ09', 'open', 'Question3', 'Gecko,gecko', 'What was the name of the layout-enginge used in FireFox OS?', 'Incorrect, the correct answer was Gecko or gecko', 'This is the correct answer');
 
 -- /* Quiz 4 */
-INSERT INTO Question VALUES('P1DQ04', 'Q1DQ10','multiChoice', 'Question1', 'applicationlayer,Open Web Platform Interface,infrastructurelayer ', 'Using which of the following 3 layers was FireFox Os built?', 'Incorrect, the correct answer was applicationlayer, Open Web Platform Interface and infrastructurelayer', 'This is the correct answer');
+INSERT INTO Question VALUES('P1DQ04', 'Q1DQ10','multiChoice', 'Question1', 'applicationlayer,Open Web Platform Interface,infrastructurelayer', 'Using which of the following 3 layers was FireFox Os built?', 'Incorrect, the correct answer was applicationlayer, Open Web Platform Interface and infrastructurelayer', 'This is the correct answer');
 INSERT INTO Question VALUES('P1DQ04', 'Q1DQ11', 'open', 'Question2', 'Phoenix,phoenix,Foenix,foenix', 'What was the original name of Firefox?', 'Incorrect, the correct answer was Phoenix,phoenix,Foenix or foenix', 'This is the correct answer');
 INSERT INTO Question VALUES('P1DQ04', 'Q1DQ12', 'ordering', 'Question3', 'Google Chrome,Safari,Mozilla Firefox,Microsoft Edge', 'What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?', 'Incorrect, the correct order was Google Chrome,Safari,Mozilla Firefox,Microsoft Edge', 'This is the correct answer');
 

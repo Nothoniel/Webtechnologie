@@ -1,10 +1,6 @@
-let openDB = require("./db");
-let db;
+let db = require("./db");
 
 function getData(sql, sqlParams) {
-    // opens the database
-    db = openDB();
-
     return new Promise(function(resolve, reject) {
         //executing the sql-string   
          
@@ -14,14 +10,7 @@ function getData(sql, sqlParams) {
             }    
             resolve(rows);
             console.log("Execute sql statement.");     
-        }); 
-
-        //closing the connection
-        // db.close(error => {
-        //     if(error)
-        //         console.error(error.message);
-        //     console.log("Close the database connection.");
-        // }); 
+        });  
     });
 }
 

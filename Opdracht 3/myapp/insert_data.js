@@ -1,20 +1,11 @@
-let openDB = require("./db");
+let db = require("./db");
 
-function insertData(insert_sql, newUser) {
-    // opens the database
-    let db = openDB();
-
+insertData = (insert_sql, newUser) => {
     //executing the sql-string            
     db.run(insert_sql, newUser, (err, rows) => {
         if(err)
             throw err;
         console.log("New user added");
-    });
-
-    //closing the connection
-    db.close(error => {
-        if(error)
-            console.error(error.message);
     });
 }
 
