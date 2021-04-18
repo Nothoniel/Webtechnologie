@@ -1,10 +1,6 @@
-let openDB = require("./db");
-let db;
+let db = require("./db");
 
 insertData = (insert_sql, newUser) => {
-    // opens the database
-    db = openDB();
-
     //executing the sql-string            
     db.run(insert_sql, newUser, (err, rows) => {
         if (err)

@@ -1,10 +1,6 @@
-let openDB = require("./db");
-let db;
+let db = require("./db");
 
 function getData(sql, sqlParams) {
-    // opens the database
-    db = openDB();
-
     return new Promise(function(resolve, reject) {
         //executing the sql-string   
          

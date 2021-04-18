@@ -1,4 +1,3 @@
-function openDB() {
     // opens the database
     const sqlite3 = require('sqlite3').verbose();
 
@@ -8,7 +7,5 @@ function openDB() {
             console.error(error.message);
         console.log('Connected to the webtech database.');
     });
-    return db;
-}
 
-module.exports = openDB;
+module.exports = db;
