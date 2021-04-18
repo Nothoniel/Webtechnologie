@@ -69,12 +69,6 @@ class multipleChoice extends excercise {
 
         questionSubSection.appendChild(quizForm);
     }
-
-    checkAnswer = i => {
-        for(var answer of document.getElementsByName("answersOfQ" + i))
-            if(answer.value == this.correctAnswer) 
-                return answer.checked;
-    }
 }
 
 class multiChoice extends excercise
@@ -110,14 +104,6 @@ class multiChoice extends excercise
         }
         questionSubSection.appendChild(quizForm);
     }
-
-    //Whether all of the correct answers are given by the users is checked upon here
-    checkAnswer = i => {
-        var answerCorrect = true;
-        for(let answer of document.getElementsByName("answersOfQ" + i))
-            answerCorrect = answerCorrect && ((this.correctAnswer.indexOf(answer.value) != -1) == answer.checked);
-        return answerCorrect;
-    }
 }
 
 class open extends excercise {
@@ -138,9 +124,6 @@ class open extends excercise {
 
         questionSubSection.appendChild(quizForm);
     }
-
-    //Regarding open question, all of the values withing the array of answers are deemed correct
-    // checkAnswer = i => this.answers.indexOf(document.getElementsByName("answersOfQ" + i)[0].value) >= 0;
 }
 
 class ordering extends excercise {
@@ -195,14 +178,6 @@ class ordering extends excercise {
         elem = document.getElementById("q" + j + "label" + (i + 1));
         elem.replaceChild(document.createTextNode(this.answers[i + 1]), elem.childNodes[0]);
     }
-
-    //When the button to check the given answer has been pressed down, whether it was right is determined here
-    checkAnswer = () => {
-        var answerCorrect = true;
-        for (let i = 0; i < this.answers.length && answerCorrect; i++)
-            answerCorrect = this.answers[i] == this.correctAnswer[i];
-        return answerCorrect;
-    }
 }
 
 //jagged array nummering is really bad in the for-loop bool
@@ -240,8 +215,6 @@ function determineQuiz(selectedQuizID) {
 
 
 function createQuiz(questions, multi, selectedQuizID){
-    // console.log(multi[0][1].questionid);
-    // console.log(selectedQuizID);
     //index of quiz in quiz array
     var quizIndex = allQuizzes.indexOf(selectedQuizID);
 
@@ -285,156 +258,6 @@ function createQuiz(questions, multi, selectedQuizID){
     renderQuiz(topicIndex, quizIndex, 0, questions);
 }
 
-
-//Here we define all of the quizzes, which will hereafter be put in the corresponding topicArray's array of quizzes
-// let quiz1 = 
-// [
-//     new multipleChoice(
-//         "What year was Google Chrome first publicly on Windows?",
-//         [
-//             "2008",
-//             "2005",
-//             "2006",
-//             "2007",
-//             "2009"
-//         ],
-//         sortNumerically
-//     ),
-//     new open(
-//         "What is the Color of the middle circle of the Google Chrome Logo?",
-//         [
-//             "Blue",
-//             "blue",
-//             "Blu",
-//             "blu",
-//             "Bleu",
-//             "bleu"
-//         ]
-//     ),
-//     new multiChoice(
-//         "Which of the are the obstacles encountered by a user playing the dinosaurgame?",
-//         [
-//             "cacti",
-//             "pterodactyls",
-//             "bats",
-//             "birds",
-//             "fences",
-//             "spikes",
-//         ],
-//         sortAlphabetically,
-//         2
-//     )
-// ];
-
-// let quiz2 =
-// [
-//     new open(
-//         "What species of dinosaurs is controlled by the user when playing the dinosaurgame?",
-//         [
-//             "Trex",
-//             "trex",
-//             "T-rex",
-//             "t-rex",
-//             "Tyrannosaurus Rex",
-//             "tyrannosaurus rex",
-//             "Tyrannosaurus rex",
-//             "tyrannosaurus Rex"
-//         ]
-//     ),
-//     new multipleChoice(
-//         "Which mode can be activated to for example make your browser unable to permanently store search history?",
-//         [
-//             "incognity mode",
-//             "stealth mode",
-//             "dark mode",
-//             "invisible mode",
-//             "VPNmode",
-//             "privacy mode"
-//         ]
-//     ),
-//     new multipleChoice(
-//         "On which distribution of linux is Chrome OS based?",
-//         [
-//             "Gentoo",
-//             "Gecko",
-//             "Manjaro",
-//             "KDE",
-//             "Ubuntu",
-//             "Fedora",
-//             "Peppermint"     
-//         ]
-//     )
-// ];
-
-// let quiz3 =
-// [
-//     new multipleChoice(
-//         "What year was Firefox 1.0 released?",
-//         [
-//             "2004",
-//             "2003",
-//             "2002",
-//             "2001"
-//         ],
-//         sortNumerically
-//     ),
-//     new multiChoice(
-//         "What programming language(s) did the application layer of FireFox OS consist of?",
-//         [
-//             "HTML5",
-//             "JavaScript",
-//             "CSS",
-//             "Jade/pug",
-//             "XML",
-//             "JSON"
-//         ],
-//         shuffle,
-//         3
-//     ),
-//     new open(
-//         "What was the name of the layout-enginge used in FireFox OS?",
-//         [
-//             "Gecko",
-//             "gecko"
-//         ]
-//     )
-// ];
-
-// let quiz4 =
-// [
-//     new multiChoice(
-//         "Using which of the following 3 layers was FireFox Os built?",
-//         [
-//             "applicationlayer",
-//             "Open Web Platform Interface",
-//             "infrastructurelayer",
-//             "Closed Web Platform Interface",
-//             "datalayer",
-//             "networklayer",
-//             "connectionlayer"
-//         ],
-//         shuffle,
-//         3
-//     ),
-//     new open(
-//         "What was the original name of Firefox?",
-//         [
-//             "Phoenix",
-//             "phoenix",
-//             "Foenix",
-//             "foenix"
-//         ]
-//     ),
-//     new ordering(
-//         "What are the top 4 leading web browsers in order of popularity on desktop as of January 2021?",
-//         [
-//             "Google Chrome",
-//             "Safari",
-//             "Mozilla Firefox",
-//             "Microsoft Edge"
-//         ]
-//     )
-// ];
 
 async function renderSelection(responseQuizTitle, responseQuizID, responseDescription, topicArray) {
     //We first reset the page to its html basics, so we can reuse those
