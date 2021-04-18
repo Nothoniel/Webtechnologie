@@ -24,7 +24,7 @@ myAnswer = e => {
             break;
     }
 
-    if(answerArray.length>0) {
+    if(answerArray.length > 0) {
         answer = answerArray;
         console.log(answer);
     }

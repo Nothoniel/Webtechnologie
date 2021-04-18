@@ -62,7 +62,5 @@ async function getStart() {
     // response.then(data => console.log( data[1]));
 }
 
-
-
 //event on the submit button that determines that t
 window.addEventListener("load", getStart());
