@@ -10,14 +10,7 @@ function getData(sql, sqlParams) {
             }    
             resolve(rows);
             console.log("Execute sql statement.");     
-        }); 
-
-        //closing the connection
-        // db.close(error => {
-        //     if(error)
-        //         console.error(error.message);
-        //     console.log("Close the database connection.");
-        // }); 
+        });  
     });
 }
 

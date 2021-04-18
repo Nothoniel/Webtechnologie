@@ -7,12 +7,6 @@ insertData = (insert_sql, newUser) => {
             throw err;
         console.log("New user added");
     });
-
-    //closing the connection
-    db.close(error => {
-        if (error)
-            console.error(error.message);
-    });
 }
 
 module.exports = insertData;

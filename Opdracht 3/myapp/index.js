@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const fetch = require('node-fetch');
 var serveStatic = require('serve-static');
 let getData = require('./data');
+let db = require("./db");
 
 let insertData = require('./insert_data');
 let sqlParams;
@@ -333,6 +334,22 @@ app.post("/user", (req, res) => {
         res.send(req.session.user);
     } else {res.send();}
 });
+
+//closing of the db, when closing server
+function exitHandler(options, exitCode) {
+    db.close(err => {
+            if (err)
+                console.error(err.message);
+            }); 
+    if (exitCode || exitCode === 0) console.log(exitCode);
+    if (options.exit) process.exit();
+}
+
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+
+//catches for pm2
+process.on('SIGTERM', exitHandler.bind(null, {exit:true}));
 
 //now app is running - listening to requests on port 8046 
 app.listen(PORT, function(){     
