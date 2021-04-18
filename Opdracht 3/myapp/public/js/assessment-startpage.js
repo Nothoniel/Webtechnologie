@@ -25,6 +25,7 @@ async function respondFunction(options) {
         responseQuizTitle.push(data[i].quiztitle);
         if(i % 2 == 0){
             responseDescription.push(data[i].description);
+        }
     }
 
     allQuizzes = responseQuizID.slice(0, data.length); //want to re-use these values
@@ -57,4 +58,4 @@ async function getStartPage() {
 }
 
 //when the page is loaded, the selectionscreen will be loaded
-window.addEventListener("load", getStartPage());
+window.addEventListener("load", getStartPage);

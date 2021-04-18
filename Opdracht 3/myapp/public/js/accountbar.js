@@ -7,7 +7,7 @@ renderBar = user => {
     accountbar.appendChild(document.createElement("br"));
 
     var logInOutButton = document.createElement("a");
-    logInOutButton.appendChild(document.createTextNode(user ? "Settings" : "Log in"));
+    logInOutButton.appendChild(document.createTextNode(user ? "Settings " : "Log in"));
     logInOutButton.setAttribute("href", user ? "account-settings.html" : "login-page.html");
     accountbar.appendChild(logInOutButton);
 

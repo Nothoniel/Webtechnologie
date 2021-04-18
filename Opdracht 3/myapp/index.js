@@ -180,7 +180,6 @@ app.post("/edit", (req, res) => {
 
 app.post("/feedback", (req, res) => {
     console.log("request came in");
-    // console.log(req.body.currentquestionID, req.body.answer);
     let user = [req.session.user.username];
 
     //query correct answer for multiChoice and open
@@ -243,11 +242,6 @@ app.post("/feedback", (req, res) => {
         return array1.length === array2.length &&
             array1.every((val, index) => val === array2[index]);
     }
-
-    //query correct answer for multiChoice and open
-    let sqlCorrect= `SELECT FeedbackCorrect feedback
-                        FROM Question
-                        WHERE QuestionID = ?`;
 
     if(req.body.type !== "multipleChoice") {
         let sql = `SELECT CorrectAnswer correctanswer
